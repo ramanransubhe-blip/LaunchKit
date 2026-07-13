@@ -1,0 +1,23 @@
+{
+  "name": "@devlaunchkit/middleware",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "tsx ../../scripts/clean.ts"
+  },
+  "dependencies": {
+    "@devlaunchkit/logger": "workspace:*",
+    "@devlaunchkit/errors": "workspace:*",
+    "@devlaunchkit/rate-limit": "workspace:*",
+    "@devlaunchkit/feature-flags": "workspace:*",
+    "@devlaunchkit/permissions": "workspace:*",
+    "@devlaunchkit/security": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

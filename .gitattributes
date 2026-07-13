@@ -1,0 +1,64 @@
+# -----------------------------------------------------------------------------
+# DevLaunchKit .gitattributes Configuration
+# -----------------------------------------------------------------------------
+
+# Set the default behavior to handle all files as text and automatically normalize line endings to LF on commit.
+* text=auto eol=lf
+
+# -----------------------------------------------------------------------------
+# Script Files (Force LF line endings for Unix execution)
+# -----------------------------------------------------------------------------
+*.sh text eol=lf
+*.bash text eol=lf
+
+# -----------------------------------------------------------------------------
+# Windows Batch/Command Files (Force CRLF line endings for compatibility)
+# -----------------------------------------------------------------------------
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# -----------------------------------------------------------------------------
+# Front-End and Code Files (Force LF line endings)
+# -----------------------------------------------------------------------------
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.mjs text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# -----------------------------------------------------------------------------
+# Binary and Asset Files (Treat strictly as binary to prevent normalization)
+# -----------------------------------------------------------------------------
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.svg text eol=lf
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+*.ttf binary
+*.otf binary
+*.zip binary
+*.gz binary
+*.tar binary
+
+# -----------------------------------------------------------------------------
+# GitHub / Linguist Configuration (Reduce noise in diffs and search results)
+# -----------------------------------------------------------------------------
+# Mark lockfiles and auto-generated configs as linguist-generated
+pnpm-lock.yaml linguist-generated=true merge=binary
+package-lock.json linguist-generated=true
+yarn.lock linguist-generated=true
+
+# Mark Next.js environment files
+next-env.d.ts linguist-generated=true

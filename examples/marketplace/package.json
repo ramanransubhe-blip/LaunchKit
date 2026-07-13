@@ -1,0 +1,43 @@
+{
+  "name": "@devlaunchkit/example-marketplace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Multi-vendor marketplace with Stripe Connect split payments, Clerk auth, and Algolia search",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx src/scripts/seed.ts",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@devlaunchkit/auth": "workspace:*",
+    "@devlaunchkit/cache": "workspace:*",
+    "@devlaunchkit/database": "workspace:*",
+    "@devlaunchkit/feature-flags": "workspace:*",
+    "@devlaunchkit/logger": "workspace:*",
+    "@devlaunchkit/notifications": "workspace:*",
+    "@devlaunchkit/payments": "workspace:*",
+    "@devlaunchkit/search": "workspace:*",
+    "@devlaunchkit/storage": "workspace:*",
+    "@clerk/backend": "^1.21.0",
+    "algoliasearch": "^5.20.0",
+    "drizzle-orm": "^0.44.0",
+    "hono": "^4.7.0",
+    "postgres": "^3.4.5",
+    "stripe": "^17.7.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "drizzle-kit": "^0.31.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

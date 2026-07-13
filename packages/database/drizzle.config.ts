@@ -1,0 +1,12 @@
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+  schema: "./src/schema/index.ts",
+  out: "./src/migrations",
+  dialect: "postgresql",
+  dbCredentials: {
+    url: process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/launchkit",
+  },
+  verbose: true,
+  strict: true,
+});

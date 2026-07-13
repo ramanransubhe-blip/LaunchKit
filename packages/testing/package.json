@@ -1,0 +1,31 @@
+{
+  "name": "@devlaunchkit/testing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "tsx ../../scripts/clean.ts",
+    "test:infra": "tsx src/test-infrastructure.ts"
+  },
+  "dependencies": {
+    "@devlaunchkit/env": "workspace:*",
+    "@devlaunchkit/config": "workspace:*",
+    "@devlaunchkit/errors": "workspace:*",
+    "@devlaunchkit/logger": "workspace:*",
+    "@devlaunchkit/cache": "workspace:*",
+    "@devlaunchkit/queue": "workspace:*",
+    "@devlaunchkit/events": "workspace:*",
+    "@devlaunchkit/security": "workspace:*",
+    "@devlaunchkit/validation": "workspace:*",
+    "@devlaunchkit/rate-limit": "workspace:*",
+    "@devlaunchkit/telemetry": "workspace:*",
+    "@devlaunchkit/observability": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "tsx": "^4.19.2"
+  }
+}

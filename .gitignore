@@ -1,0 +1,159 @@
+# =============================================================================
+# DevLaunchKit .gitignore Configuration
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Node.js & Dependencies
+# -----------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.eslintcache
+
+# -----------------------------------------------------------------------------
+# Next.js Build and Output
+# -----------------------------------------------------------------------------
+.next/
+out/
+next-env.d.ts
+
+# -----------------------------------------------------------------------------
+# Turborepo and Build Caches
+# -----------------------------------------------------------------------------
+.turbo/
+.cache/
+.vercel/
+.vercel/output/
+dist/
+build/
+tsconfig.tsbuildinfo
+*.tsbuildinfo
+storybook-static/
+
+# -----------------------------------------------------------------------------
+# Testing and Coverage
+# -----------------------------------------------------------------------------
+playwright-report/
+test-results/
+coverage/
+.nyc_output/
+*.lcov
+.playwright/
+html-report/
+# Visual regression / screenshot diff artifacts (e.g. from Playwright / Cypress / Jest)
+__diff_output__/
+**/*.diff.png
+**/*-diff.png
+**/*-actual.png
+
+# -----------------------------------------------------------------------------
+# Environment & Secrets (NEVER commit secrets to Git)
+# -----------------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+.env.*.local
+*.env
+# Ensure example/template files are NEVER ignored
+!*.env.example
+!*.env.template
+!*.env.local.example
+
+# -----------------------------------------------------------------------------
+# Database (SQLite & Local Dumps)
+# -----------------------------------------------------------------------------
+# Ignore SQLite database files and journals
+*.db
+*.db-journal
+*.sqlite
+*.sqlite-journal
+*.sqlite3
+*.sqlite3-journal
+# Temporary database or migration lock/artifacts
+*.db.tmp
+*.sql.tmp
+
+# -----------------------------------------------------------------------------
+# Log Files
+# -----------------------------------------------------------------------------
+logs/
+*.log
+*.log.*
+*.pid
+*.seed
+
+# -----------------------------------------------------------------------------
+# Operating System Files
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+Icon?
+# Windows temporary files
+~$*
+
+# -----------------------------------------------------------------------------
+# Editors / IDEs
+# -----------------------------------------------------------------------------
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/chrome.json
+.idea/
+*.iml
+*.suo
+*.user
+*.swp
+*.swo
+.history/
+*.code-workspace
+
+# -----------------------------------------------------------------------------
+# Temporary Files
+# -----------------------------------------------------------------------------
+tmp/
+temp/
+*.tmp
+*.temp
+
+# -----------------------------------------------------------------------------
+# Docker
+# -----------------------------------------------------------------------------
+# Docker runtime files & temporary local data folders
+.docker/
+
+# -----------------------------------------------------------------------------
+# Security & Cryptography (Private Keys / Certificates)
+# -----------------------------------------------------------------------------
+*.pem
+*.key
+*.p12
+*.crt
+*.csr
+*.pfx
+
+# -----------------------------------------------------------------------------
+# Whitelist / Do Not Ignore (Ensure critical configuration and code are kept)
+# -----------------------------------------------------------------------------
+# Core metadata and documentations
+!README.md
+!LICENSE
+!CHANGELOG.md
+!CONTRIBUTING.md
+!SECURITY.md
+!CODE_OF_CONDUCT.md
+!ROADMAP.md
+# Core directories
+!docs/
+!examples/
+!packages/
+!apps/
+!scripts/
+!templates/
+!public/
+!.github/

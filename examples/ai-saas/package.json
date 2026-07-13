@@ -1,0 +1,31 @@
+{
+  "name": "@devlaunchkit/example-ai-saas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI Chat & Image Generation SaaS powered by DevLaunchKit",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@devlaunchkit/ai": "workspace:*",
+    "@devlaunchkit/auth": "workspace:*",
+    "@devlaunchkit/database": "workspace:*",
+    "@devlaunchkit/payments": "workspace:*",
+    "@devlaunchkit/rate-limit": "workspace:*",
+    "@devlaunchkit/storage": "workspace:*",
+    "@hono/node-server": "^1.13.8",
+    "hono": "^4.7.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

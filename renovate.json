@@ -1,0 +1,73 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests",
+    "group:monorepos",
+    "group:recommended",
+    ":dependencyDashboard"
+  ],
+  "labels": ["dependencies", "renovate"],
+  "schedule": ["before 8am on weekdays"],
+  "timezone": "UTC",
+  "prHourlyLimit": 4,
+  "prConcurrentLimit": 10,
+  "platformAutomerge": true,
+  "packageRules": [
+    {
+      "description": "Auto-merge minor and patch updates with passing CI",
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "description": "Group all dev dependency updates",
+      "matchDepTypes": ["devDependencies"],
+      "groupName": "dev dependencies",
+      "automerge": true
+    },
+    {
+      "description": "Group TypeScript ESLint packages",
+      "matchPackagePatterns": ["^@typescript-eslint/", "^typescript-eslint$"],
+      "groupName": "typescript-eslint"
+    },
+    {
+      "description": "Group Vitest packages",
+      "matchPackagePatterns": ["^vitest$", "^@vitest/"],
+      "groupName": "vitest"
+    },
+    {
+      "description": "Group Next.js and React updates",
+      "matchPackageNames": ["next", "react", "react-dom", "@types/react", "@types/react-dom"],
+      "groupName": "next-and-react"
+    },
+    {
+      "description": "Do not auto-merge major updates of critical packages",
+      "matchPackageNames": ["next", "react", "react-dom", "typescript", "eslint", "turbo"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["dependencies", "breaking-change"]
+    },
+    {
+      "description": "Group Turborepo packages",
+      "matchPackagePatterns": ["^turbo$", "^@turbo/"],
+      "groupName": "turborepo"
+    },
+    {
+      "description": "Pin GitHub Actions to full SHA digests",
+      "matchManagers": ["github-actions"],
+      "pinDigests": true
+    },
+    {
+      "description": "Group all GitHub Actions updates",
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions",
+      "automerge": true
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"]
+  }
+}
