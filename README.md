@@ -420,8 +420,9 @@ Special thanks to our sponsors who keep DevLaunchKit moving forward.
 
 <!-- SPONSORS IMAGE -->
 
-- **Chat with us:** Join our [Discord Server](https://discord.gg/devlaunchkit) to meet other builders.
-- **Updates:** Follow [@DevLaunchKit](https://twitter.com/devlaunchkit) on Twitter.
+- **Instagram:** Follow [@rmn.core_7](https://www.instagram.com/rmn.core_7/) for updates and behind-the-scenes.
+- **X (Twitter):** Follow [@rmncore7](https://x.com/rmncore7) for announcements and discussions.
+- **LinkedIn:** Connect on [LinkedIn](https://www.linkedin.com/in/raman-r-2aa784403/) for professional updates.
 
 ---
 
