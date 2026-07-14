@@ -55,9 +55,20 @@
 
 ## ⚡ Why DevLaunchKit Exists
 
-Traditional SaaS boilerplates are a double-edged sword. They get you started quickly but leave you permanently bound to their pre-selected vendors. Swapping Clerk for Better Auth, or Stripe for Dodo Payments, usually requires dissecting and rewriting your entire core codebase.
+Every SaaS application begins the same way. Before writing a single line of product logic, you spend days—sometimes weeks—wiring up authentication, configuring a database, integrating a payment processor, setting up transactional emails, structuring a monorepo, and establishing CI/CD pipelines. This foundational work is necessary, but it is largely identical across projects. It slows down the path from idea to working product, and it makes experimentation expensive.
 
-**DevLaunchKit breaks this cycle.** Built as an enterprise-grade monorepo foundation, it decouples application logic from third-party vendors. Every core capability—Authentication, Billing, AI, Storage, and Communication—is abstracted behind a provider-agnostic engine. Swap vendors by changing environment variables or minimal configuration tweaks, without touching your business logic.
+DevLaunchKit exists to eliminate that repeated setup. It provides a well-structured, production-ready foundation where authentication, billing, storage, communication, and API layers are already integrated using modern best practices. Each capability is organized as an independent package behind a provider-agnostic interface, so you can swap underlying services—switching from Stripe to Dodo Payments, or from Clerk to Better Auth—without rewriting application code.
+
+The project is designed to be a **starting point**, not a framework that dictates how you build. There are no proprietary abstractions or opinionated runtime constraints. The codebase is standard TypeScript, organized as a Turborepo monorepo with clear package boundaries. You own every line of code, and you are free to modify, extend, or remove any part of it as your product evolves.
+
+The priorities behind DevLaunchKit are practical:
+
+- **Maintainability.** Clean separation between packages ensures that changes in one area do not cascade unpredictably into others.
+- **Developer experience.** Consistent conventions, strict type safety, and well-documented APIs reduce the cognitive overhead of working across the codebase.
+- **Scalability.** The architecture supports growing from a single developer to a team, and from a prototype to a production system serving real users.
+- **Extensibility.** Adding a new provider, package, or integration follows established patterns rather than requiring architectural changes.
+
+DevLaunchKit does not try to be everything. It handles the infrastructure that every SaaS needs so that you can focus your time on the features that make your product worth using.
 
 ---
 
