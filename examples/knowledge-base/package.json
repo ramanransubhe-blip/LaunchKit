@@ -1,0 +1,31 @@
+{
+  "name": "@devlaunchkit/example-knowledge-base",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-powered knowledge base with vector search, document summarization, and semantic retrieval",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "worker:indexer": "tsx src/workers/indexer.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@devlaunchkit/ai": "workspace:*",
+    "@devlaunchkit/auth": "workspace:*",
+    "@devlaunchkit/cache": "workspace:*",
+    "@devlaunchkit/database": "workspace:*",
+    "@devlaunchkit/search": "workspace:*",
+    "@devlaunchkit/storage": "workspace:*",
+    "@devlaunchkit/env": "workspace:*",
+    "express": "^4.21.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

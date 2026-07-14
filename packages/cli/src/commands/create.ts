@@ -1,14 +1,17 @@
 import * as fs from "fs";
 import * as path from "path";
 
-export function handleCreateCommand(projectName: string): void {
+export function handleCreateCommand(projectName: string, shouldExit: boolean = true): void {
   console.log(`\n🚀 [Scaffold] Initializing new SaaS application: "${projectName}"...`);
 
   const targetDir = path.resolve(process.cwd(), projectName);
   
   if (fs.existsSync(targetDir)) {
     console.error(`❌ Directory "${projectName}" already exists.`);
-    process.exit(1);
+    if (shouldExit) {
+      process.exit(1);
+    }
+    return;
   }
 
   try {
@@ -81,6 +84,8 @@ export function handleCreateCommand(projectName: string): void {
     console.log(`\n🎉 Successfully created SaaS project! Run:\n   cd ${projectName}\n   pnpm install\n`);
   } catch (error: any) {
     console.error(`❌ Failed to scaffold project:`, error.message || error);
-    process.exit(1);
+    if (shouldExit) {
+      process.exit(1);
+    }
   }
 }

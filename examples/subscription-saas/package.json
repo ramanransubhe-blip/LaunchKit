@@ -1,0 +1,31 @@
+{
+  "name": "@devlaunchkit/example-subscription-saas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Subscription management platform built with DevLaunchKit — Dodo Payments, Better Auth, Resend, and feature flags",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@devlaunchkit/auth": "workspace:*",
+    "@devlaunchkit/communication": "workspace:*",
+    "@devlaunchkit/database": "workspace:*",
+    "@devlaunchkit/feature-flags": "workspace:*",
+    "@devlaunchkit/payments": "workspace:*",
+    "@devlaunchkit/storage": "workspace:*",
+    "@devlaunchkit/logger": "workspace:*",
+    "@devlaunchkit/env": "workspace:*",
+    "express": "^4.21.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

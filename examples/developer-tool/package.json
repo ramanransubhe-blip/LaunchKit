@@ -1,0 +1,33 @@
+{
+  "name": "@devlaunchkit/example-developer-tool",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Developer console and API gateway with tiered rate limiting, API key management, and webhook delivery",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "worker": "tsx src/workers/webhook-delivery.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@devlaunchkit/api": "workspace:*",
+    "@devlaunchkit/auth": "workspace:*",
+    "@devlaunchkit/cache": "workspace:*",
+    "@devlaunchkit/database": "workspace:*",
+    "@devlaunchkit/logger": "workspace:*",
+    "@devlaunchkit/queue": "workspace:*",
+    "@devlaunchkit/rate-limit": "workspace:*",
+    "@devlaunchkit/env": "workspace:*",
+    "express": "^4.21.0",
+    "zod": "^3.23.0",
+    "nanoid": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

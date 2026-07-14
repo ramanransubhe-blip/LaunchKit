@@ -28,7 +28,7 @@ function logSection(title: string) {
   console.log(`\n${BOLD}${CYAN}=== ${title} ===${RESET}\n`);
 }
 
-export async function handleDoctorCommand(): Promise<void> {
+export async function handleDoctorCommand(shouldExit: boolean = true): Promise<void> {
   console.log(`\n${BOLD}🩺 [Diagnostics] Assessing DevLaunchKit system health...${RESET}\n`);
   
   let hasErrors = false;
@@ -78,8 +78,8 @@ export async function handleDoctorCommand(): Promise<void> {
   const envPath = path.join(rootDir, ".env");
   const envLocalPath = path.join(rootDir, ".env.local");
 
-  let envExists = fs.existsSync(envPath);
-  let envLocalExists = fs.existsSync(envLocalPath);
+  const envExists = fs.existsSync(envPath);
+  const envLocalExists = fs.existsSync(envLocalPath);
 
   if (envExists || envLocalExists) {
     logSuccess(`Environment files detected (${envExists ? ".env " : ""}${envLocalExists ? ".env.local" : ""})`);
@@ -199,7 +199,9 @@ export async function handleDoctorCommand(): Promise<void> {
   console.log(`\n${BOLD}========================================${RESET}`);
   if (hasErrors) {
     console.log(`\n❌ ${RED}${BOLD}LaunchKit diagnostics failed. Please fix critical errors listed above before starting the app.${RESET}\n`);
-    process.exit(1);
+    if (shouldExit) {
+      process.exit(1);
+    }
   } else if (hasWarnings) {
     console.log(`\n⚠️  ${YELLOW}${BOLD}LaunchKit diagnostics passed with warnings. Optional provider systems may run in mock mode.${RESET}\n`);
   } else {

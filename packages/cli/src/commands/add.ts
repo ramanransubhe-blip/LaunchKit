@@ -39,14 +39,17 @@ REDIS_URL=redis://localhost:6379
 `
 };
 
-export function handleAddCommand(provider: string): void {
+export function handleAddCommand(provider: string, shouldExit: boolean = true): void {
   const normalized = provider.toLowerCase().replace(/[^a-z]/g, "");
   console.log(`\n🔌 [Integration] Configuring provider module: "${provider}"...`);
 
   const template = PROVIDER_TEMPLATES[normalized];
   if (!template) {
     console.log(`❌ Provider "${provider}" is not recognized. Supported providers: stripe, clerk, betterauth, gemini, openai, anthropic, resend, redis.`);
-    process.exit(1);
+    if (shouldExit) {
+      process.exit(1);
+    }
+    return;
   }
 
   const rootDir = process.cwd();
