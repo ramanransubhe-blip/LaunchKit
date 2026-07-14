@@ -143,8 +143,8 @@ jobs:
         with:
           name: build-output-node-${{ matrix.node-version }}
 
-      - name: Run tests with coverage
-        run: pnpm test -- --coverage --reporter=verbose
+      - name: Run tests
+        run: pnpm test
 
       - name: Upload coverage reports
         if: matrix.node-version == 20 && always()
