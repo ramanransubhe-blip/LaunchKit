@@ -137,10 +137,7 @@ const ROLE_DEFINITIONS: Record<AnyRole, RoleDefinition> = {
   },
   [OrganizationRole.Member]: {
     role: OrganizationRole.Member,
-    permissions: [
-      Permission.OrganizationRead,
-      Permission.OrganizationSwitch,
-    ],
+    permissions: [Permission.OrganizationRead, Permission.OrganizationSwitch],
     inherits: [UserRole.Guest],
   },
 };
@@ -197,9 +194,7 @@ export function createPermissionService(): PermissionService {
  * @param role - Role to resolve.
  * @returns Permission list.
  */
-export function resolvePermissionsForRole(
-  role: AnyRole,
-): readonly PermissionType[] {
+export function resolvePermissionsForRole(role: AnyRole): readonly PermissionType[] {
   const permissions = new Set<PermissionType>();
   const visit = (current: AnyRole): void => {
     const definition = ROLE_DEFINITIONS[current];
@@ -244,7 +239,12 @@ export function resolveRoleHierarchy(role: AnyRole): readonly AnyRole[] {
  * @returns `true` for platform roles.
  */
 export function isAccountRole(role: AnyRole): role is UserRoleType {
-  return role === UserRole.Guest || role === UserRole.User || role === UserRole.Admin || role === UserRole.SuperAdmin;
+  return (
+    role === UserRole.Guest ||
+    role === UserRole.User ||
+    role === UserRole.Admin ||
+    role === UserRole.SuperAdmin
+  );
 }
 
 /**
@@ -253,9 +253,10 @@ export function isAccountRole(role: AnyRole): role is UserRoleType {
  * @param role - Role to inspect.
  * @returns `true` for organization roles.
  */
-export function isOrganizationRole(
-  role: AnyRole,
-): role is OrganizationRoleType {
-  return role === OrganizationRole.Owner || role === OrganizationRole.Admin || role === OrganizationRole.Member;
+export function isOrganizationRole(role: AnyRole): role is OrganizationRoleType {
+  return (
+    role === OrganizationRole.Owner ||
+    role === OrganizationRole.Admin ||
+    role === OrganizationRole.Member
+  );
 }
-

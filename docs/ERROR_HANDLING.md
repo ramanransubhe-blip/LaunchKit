@@ -6,22 +6,23 @@
 
 All custom errors inherit from the base `ApplicationError` class, which automatically maps error states to HTTP status codes and serializes details cleanly for API responses.
 
-| Class Name | Error Code | HTTP Status | Use Case |
-| :--- | :--- | :--- | :--- |
-| `ValidationError` | `VALIDATION_ERROR` | `400` | Malformed payloads, invalid formats. |
-| `AuthenticationError`| `AUTHENTICATION_ERROR` | `401` | Session token missing, expired, or invalid. |
-| `AuthorizationError` | `AUTHORIZATION_ERROR` | `403` | Insufficient roles/permissions privileges. |
-| `NotFoundError` | `NOT_FOUND_ERROR` | `404` | Database record or route resource not found. |
-| `DatabaseError` | `DATABASE_ERROR` | `500` | Database queries or transaction failures. |
-| `PaymentError` | `PAYMENT_ERROR` | `402` | Stripe declines, invalid cards, pricing mismatch. |
-| `RateLimitError` | `RATE_LIMIT_ERROR` | `429` | Sliding window rate limits breached. |
-| `UnknownError` | `UNKNOWN_ERROR` | `500` | Uncaught exceptions. |
+| Class Name            | Error Code             | HTTP Status | Use Case                                          |
+| :-------------------- | :--------------------- | :---------- | :------------------------------------------------ |
+| `ValidationError`     | `VALIDATION_ERROR`     | `400`       | Malformed payloads, invalid formats.              |
+| `AuthenticationError` | `AUTHENTICATION_ERROR` | `401`       | Session token missing, expired, or invalid.       |
+| `AuthorizationError`  | `AUTHORIZATION_ERROR`  | `403`       | Insufficient roles/permissions privileges.        |
+| `NotFoundError`       | `NOT_FOUND_ERROR`      | `404`       | Database record or route resource not found.      |
+| `DatabaseError`       | `DATABASE_ERROR`       | `500`       | Database queries or transaction failures.         |
+| `PaymentError`        | `PAYMENT_ERROR`        | `402`       | Stripe declines, invalid cards, pricing mismatch. |
+| `RateLimitError`      | `RATE_LIMIT_ERROR`     | `429`       | Sliding window rate limits breached.              |
+| `UnknownError`        | `UNKNOWN_ERROR`        | `500`       | Uncaught exceptions.                              |
 
 ---
 
 ## Usage Examples
 
 ### Throwing Errors
+
 ```typescript
 import { ValidationError, NotFoundError } from "@devlaunchkit/errors";
 
@@ -37,6 +38,7 @@ if (!user) {
 ```
 
 ### Catching & Serializing Errors in APIs
+
 The `serializeError()` helper translates any error object (custom or native) into a unified JSON format:
 
 ```typescript
@@ -51,6 +53,7 @@ try {
 ```
 
 ### Serialized JSON Response Format
+
 ```json
 {
   "success": false,

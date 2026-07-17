@@ -61,7 +61,11 @@ export class StripeBillingService implements BillingService {
     }
   }
 
-  async createCustomer(email: string, name?: string, metadata?: Record<string, unknown>): Promise<BillingCustomer> {
+  async createCustomer(
+    email: string,
+    name?: string,
+    metadata?: Record<string, unknown>
+  ): Promise<BillingCustomer> {
     if (this.isMock) {
       return {
         id: "cust_stripe_mock_" + Math.random().toString(36).substring(7),
@@ -130,7 +134,10 @@ export class StripeBillingService implements BillingService {
         createdAt: new Date(),
       };
     }
-    return this.request<BillingSubscription>("/subscriptions", "POST", { customer: customerId, "items[0][price]": priceId });
+    return this.request<BillingSubscription>("/subscriptions", "POST", {
+      customer: customerId,
+      "items[0][price]": priceId,
+    });
   }
 
   async cancelSubscription(subscriptionId: string): Promise<BillingSubscription> {
@@ -164,7 +171,9 @@ export class StripeBillingService implements BillingService {
         createdAt: new Date(),
       };
     }
-    return this.request<BillingSubscription>(`/subscriptions/${subscriptionId}`, "POST", { "pause_collection[behavior]": "keep_as_draft" });
+    return this.request<BillingSubscription>(`/subscriptions/${subscriptionId}`, "POST", {
+      "pause_collection[behavior]": "keep_as_draft",
+    });
   }
 
   async resumeSubscription(subscriptionId: string): Promise<BillingSubscription> {
@@ -181,7 +190,9 @@ export class StripeBillingService implements BillingService {
         createdAt: new Date(),
       };
     }
-    return this.request<BillingSubscription>(`/subscriptions/${subscriptionId}`, "POST", { "pause_collection": "" });
+    return this.request<BillingSubscription>(`/subscriptions/${subscriptionId}`, "POST", {
+      pause_collection: "",
+    });
   }
 
   async upgradePlan(subscriptionId: string, newPriceId: string): Promise<BillingSubscription> {
@@ -198,7 +209,9 @@ export class StripeBillingService implements BillingService {
         createdAt: new Date(),
       };
     }
-    return this.request<BillingSubscription>(`/subscriptions/${subscriptionId}`, "POST", { "items[0][price]": newPriceId });
+    return this.request<BillingSubscription>(`/subscriptions/${subscriptionId}`, "POST", {
+      "items[0][price]": newPriceId,
+    });
   }
 
   async downgradePlan(subscriptionId: string, newPriceId: string): Promise<BillingSubscription> {
@@ -227,7 +240,9 @@ export class StripeBillingService implements BillingService {
         },
       ];
     }
-    return this.request<readonly BillingInvoice[]>(`/invoices?customer=${encodeURIComponent(customerId)}`);
+    return this.request<readonly BillingInvoice[]>(
+      `/invoices?customer=${encodeURIComponent(customerId)}`
+    );
   }
 
   async downloadInvoice(invoiceId: string): Promise<string> {
@@ -291,7 +306,11 @@ export class StripeBillingService implements BillingService {
     return this.request<BillingRefund>("/refunds", "POST", { charge: paymentId, amount });
   }
 
-  async validateWebhook(rawBody: string, signature: string, secret: string): Promise<BillingWebhookEvent> {
+  async validateWebhook(
+    rawBody: string,
+    signature: string,
+    secret: string
+  ): Promise<BillingWebhookEvent> {
     if (this.isMock) {
       if (signature === "invalid") {
         throw new BillingWebhookError("Invalid mock signature");

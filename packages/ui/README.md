@@ -15,6 +15,7 @@ To use this library inside the monorepo workspace, add it to your `package.json`
 ```
 
 Then run:
+
 ```bash
 pnpm install
 ```
@@ -29,11 +30,7 @@ Configure `ThemeProvider` at the root of your React tree to support light, dark,
 import { ThemeProvider } from "@devlaunchkit/ui";
 
 export default function Layout({ children }) {
-  return (
-    <ThemeProvider defaultTheme="system">
-      {children}
-    </ThemeProvider>
-  );
+  return <ThemeProvider defaultTheme="system">{children}</ThemeProvider>;
 }
 ```
 
@@ -42,26 +39,31 @@ export default function Layout({ children }) {
 ## 🧩 Component Directory
 
 ### 1. Typography & Layouts
-*   `Heading`, `Title`, `Subtitle`, `Body`, `Caption`, `Code`, `Quote`, `GradientText`, `AnimatedText`
-*   `Container`, `Section`, `Grid`, `Stack`, `Page`, `SidebarLayout`, `DashboardLayout`, `AuthLayout`
+
+- `Heading`, `Title`, `Subtitle`, `Body`, `Caption`, `Code`, `Quote`, `GradientText`, `AnimatedText`
+- `Container`, `Section`, `Grid`, `Stack`, `Page`, `SidebarLayout`, `DashboardLayout`, `AuthLayout`
 
 ### 2. Navigation
-*   `Navbar`, `Sidebar`, `Breadcrumbs`, `CommandMenu`, `SearchBar`, `Tabs`, `Pagination`, `DropdownMenu`, `ContextMenu`
+
+- `Navbar`, `Sidebar`, `Breadcrumbs`, `CommandMenu`, `SearchBar`, `Tabs`, `Pagination`, `DropdownMenu`, `ContextMenu`
 
 ### 3. Controls & Forms
-*   `Button`, `IconButton`, `SplitButton`, `CopyButton`, `AnimatedButton`
-*   `Input`, `Textarea`, `PasswordInput`, `OTPInput`, `Checkbox`, `RadioGroup`, `Switch`, `Slider`, `Select`, `MultiSelect`, `Autocomplete`, `DatePicker`, `TimePicker`, `FileUpload`, `ImageUpload`, `ColorPicker`, `MarkdownEditor`, `RichTextEditor`
+
+- `Button`, `IconButton`, `SplitButton`, `CopyButton`, `AnimatedButton`
+- `Input`, `Textarea`, `PasswordInput`, `OTPInput`, `Checkbox`, `RadioGroup`, `Switch`, `Slider`, `Select`, `MultiSelect`, `Autocomplete`, `DatePicker`, `TimePicker`, `FileUpload`, `ImageUpload`, `ColorPicker`, `MarkdownEditor`, `RichTextEditor`
 
 ### 4. Data Display & Feedback
-*   `Card`, `StatisticCard`, `Table`, `DataTable`, `Avatar`, `Badge`, `Tag`, `Timeline`, `Accordion`, `Alert`, `Callout`, `Tooltip`, `Popover`, `Progress`, `CircularProgress`, `Skeleton`, `Separator`, `Calendar`, `Charts` (responsive SVG charts)
-*   `Toast` (context provider + hooks), `Notification`, `LoadingSpinner`, `LoadingScreen`, `SuccessAnimation`, `ErrorState`, `EmptyState`
+
+- `Card`, `StatisticCard`, `Table`, `DataTable`, `Avatar`, `Badge`, `Tag`, `Timeline`, `Accordion`, `Alert`, `Callout`, `Tooltip`, `Popover`, `Progress`, `CircularProgress`, `Skeleton`, `Separator`, `Calendar`, `Charts` (responsive SVG charts)
+- `Toast` (context provider + hooks), `Notification`, `LoadingSpinner`, `LoadingScreen`, `SuccessAnimation`, `ErrorState`, `EmptyState`
 
 ### 5. Overlays, AI, Auth & Payments
-*   `Dialog`, `Drawer`, `BottomSheet`, `DeleteDialog`
-*   `ChatWindow`, `StreamingResponse`, `CodeBlock`, `MessageBubble`, `ThinkingIndicator`, `ToolCallRenderer`
-*   `LoginCard`, `SignupCard`, `MagicLink`, `ProfileDropdown`
-*   `PricingCard`, `SubscriptionCard`, `PlanComparison`, `CheckoutSummary`, `BillingHistory`, `UsageMeter`
-*   `UserTable`, `RoleBadge`, `PermissionTable`, `AuditLogViewer`, `SystemStatus`
+
+- `Dialog`, `Drawer`, `BottomSheet`, `DeleteDialog`
+- `ChatWindow`, `StreamingResponse`, `CodeBlock`, `MessageBubble`, `ThinkingIndicator`, `ToolCallRenderer`
+- `LoginCard`, `SignupCard`, `MagicLink`, `ProfileDropdown`
+- `PricingCard`, `SubscriptionCard`, `PlanComparison`, `CheckoutSummary`, `BillingHistory`, `UsageMeter`
+- `UserTable`, `RoleBadge`, `PermissionTable`, `AuditLogViewer`, `SystemStatus`
 
 ---
 

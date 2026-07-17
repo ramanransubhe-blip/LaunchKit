@@ -26,5 +26,6 @@ Every endpoint returns a unified JSON format:
 ## Paginations Specs
 
 Supports both offset and cursor pagination schemas:
+
 - **Offset pagination**: `page` & `pageSize` controls.
 - **Cursor pagination**: `nextCursor` & `hasMore` controls.

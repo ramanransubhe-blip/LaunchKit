@@ -60,7 +60,10 @@ export class SupabaseStorageService implements StorageService {
     body: Buffer | ArrayBuffer | string,
     options?: UploadOptions
   ): Promise<StorageUploadResult> {
-    const size = typeof body === "string" ? Buffer.byteLength(body) : (body as any).byteLength || (body as Buffer).length || 0;
+    const size =
+      typeof body === "string"
+        ? Buffer.byteLength(body)
+        : (body as any).byteLength || (body as Buffer).length || 0;
     if (this.isMock) {
       return {
         path,
@@ -98,12 +101,20 @@ export class SupabaseStorageService implements StorageService {
 
   async move(bucket: string, fromPath: string, toPath: string): Promise<void> {
     if (this.isMock) return;
-    await this.request<void>(`/object/move`, "POST", { bucketId: bucket, srcKey: fromPath, destKey: toPath });
+    await this.request<void>(`/object/move`, "POST", {
+      bucketId: bucket,
+      srcKey: fromPath,
+      destKey: toPath,
+    });
   }
 
   async copy(bucket: string, fromPath: string, toPath: string): Promise<void> {
     if (this.isMock) return;
-    await this.request<void>(`/object/copy`, "POST", { bucketId: bucket, srcKey: fromPath, destKey: toPath });
+    await this.request<void>(`/object/copy`, "POST", {
+      bucketId: bucket,
+      srcKey: fromPath,
+      destKey: toPath,
+    });
   }
 
   async rename(bucket: string, path: string, newName: string): Promise<void> {
@@ -116,11 +127,25 @@ export class SupabaseStorageService implements StorageService {
   async list(bucket: string, folderPath?: string): Promise<readonly StorageObject[]> {
     if (this.isMock) {
       return [
-        { name: "file1.txt", path: folderPath ? `${folderPath}/file1.txt` : "file1.txt", isFolder: false, size: 1024, updatedAt: new Date() },
-        { name: "assets", path: folderPath ? `${folderPath}/assets` : "assets", isFolder: true, updatedAt: new Date() },
+        {
+          name: "file1.txt",
+          path: folderPath ? `${folderPath}/file1.txt` : "file1.txt",
+          isFolder: false,
+          size: 1024,
+          updatedAt: new Date(),
+        },
+        {
+          name: "assets",
+          path: folderPath ? `${folderPath}/assets` : "assets",
+          isFolder: true,
+          updatedAt: new Date(),
+        },
       ];
     }
-    return this.request<readonly StorageObject[]>(`/object/list/${bucket}`, "POST", { prefix: folderPath || "", limit: 100 });
+    return this.request<readonly StorageObject[]>(`/object/list/${bucket}`, "POST", {
+      prefix: folderPath || "",
+      limit: 100,
+    });
   }
 
   async exists(bucket: string, path: string): Promise<boolean> {
@@ -150,7 +175,11 @@ export class SupabaseStorageService implements StorageService {
     if (this.isMock) {
       return `https://mock.supabase.co/storage/v1/object/sign/${bucket}/${path}?token=mock_signed_token&expires=${Date.now() + expiresInSeconds * 1000}`;
     }
-    const res = await this.request<{ signedURL: string }>(`/object/sign/${bucket}/${path}`, "POST", { expiresIn: expiresInSeconds });
+    const res = await this.request<{ signedURL: string }>(
+      `/object/sign/${bucket}/${path}`,
+      "POST",
+      { expiresIn: expiresInSeconds }
+    );
     return res.signedURL;
   }
 

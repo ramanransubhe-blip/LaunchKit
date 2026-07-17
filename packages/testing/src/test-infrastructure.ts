@@ -79,7 +79,11 @@ async function runTests() {
     state.eventReceived = true;
   });
 
-  eventBus.publish("user:signup", { profileId: "usr_1", email: "test@example.com", timestamp: new Date() });
+  eventBus.publish("user:signup", {
+    profileId: "usr_1",
+    email: "test@example.com",
+    timestamp: new Date(),
+  });
   await new Promise((r) => setTimeout(r, 50)); // await async setImmediate queue dispatch
   assert(state.eventReceived === true, "Async subscriber executes callback successfully");
   unsubscribe();

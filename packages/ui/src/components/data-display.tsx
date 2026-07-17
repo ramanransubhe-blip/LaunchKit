@@ -6,7 +6,14 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { Info, AlertTriangle, CheckCircle2, TrendingUp, TrendingDown, ChevronDown } from "lucide-react";
+import {
+  Info,
+  AlertTriangle,
+  CheckCircle2,
+  TrendingUp,
+  TrendingDown,
+  ChevronDown,
+} from "lucide-react";
 
 // Card Components
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
@@ -29,23 +36,62 @@ export function Card({ glass = false, className, children, ...props }: CardProps
 }
 
 export function CardHeader({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("flex flex-col gap-1 border-b border-slate-100 dark:border-slate-900 pb-3", className)} {...props}>{children}</div>;
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-1 border-b border-slate-100 dark:border-slate-900 pb-3",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
 }
 
 export function CardTitle({ className, children, ...props }: HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn("font-bold text-lg text-slate-900 dark:text-slate-50", className)} {...props}>{children}</h3>;
+  return (
+    <h3 className={cn("font-bold text-lg text-slate-900 dark:text-slate-50", className)} {...props}>
+      {children}
+    </h3>
+  );
 }
 
-export function CardDescription({ className, children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-xs text-slate-500 dark:text-slate-400", className)} {...props}>{children}</p>;
+export function CardDescription({
+  className,
+  children,
+  ...props
+}: HTMLAttributes<HTMLParagraphElement>) {
+  return (
+    <p className={cn("text-xs text-slate-500 dark:text-slate-400", className)} {...props}>
+      {children}
+    </p>
+  );
 }
 
 export function CardContent({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("text-sm text-slate-700 dark:text-slate-350 leading-relaxed", className)} {...props}>{children}</div>;
+  return (
+    <div
+      className={cn("text-sm text-slate-700 dark:text-slate-350 leading-relaxed", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
 }
 
 export function CardFooter({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("flex items-center justify-between border-t border-slate-100 dark:border-slate-900 pt-3", className)} {...props}>{children}</div>;
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-between border-t border-slate-100 dark:border-slate-900 pt-3",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
 }
 
 // StatisticCard
@@ -57,7 +103,15 @@ export interface StatisticCardProps extends CardProps {
   icon?: ReactNode;
 }
 
-export function StatisticCard({ title, value, delta, description, icon, className, ...props }: StatisticCardProps) {
+export function StatisticCard({
+  title,
+  value,
+  delta,
+  description,
+  icon,
+  className,
+  ...props
+}: StatisticCardProps) {
   return (
     <Card className={cn("p-5 justify-between relative overflow-hidden", className)} {...props}>
       <div className="flex justify-between items-start">
@@ -75,7 +129,11 @@ export function StatisticCard({ title, value, delta, description, icon, classNam
                 : "bg-red-50 dark:bg-red-950/20 text-red-600"
             )}
           >
-            {delta.trend === "up" ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+            {delta.trend === "up" ? (
+              <TrendingUp className="w-3 h-3" />
+            ) : (
+              <TrendingDown className="w-3 h-3" />
+            )}
             {delta.value}
           </span>
         )}
@@ -92,11 +150,16 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 export function Badge({ variant = "secondary", className, children, ...props }: BadgeProps) {
   const variantClasses = {
-    primary: "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-650 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/30",
-    secondary: "bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800",
-    danger: "bg-red-50 dark:bg-red-950/20 text-red-650 dark:text-red-400 border border-red-100 dark:border-red-900/30",
-    success: "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-650 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30",
-    warning: "bg-amber-50 dark:bg-amber-950/20 text-amber-650 dark:text-amber-400 border border-amber-100 dark:border-amber-900/30",
+    primary:
+      "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-650 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/30",
+    secondary:
+      "bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800",
+    danger:
+      "bg-red-50 dark:bg-red-950/20 text-red-650 dark:text-red-400 border border-red-100 dark:border-red-900/30",
+    success:
+      "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-650 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30",
+    warning:
+      "bg-amber-50 dark:bg-amber-950/20 text-amber-650 dark:text-amber-400 border border-amber-100 dark:border-amber-900/30",
   };
 
   return (
@@ -140,7 +203,9 @@ export function Table({ headers, className, children, ...props }: TableProps) {
         <thead className="bg-slate-50 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 text-xs font-bold uppercase tracking-wider text-slate-500">
           <tr>
             {headers.map((h, i) => (
-              <th key={i} className="px-6 py-3.5 font-bold">{h}</th>
+              <th key={i} className="px-6 py-3.5 font-bold">
+                {h}
+              </th>
             ))}
           </tr>
         </thead>
@@ -159,11 +224,7 @@ export interface DataTableProps<T> {
 }
 
 export function DataTable({ headers, data, renderRow }: DataTableProps<any>) {
-  return (
-    <Table headers={headers}>
-      {data.map((item, idx) => renderRow(item, idx))}
-    </Table>
-  );
+  return <Table headers={headers}>{data.map((item, idx) => renderRow(item, idx))}</Table>;
 }
 
 // Avatar
@@ -176,8 +237,17 @@ export interface AvatarProps {
 
 export function Avatar({ src, alt, fallback, className }: AvatarProps) {
   return (
-    <AvatarPrimitive.Root className={cn("relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900", className)}>
-      <AvatarPrimitive.Image src={src} alt={alt} className="aspect-square h-full w-full object-cover" />
+    <AvatarPrimitive.Root
+      className={cn(
+        "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900",
+        className
+      )}
+    >
+      <AvatarPrimitive.Image
+        src={src}
+        alt={alt}
+        className="aspect-square h-full w-full object-cover"
+      />
       <AvatarPrimitive.Fallback className="flex h-full w-full items-center justify-center rounded-full text-sm font-bold text-slate-600 dark:text-slate-400 select-none uppercase">
         {fallback.substring(0, 2)}
       </AvatarPrimitive.Fallback>
@@ -218,7 +288,11 @@ export interface AccordionItemProps {
 
 export function Accordion({ items }: { items: AccordionItemProps[] }) {
   return (
-    <AccordionPrimitive.Root type="single" collapsible className="w-full divide-y divide-slate-100 dark:divide-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-950">
+    <AccordionPrimitive.Root
+      type="single"
+      collapsible
+      className="w-full divide-y divide-slate-100 dark:divide-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-950"
+    >
       {items.map((item) => (
         <AccordionPrimitive.Item key={item.value} value={item.value} className="text-left">
           <AccordionPrimitive.Header>
@@ -255,16 +329,25 @@ export function Alert({ variant = "info", title, description, className }: Alert
   const bgClasses = {
     info: "bg-indigo-50/40 dark:bg-indigo-950/10 border-indigo-100 dark:border-indigo-900/30",
     warning: "bg-amber-50/45 dark:bg-amber-950/10 border-amber-100 dark:border-amber-900/30",
-    success: "bg-emerald-50/40 dark:bg-emerald-950/10 border-emerald-100 dark:border-emerald-900/30",
+    success:
+      "bg-emerald-50/40 dark:bg-emerald-950/10 border-emerald-100 dark:border-emerald-900/30",
     error: "bg-red-50/40 dark:bg-red-950/10 border-red-100 dark:border-red-900/30",
   };
 
   return (
-    <div className={cn("p-4 rounded-2xl border flex gap-3 text-left items-start", bgClasses[variant], className)}>
+    <div
+      className={cn(
+        "p-4 rounded-2xl border flex gap-3 text-left items-start",
+        bgClasses[variant],
+        className
+      )}
+    >
       <div className="shrink-0 mt-0.5">{icons[variant]}</div>
       <div className="space-y-1">
         <h5 className="font-bold text-sm text-slate-900 dark:text-white leading-none">{title}</h5>
-        {description && <p className="text-xs text-slate-500 dark:text-slate-450 leading-normal">{description}</p>}
+        {description && (
+          <p className="text-xs text-slate-500 dark:text-slate-450 leading-normal">{description}</p>
+        )}
       </div>
     </div>
   );
@@ -272,7 +355,12 @@ export function Alert({ variant = "info", title, description, className }: Alert
 
 export function Callout({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-700 dark:text-slate-350 text-left font-medium leading-relaxed", className)}>
+    <div
+      className={cn(
+        "p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm text-slate-700 dark:text-slate-350 text-left font-medium leading-relaxed",
+        className
+      )}
+    >
       {children}
     </div>
   );
@@ -328,20 +416,39 @@ export function HoverCard({ trigger, children }: PopoverProps) {
 export function Progress({ value }: { value: number }) {
   return (
     <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden border border-slate-200/40 dark:border-slate-800/40">
-      <div className="bg-indigo-600 dark:bg-indigo-500 h-full rounded-full transition-all duration-300" style={{ width: `${Math.min(100, Math.max(0, value))}%` }} />
+      <div
+        className="bg-indigo-600 dark:bg-indigo-500 h-full rounded-full transition-all duration-300"
+        style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
+      />
     </div>
   );
 }
 
-export function CircularProgress({ value, size = 44, strokeWidth = 4 }: { value: number; size?: number; strokeWidth?: number }) {
+export function CircularProgress({
+  value,
+  size = 44,
+  strokeWidth = 4,
+}: {
+  value: number;
+  size?: number;
+  strokeWidth?: number;
+}) {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-  const strokeDashoffset = circumference - (Math.min(100, Math.max(0, value)) / 100) * circumference;
+  const strokeDashoffset =
+    circumference - (Math.min(100, Math.max(0, value)) / 100) * circumference;
 
   return (
     <div className="relative inline-flex items-center justify-center">
       <svg width={size} height={size} className="transform -rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={radius} strokeWidth={strokeWidth} fill="transparent" className="stroke-slate-100 dark:stroke-slate-900" />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          strokeWidth={strokeWidth}
+          fill="transparent"
+          className="stroke-slate-100 dark:stroke-slate-900"
+        />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -376,15 +483,31 @@ export function Separator({ className }: { className?: string }) {
 
 // Calendar Mock
 export function Calendar({ className }: { className?: string }) {
-  const days = Array(31).fill(null).map((_, i) => i + 1);
+  const days = Array(31)
+    .fill(null)
+    .map((_, i) => i + 1);
   return (
-    <div className={cn("p-4 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-950 w-fit", className)}>
+    <div
+      className={cn(
+        "p-4 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-950 w-fit",
+        className
+      )}
+    >
       <div className="grid grid-cols-7 gap-1.5 text-center text-xs font-mono font-bold text-slate-500 mb-2">
-        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+        <span>Su</span>
+        <span>Mo</span>
+        <span>Tu</span>
+        <span>We</span>
+        <span>Th</span>
+        <span>Fr</span>
+        <span>Sa</span>
       </div>
       <div className="grid grid-cols-7 gap-1.5 text-sm font-semibold">
         {days.map((day) => (
-          <button key={day} className="w-8 h-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+          <button
+            key={day}
+            className="w-8 h-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer"
+          >
             {day}
           </button>
         ))}
@@ -394,7 +517,13 @@ export function Calendar({ className }: { className?: string }) {
 }
 
 // SVG Charts
-export function Charts({ type = "line", data }: { type?: "line" | "bar" | "area"; data: number[] }) {
+export function Charts({
+  type = "line",
+  data,
+}: {
+  type?: "line" | "bar" | "area";
+  data: number[];
+}) {
   const max = Math.max(...data, 1);
   const width = 400;
   const height = 150;
@@ -412,14 +541,28 @@ export function Charts({ type = "line", data }: { type?: "line" | "bar" | "area"
     <div className="w-full border border-slate-200 dark:border-slate-800 rounded-2xl p-4 bg-white dark:bg-slate-950">
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto overflow-visible">
         {/* Grid lines */}
-        <line x1={padding} y1={height / 2} x2={width - padding} y2={height / 2} className="stroke-slate-100 dark:stroke-slate-900" strokeDasharray="4" />
-        
+        <line
+          x1={padding}
+          y1={height / 2}
+          x2={width - padding}
+          y2={height / 2}
+          className="stroke-slate-100 dark:stroke-slate-900"
+          strokeDasharray="4"
+        />
+
         {type === "area" && (
           <path d={areaD} className="fill-indigo-500/10 dark:fill-indigo-500/5 stroke-none" />
         )}
-        
+
         {type !== "bar" && (
-          <path d={pathD} fill="none" strokeWidth="2.5" className="stroke-indigo-500" strokeLinecap="round" strokeLinejoin="round" />
+          <path
+            d={pathD}
+            fill="none"
+            strokeWidth="2.5"
+            className="stroke-indigo-500"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         )}
 
         {type === "bar" &&
@@ -444,7 +587,15 @@ export function Charts({ type = "line", data }: { type?: "line" | "bar" | "area"
     </div>
   );
 }
-export function MetricCards({ title, value, unit }: { title: string; value: string | number; unit?: string }) {
+export function MetricCards({
+  title,
+  value,
+  unit,
+}: {
+  title: string;
+  value: string | number;
+  unit?: string;
+}) {
   return (
     <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex flex-col gap-1 text-left">
       <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{title}</span>

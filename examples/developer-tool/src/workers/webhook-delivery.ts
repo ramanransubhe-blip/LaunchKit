@@ -88,9 +88,7 @@ async function deliverWebhook(payload: WebhookPayload): Promise<void> {
         enqueue("webhook-delivery", {
           ...payload,
           attempt: attempt + 1,
-        }).catch((err: unknown) =>
-          logger.error("Failed to enqueue webhook retry", { error: err })
-        );
+        }).catch((err: unknown) => logger.error("Failed to enqueue webhook retry", { error: err }));
       }, delay);
     } else {
       logger.error("Webhook delivery permanently failed — max retries exceeded", {

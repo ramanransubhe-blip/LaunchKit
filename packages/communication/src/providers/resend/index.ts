@@ -8,7 +8,10 @@ import type {
   NotificationOptions,
   AnnouncementOptions,
 } from "../../core/contracts.js";
-import { CommunicationProviderError, CommunicationTemplateMissingError } from "../../core/errors.js";
+import {
+  CommunicationProviderError,
+  CommunicationTemplateMissingError,
+} from "../../core/errors.js";
 
 export interface ResendConfig {
   apiKey?: string;

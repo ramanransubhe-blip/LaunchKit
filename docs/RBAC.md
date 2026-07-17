@@ -22,12 +22,12 @@ const guestAccess = permissions.hasPermission(UserRole.Guest, Permission.AdminAc
 
 ## Centralized Role Hierarchy Table
 
-| Role | Directly Granted Permissions | Inherits From |
-| :--- | :--- | :--- |
-| `guest` | `auth.sign_in`, `auth.sign_up`, `auth.password_forgot` | (None) |
-| `user` | `auth.profile_read`, `auth.profile_write`, `organization.read` | `guest` |
-| `admin` | `admin.access`, `admin.user_manage`, `organization.invite` | `user` |
-| `super_admin`| `admin.impersonate`, `organization.delete`, `billing.write` | `admin` |
+| Role          | Directly Granted Permissions                                   | Inherits From |
+| :------------ | :------------------------------------------------------------- | :------------ |
+| `guest`       | `auth.sign_in`, `auth.sign_up`, `auth.password_forgot`         | (None)        |
+| `user`        | `auth.profile_read`, `auth.profile_write`, `organization.read` | `guest`       |
+| `admin`       | `admin.access`, `admin.user_manage`, `organization.invite`     | `user`        |
+| `super_admin` | `admin.impersonate`, `organization.delete`, `billing.write`    | `admin`       |
 
 ---
 
@@ -41,10 +41,10 @@ import { UserRole } from "@devlaunchkit/auth";
 
 export async function GET() {
   const auth = createAuthServerHelpers({ store });
-  
+
   // Throws AuthForbiddenError if the user is not Admin or SuperAdmin
   auth.requireRole(UserRole.Admin);
-  
+
   return Response.json({ success: true });
 }
 ```

@@ -39,7 +39,8 @@ router.post("/dodo", rateLimitMiddleware, async (req: Request, res: Response) =>
     }
 
     const secret = process.env.DODO_WEBHOOK_SECRET ?? "";
-    const rawBody = req.body instanceof Buffer ? req.body.toString("utf8") : JSON.stringify(req.body);
+    const rawBody =
+      req.body instanceof Buffer ? req.body.toString("utf8") : JSON.stringify(req.body);
     const event = await payments.validateWebhook(rawBody, signature, secret);
     logger.info("Webhook received", { type: event.type, id: event.id });
 

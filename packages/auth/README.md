@@ -16,12 +16,12 @@ Provider-agnostic authentication platform supporting **Better Auth** and **Clerk
 
 ## Provider Comparison
 
-| Feature | Better Auth | Clerk |
-| :--- | :--- | :--- |
-| **Hosting** | Self-hosted / Local DB | Managed SaaS |
-| **API Backend** | Local Node REST API | Clerk Cloud API |
-| **Local Mocks** | Supported | Supported |
-| **OAuth Providers**| Google, GitHub | Google, GitHub, Apple, etc. |
+| Feature             | Better Auth            | Clerk                       |
+| :------------------ | :--------------------- | :-------------------------- |
+| **Hosting**         | Self-hosted / Local DB | Managed SaaS                |
+| **API Backend**     | Local Node REST API    | Clerk Cloud API             |
+| **Local Mocks**     | Supported              | Supported                   |
+| **OAuth Providers** | Google, GitHub         | Google, GitHub, Apple, etc. |
 
 ---
 
@@ -36,11 +36,19 @@ AUTH_PROVIDER="better-auth" # or "clerk"
 Initialize the service:
 
 ```typescript
-import { createBetterAuthService, createClerkService, setGlobalAuthService } from "@devlaunchkit/auth/server";
+import {
+  createBetterAuthService,
+  createClerkService,
+  setGlobalAuthService,
+} from "@devlaunchkit/auth/server";
 
-const authService = process.env.AUTH_PROVIDER === "clerk"
-  ? createClerkService({ secret: process.env.CLERK_SECRET_KEY })
-  : createBetterAuthService({ baseUrl: process.env.NEXT_PUBLIC_APP_URL, secret: process.env.BETTER_AUTH_SECRET });
+const authService =
+  process.env.AUTH_PROVIDER === "clerk"
+    ? createClerkService({ secret: process.env.CLERK_SECRET_KEY })
+    : createBetterAuthService({
+        baseUrl: process.env.NEXT_PUBLIC_APP_URL,
+        secret: process.env.BETTER_AUTH_SECRET,
+      });
 
 setGlobalAuthService(authService);
 ```

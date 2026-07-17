@@ -111,7 +111,7 @@ export interface AuthEventMap {
 
 /** Typed event listener signature. */
 export type AuthEventListener<K extends keyof AuthEventMap> = (
-  payload: AuthEventMap[K],
+  payload: AuthEventMap[K]
 ) => void | Promise<void>;
 
 /**
@@ -119,15 +119,22 @@ export type AuthEventListener<K extends keyof AuthEventMap> = (
  *
  * @typeParam TEventMap - Event payload map.
  */
-export interface TypedAuthEventBus<
-  TEventMap extends object = AuthEventMap,
-> {
+export interface TypedAuthEventBus<TEventMap extends object = AuthEventMap> {
   /** Register a listener. */
-  on<K extends keyof TEventMap & string>(event: K, listener: (payload: TEventMap[K]) => void | Promise<void>): void;
+  on<K extends keyof TEventMap & string>(
+    event: K,
+    listener: (payload: TEventMap[K]) => void | Promise<void>
+  ): void;
   /** Register a one-shot listener. */
-  once<K extends keyof TEventMap & string>(event: K, listener: (payload: TEventMap[K]) => void | Promise<void>): void;
+  once<K extends keyof TEventMap & string>(
+    event: K,
+    listener: (payload: TEventMap[K]) => void | Promise<void>
+  ): void;
   /** Remove a listener. */
-  off<K extends keyof TEventMap & string>(event: K, listener: (payload: TEventMap[K]) => void | Promise<void>): void;
+  off<K extends keyof TEventMap & string>(
+    event: K,
+    listener: (payload: TEventMap[K]) => void | Promise<void>
+  ): void;
   /** Emit an event asynchronously. */
   emit<K extends keyof TEventMap & string>(event: K, payload: TEventMap[K]): Promise<void>;
   /** Count listeners registered for an event. */
@@ -162,9 +169,7 @@ export function createAuthEventBus(): TypedAuthEventBus<AuthEventMap> {
     async emit(event, payload) {
       const listeners = emitter.listeners(event as string);
       const settled = await Promise.allSettled(
-        listeners.map((listener) =>
-          Promise.resolve(listener(payload as never)),
-        ),
+        listeners.map((listener) => Promise.resolve(listener(payload as never)))
       );
 
       for (const result of settled) {

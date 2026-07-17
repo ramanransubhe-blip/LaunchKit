@@ -126,8 +126,7 @@ contactsRouter.get("/", async (c) => {
   const tagFilter = c.req.query("tag");
   const assignedFilter = c.req.query("assignedTo");
 
-  let orgContacts = Array.from(contacts.values())
-    .filter((ct) => ct.orgId === orgId);
+  let orgContacts = Array.from(contacts.values()).filter((ct) => ct.orgId === orgId);
 
   // Apply filters
   if (statusFilter) {
@@ -178,16 +177,18 @@ contactsRouter.get("/search", async (c) => {
 
   const totalCount = searchIndex.count(query, orgId, "contact");
 
-  return c.json(sendSuccess({
-    query,
-    results: results.map((r) => ({
-      id: r.document.id,
-      score: r.score,
-      highlights: r.highlights,
-      data: r.document.data,
-    })),
-    total: totalCount,
-  }));
+  return c.json(
+    sendSuccess({
+      query,
+      results: results.map((r) => ({
+        id: r.document.id,
+        score: r.score,
+        highlights: r.highlights,
+        data: r.document.data,
+      })),
+      total: totalCount,
+    })
+  );
 });
 
 /**
@@ -214,7 +215,7 @@ contactsRouter.post("/", async (c) => {
 
   // Check for duplicate email within organization
   const existingContact = Array.from(contacts.values()).find(
-    (ct) => ct.orgId === orgId && ct.email.toLowerCase() === body.email.toLowerCase(),
+    (ct) => ct.orgId === orgId && ct.email.toLowerCase() === body.email.toLowerCase()
   );
   if (existingContact) {
     return c.json(sendFailure("A contact with this email already exists", "CONFLICT"), 409);
@@ -242,8 +243,14 @@ contactsRouter.post("/", async (c) => {
 
   // Index for full-text search
   indexContact(
-    { id: contact.id, name: contact.name, email: contact.email, company: contact.company ?? undefined, notes: contact.notes },
-    orgId,
+    {
+      id: contact.id,
+      name: contact.name,
+      email: contact.email,
+      company: contact.company ?? undefined,
+      notes: contact.notes,
+    },
+    orgId
   );
 
   logActivity(contact.id, userId, "created", `Contact "${contact.name}" created`);
@@ -325,8 +332,14 @@ contactsRouter.put("/:id", async (c) => {
 
   // Re-index for search
   indexContact(
-    { id: contact.id, name: contact.name, email: contact.email, company: contact.company ?? undefined, notes: contact.notes },
-    orgId,
+    {
+      id: contact.id,
+      name: contact.name,
+      email: contact.email,
+      company: contact.company ?? undefined,
+      notes: contact.notes,
+    },
+    orgId
   );
 
   if (changes.length > 0) {
@@ -381,7 +394,11 @@ contactsRouter.post("/:id/email", async (c) => {
     return c.json(sendFailure("Contact not found", "NOT_FOUND"), 404);
   }
 
-  const body = await c.req.json<{ subject: string; template: string; variables?: Record<string, unknown> }>();
+  const body = await c.req.json<{
+    subject: string;
+    template: string;
+    variables?: Record<string, unknown>;
+  }>();
 
   if (!body.subject || !body.template) {
     return c.json(sendFailure("Subject and template are required", "VALIDATION_ERROR"), 400);
@@ -397,7 +414,7 @@ contactsRouter.post("/:id/email", async (c) => {
     contactId,
     userId,
     "email_sent",
-    `Email "${body.subject}" sent to ${contact.email} (template: ${body.template})`,
+    `Email "${body.subject}" sent to ${contact.email} (template: ${body.template})`
   );
 
   return c.json(
@@ -407,6 +424,6 @@ contactsRouter.post("/:id/email", async (c) => {
       subject: body.subject,
       status: "queued",
     }),
-    201,
+    201
   );
 });

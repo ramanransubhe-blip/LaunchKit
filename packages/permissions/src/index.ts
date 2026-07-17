@@ -48,7 +48,7 @@ export class PermissionsManager {
   // Recursively fetch all permissions representing a role including its inherits hierarchy
   getRolePermissions(roleName: string, visited = new Set<string>()): Set<string> {
     const permissions = new Set<string>();
-    
+
     if (visited.has(roleName)) return permissions; // Prevent infinite circular loops
     visited.add(roleName);
 

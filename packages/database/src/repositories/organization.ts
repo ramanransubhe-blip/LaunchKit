@@ -3,7 +3,11 @@ import { Organization, InsertOrganization, Profile } from "../types";
 import { organizations, organizationMembers, teams, teamMembers, roles } from "../schema";
 import { eq, and } from "drizzle-orm";
 
-export class OrganizationRepository extends BaseRepository<Organization, InsertOrganization, typeof organizations> {
+export class OrganizationRepository extends BaseRepository<
+  Organization,
+  InsertOrganization,
+  typeof organizations
+> {
   constructor() {
     super(organizations);
   }
@@ -55,7 +59,9 @@ export class OrganizationRepository extends BaseRepository<Organization, InsertO
   }
 
   // Get full member profiles
-  async getMembersWithProfiles(orgId: string): Promise<{ id: string; name: string | null; email: string; role: string }[]> {
+  async getMembersWithProfiles(
+    orgId: string
+  ): Promise<{ id: string; name: string | null; email: string; role: string }[]> {
     const results = await this.db
       .select({
         id: organizationMembers.id,
@@ -81,11 +87,7 @@ export class OrganizationRepository extends BaseRepository<Organization, InsertO
 
   // Add member to organization
   async addMember(organizationId: string, profileId: string, roleName: string): Promise<void> {
-    const roleResults = await this.db
-      .select()
-      .from(roles)
-      .where(eq(roles.name, roleName))
-      .limit(1);
+    const roleResults = await this.db.select().from(roles).where(eq(roles.name, roleName)).limit(1);
 
     const role = roleResults[0];
     if (!role) throw new Error(`Role ${roleName} not found.`);
@@ -125,9 +127,6 @@ export class OrganizationRepository extends BaseRepository<Organization, InsertO
 
   // Get organization teams
   async getTeams(organizationId: string): Promise<any[]> {
-    return await this.db
-      .select()
-      .from(teams)
-      .where(eq(teams.organizationId, organizationId));
+    return await this.db.select().from(teams).where(eq(teams.organizationId, organizationId));
   }
 }

@@ -12,8 +12,8 @@ const navItem = {
   href: "/settings",
   items: [
     { title: "General", href: "/settings" },
-    { title: "Account", href: "/account" }
-  ]
+    { title: "Account", href: "/account" },
+  ],
 };
 ```
 
@@ -26,4 +26,5 @@ The framework compares `activeHref` with current Next.js `pathname` segments to 
 ## Favorites and Pinned Items
 
 Users can toggle custom pins on dashboard route paths.
+
 - Pinned and favorited keys are persisted directly in local memory and sorted at the top of the navigation list.

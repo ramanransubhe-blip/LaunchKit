@@ -9,10 +9,7 @@ import {
 } from "../types/index.js";
 
 /** Validates a payload with Zod and throws a typed auth error on failure. */
-export function validateAuthSchema<T extends z.ZodTypeAny>(
-  schema: T,
-  data: unknown,
-): z.infer<T> {
+export function validateAuthSchema<T extends z.ZodTypeAny>(schema: T, data: unknown): z.infer<T> {
   const result = schema.safeParse(data);
   if (!result.success) {
     throw new AuthValidationError("Request payload validation failed", {

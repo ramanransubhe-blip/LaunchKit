@@ -83,6 +83,8 @@ export class PostmarkCommunicationService implements CommunicationService {
   }
 }
 
-export function createPostmarkCommunicationService(config: PostmarkConfig = {}): CommunicationService {
+export function createPostmarkCommunicationService(
+  config: PostmarkConfig = {}
+): CommunicationService {
   return new PostmarkCommunicationService(config);
 }

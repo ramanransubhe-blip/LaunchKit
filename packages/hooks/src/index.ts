@@ -13,7 +13,10 @@ export function useEnvironment() {
 }
 
 // 2. useFeatureFlag: Hook to query feature flag status
-export function useFeatureFlag(key: string, defaultVal = false): { isEnabled: boolean; isLoading: boolean } {
+export function useFeatureFlag(
+  key: string,
+  defaultVal = false
+): { isEnabled: boolean; isLoading: boolean } {
   const [isEnabled, setIsEnabled] = useState(defaultVal);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -47,7 +50,14 @@ export function usePermission(permission: string, userRole?: string): boolean {
   const permissionsMap: Record<string, string[]> = {
     guest: ["read:settings", "read:billing"],
     member: ["read:settings", "read:billing", "write:settings"],
-    admin: ["read:settings", "read:billing", "write:settings", "write:billing", "manage:users", "manage:teams"],
+    admin: [
+      "read:settings",
+      "read:billing",
+      "write:settings",
+      "write:billing",
+      "manage:users",
+      "manage:teams",
+    ],
   };
 
   const userPerms = permissionsMap[userRole] || [];
@@ -72,7 +82,10 @@ export function useDebounce<T>(value: T, delay: number): T {
 }
 
 // 5. useCopy: Copy text to clipboard with feedback state
-export function useCopy(resetDuration = 2000): { copied: boolean; copy: (text: string) => Promise<boolean> } {
+export function useCopy(resetDuration = 2000): {
+  copied: boolean;
+  copy: (text: string) => Promise<boolean>;
+} {
   const [copied, setCopied] = useState(false);
 
   const copy = useCallback(
@@ -123,7 +136,10 @@ export function usePagination(totalItems: number, initialPageSize = 10) {
 }
 
 // 7. useLocalStorage: Stateful synchronization with LocalStorage
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val: T) => T)) => void] {
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T | ((val: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === "undefined") {
       return initialValue;

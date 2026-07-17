@@ -93,11 +93,20 @@ export interface BillingWebhookEvent {
 export interface BillingService {
   readonly providerName: string;
 
-  createCustomer(email: string, name?: string, metadata?: Record<string, unknown>): Promise<BillingCustomer>;
+  createCustomer(
+    email: string,
+    name?: string,
+    metadata?: Record<string, unknown>
+  ): Promise<BillingCustomer>;
   updateCustomer(customerId: string, data: UpdateCustomerData): Promise<BillingCustomer>;
   deleteCustomer(customerId: string): Promise<void>;
 
-  createCheckout(customerId: string, priceId: string, successUrl: string, cancelUrl: string): Promise<BillingCheckout>;
+  createCheckout(
+    customerId: string,
+    priceId: string,
+    successUrl: string,
+    cancelUrl: string
+  ): Promise<BillingCheckout>;
   createSubscription(customerId: string, priceId: string): Promise<BillingSubscription>;
   cancelSubscription(subscriptionId: string): Promise<BillingSubscription>;
   pauseSubscription(subscriptionId: string): Promise<BillingSubscription>;

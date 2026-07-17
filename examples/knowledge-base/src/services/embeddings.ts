@@ -30,9 +30,7 @@ export async function generateEmbeddings(texts: string[]): Promise<number[][]> {
         dimensions: EMBEDDING_DIMENSIONS,
       });
 
-      const batchEmbeddings = response.data.map(
-        (item: { embedding: number[] }) => item.embedding
-      );
+      const batchEmbeddings = response.data.map((item: { embedding: number[] }) => item.embedding);
       embeddings.push(...batchEmbeddings);
 
       logger.debug("Embedding batch processed", {

@@ -73,7 +73,11 @@ export interface AIService {
   chat(messages: readonly AIMessage[], options?: AIOptions): Promise<AIChatResult>;
   embed(text: string, options?: AIOptions): Promise<AIEmbeddingResult>;
   summarize(text: string, options?: AIOptions): Promise<AITextResult>;
-  classify(text: string, categories: readonly string[], options?: AIOptions): Promise<AIClassifyResult>;
+  classify(
+    text: string,
+    categories: readonly string[],
+    options?: AIOptions
+  ): Promise<AIClassifyResult>;
   rewrite(text: string, instruction: string, options?: AIOptions): Promise<AITextResult>;
   translate(text: string, targetLanguage: string, options?: AIOptions): Promise<AITextResult>;
   extract(text: string, schema: any, options?: AIOptions): Promise<AIObjectResult<any>>;

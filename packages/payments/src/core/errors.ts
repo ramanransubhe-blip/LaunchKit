@@ -13,7 +13,10 @@ export abstract class BillingError extends Error {
   abstract readonly code: BillingErrorCode;
   abstract readonly statusCode: number;
 
-  constructor(message: string, public readonly details?: BillingErrorDetails) {
+  constructor(
+    message: string,
+    public readonly details?: BillingErrorDetails
+  ) {
     super(message);
     this.name = new.target.name;
     Object.setPrototypeOf(this, new.target.prototype);

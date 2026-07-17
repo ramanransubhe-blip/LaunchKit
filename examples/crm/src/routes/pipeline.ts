@@ -64,7 +64,10 @@ const orgPipelines = new Map<string, PipelineStage[]>();
 
 function getStages(orgId: string): PipelineStage[] {
   if (!orgPipelines.has(orgId)) {
-    orgPipelines.set(orgId, DEFAULT_STAGES.map((s) => ({ ...s })));
+    orgPipelines.set(
+      orgId,
+      DEFAULT_STAGES.map((s) => ({ ...s }))
+    );
   }
   return orgPipelines.get(orgId)!;
 }
@@ -102,12 +105,14 @@ pipelineRouter.get("/", async (c) => {
   const stages = getStages(orgId);
   const sortedStages = [...stages].sort((a, b) => a.order - b.order);
 
-  return c.json(sendSuccess({
-    orgId,
-    stages: sortedStages,
-    totalStages: sortedStages.length,
-    activeStages: sortedStages.filter((s) => s.probability > 0 && s.probability < 100).length,
-  }));
+  return c.json(
+    sendSuccess({
+      orgId,
+      stages: sortedStages,
+      totalStages: sortedStages.length,
+      activeStages: sortedStages.filter((s) => s.probability > 0 && s.probability < 100).length,
+    })
+  );
 });
 
 /**
@@ -155,20 +160,23 @@ pipelineRouter.get("/summary", async (c) => {
   const closedDeals = wonDeals + lostDeals;
   const winRate = closedDeals > 0 ? (wonDeals / closedDeals) * 100 : 0;
 
-  return c.json(sendSuccess({
-    overview: {
-      totalDeals,
-      totalPipelineValue,
-      totalWeightedValue: Math.round(totalWeightedValue * 100) / 100,
-      averageDealSize: totalDeals > 0 ? Math.round((totalPipelineValue / totalDeals) * 100) / 100 : 0,
-      winRate: Math.round(winRate * 10) / 10,
-      wonDeals,
-      lostDeals,
-      openDeals: totalDeals - closedDeals,
-    },
-    stages: stageMetrics,
-    generatedAt: new Date().toISOString(),
-  }));
+  return c.json(
+    sendSuccess({
+      overview: {
+        totalDeals,
+        totalPipelineValue,
+        totalWeightedValue: Math.round(totalWeightedValue * 100) / 100,
+        averageDealSize:
+          totalDeals > 0 ? Math.round((totalPipelineValue / totalDeals) * 100) / 100 : 0,
+        winRate: Math.round(winRate * 10) / 10,
+        wonDeals,
+        lostDeals,
+        openDeals: totalDeals - closedDeals,
+      },
+      stages: stageMetrics,
+      generatedAt: new Date().toISOString(),
+    })
+  );
 });
 
 /**
@@ -194,12 +202,18 @@ pipelineRouter.put("/stages", async (c) => {
   // Validate each stage
   for (const stage of body.stages) {
     if (!stage.id || !stage.name || typeof stage.order !== "number") {
-      return c.json(sendFailure("Each stage must have id, name, and order", "VALIDATION_ERROR"), 400);
+      return c.json(
+        sendFailure("Each stage must have id, name, and order", "VALIDATION_ERROR"),
+        400
+      );
     }
     if (typeof stage.probability !== "number" || stage.probability < 0 || stage.probability > 100) {
       return c.json(
-        sendFailure(`Stage "${stage.name}" has invalid probability. Must be 0–100.`, "VALIDATION_ERROR"),
-        400,
+        sendFailure(
+          `Stage "${stage.name}" has invalid probability. Must be 0–100.`,
+          "VALIDATION_ERROR"
+        ),
+        400
       );
     }
   }
@@ -224,11 +238,13 @@ pipelineRouter.put("/stages", async (c) => {
 
   orgPipelines.set(orgId, updatedStages);
 
-  return c.json(sendSuccess({
-    stages: updatedStages,
-    totalStages: updatedStages.length,
-    updatedAt: new Date().toISOString(),
-  }));
+  return c.json(
+    sendSuccess({
+      stages: updatedStages,
+      totalStages: updatedStages.length,
+      updatedAt: new Date().toISOString(),
+    })
+  );
 });
 
 /**
@@ -291,10 +307,12 @@ pipelineRouter.get("/forecast", async (c) => {
 
   const totalForecastedRevenue = forecast.reduce((sum, f) => sum + f.expectedRevenue, 0);
 
-  return c.json(sendSuccess({
-    periods: forecast,
-    totalForecastedRevenue: Math.round(totalForecastedRevenue * 100) / 100,
-    totalDealsInForecast: forecast.reduce((sum, f) => sum + f.dealCount, 0),
-    generatedAt: new Date().toISOString(),
-  }));
+  return c.json(
+    sendSuccess({
+      periods: forecast,
+      totalForecastedRevenue: Math.round(totalForecastedRevenue * 100) / 100,
+      totalDealsInForecast: forecast.reduce((sum, f) => sum + f.dealCount, 0),
+      generatedAt: new Date().toISOString(),
+    })
+  );
 });

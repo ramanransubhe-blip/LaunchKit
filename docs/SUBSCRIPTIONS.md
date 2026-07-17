@@ -6,12 +6,12 @@ The billing platform defines a uniform model to transition subscription plans.
 
 ## Subscription Status Matrix
 
-| Status | Details | Allow Actions |
-| :--- | :--- | :--- |
-| `active` | Payment is current | Upgrade, Downgrade, Cancel |
-| `past_due` | Retrying failing payment | Retry Payment |
-| `paused` | Paused temporarily | Resume |
-| `canceled` | Period ended and revoked | Re-subscribe |
+| Status     | Details                  | Allow Actions              |
+| :--------- | :----------------------- | :------------------------- |
+| `active`   | Payment is current       | Upgrade, Downgrade, Cancel |
+| `past_due` | Retrying failing payment | Retry Payment              |
+| `paused`   | Paused temporarily       | Resume                     |
+| `canceled` | Period ended and revoked | Re-subscribe               |
 
 ---
 

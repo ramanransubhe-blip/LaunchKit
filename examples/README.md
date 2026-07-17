@@ -4,15 +4,15 @@ Production-ready example projects demonstrating real-world integrations with Dev
 
 ## Examples
 
-| Example | Description | Key Packages |
-|---|---|---|
-| [**AI SaaS**](./ai-saas/) | AI chat & image generation platform | `ai`, `auth`, `payments`, `storage`, `rate-limit` |
-| [**CRM**](./crm/) | Customer relationship manager | `database`, `auth`, `search`, `api`, `permissions`, `emails` |
-| [**Subscription SaaS**](./subscription-saas/) | Subscription billing & management | `payments`, `auth`, `communication`, `feature-flags`, `storage` |
-| [**Internal Dashboard**](./internal-dashboard/) | Operations metrics & monitoring | `database`, `cache`, `queue`, `analytics`, `observability`, `logger` |
-| [**Marketplace**](./marketplace/) | Multi-vendor marketplace | `payments`, `auth`, `storage`, `search`, `feature-flags`, `notifications` |
-| [**Developer Tool**](./developer-tool/) | API gateway & developer console | `rate-limit`, `api`, `queue`, `auth`, `cache`, `logger` |
-| [**Knowledge Base**](./knowledge-base/) | AI-powered semantic search platform | `ai`, `search`, `database`, `storage`, `auth`, `cache` |
+| Example                                         | Description                         | Key Packages                                                              |
+| ----------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------- |
+| [**AI SaaS**](./ai-saas/)                       | AI chat & image generation platform | `ai`, `auth`, `payments`, `storage`, `rate-limit`                         |
+| [**CRM**](./crm/)                               | Customer relationship manager       | `database`, `auth`, `search`, `api`, `permissions`, `emails`              |
+| [**Subscription SaaS**](./subscription-saas/)   | Subscription billing & management   | `payments`, `auth`, `communication`, `feature-flags`, `storage`           |
+| [**Internal Dashboard**](./internal-dashboard/) | Operations metrics & monitoring     | `database`, `cache`, `queue`, `analytics`, `observability`, `logger`      |
+| [**Marketplace**](./marketplace/)               | Multi-vendor marketplace            | `payments`, `auth`, `storage`, `search`, `feature-flags`, `notifications` |
+| [**Developer Tool**](./developer-tool/)         | API gateway & developer console     | `rate-limit`, `api`, `queue`, `auth`, `cache`, `logger`                   |
+| [**Knowledge Base**](./knowledge-base/)         | AI-powered semantic search platform | `ai`, `search`, `database`, `storage`, `auth`, `cache`                    |
 
 ## Getting Started
 

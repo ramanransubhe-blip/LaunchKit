@@ -59,7 +59,7 @@ const DEFAULT_LOCKOUT_DURATION_SECONDS = 15 * 60;
  */
 export function createAuthService(
   base: AuthService,
-  options: AuthServiceFactoryOptions = {},
+  options: AuthServiceFactoryOptions = {}
 ): AuthService {
   const repository = options.repository ?? null;
   const events = options.events ?? null;
@@ -69,7 +69,7 @@ export function createAuthService(
 
   async function emit<K extends keyof AuthEventMap>(
     event: K,
-    payload: AuthEventMap[K],
+    payload: AuthEventMap[K]
   ): Promise<void> {
     if (!events) {
       return;
@@ -81,7 +81,7 @@ export function createAuthService(
     type: string,
     userId: string,
     payload: Readonly<Record<string, unknown>>,
-    metadata: Readonly<Record<string, unknown>>,
+    metadata: Readonly<Record<string, unknown>>
   ): Promise<void> {
     if (!repository) {
       return;
@@ -99,9 +99,7 @@ export function createAuthService(
     await repository.recordAuditEvent(record);
   }
 
-  async function recordLoginAttempt(
-    attempt: Omit<AuthLoginAttempt, "createdAt">,
-  ): Promise<void> {
+  async function recordLoginAttempt(attempt: Omit<AuthLoginAttempt, "createdAt">): Promise<void> {
     if (!repository) {
       return;
     }
@@ -138,13 +136,11 @@ export function createAuthService(
       return null;
     }
 
-    const maxAttempts =
-      config.security.maxLoginAttempts ?? DEFAULT_LOCKOUT_ATTEMPTS;
-    const lockoutDuration =
-      config.security.lockoutDuration ?? DEFAULT_LOCKOUT_DURATION_SECONDS;
+    const maxAttempts = config.security.maxLoginAttempts ?? DEFAULT_LOCKOUT_ATTEMPTS;
+    const lockoutDuration = config.security.lockoutDuration ?? DEFAULT_LOCKOUT_DURATION_SECONDS;
     const failedAttempts = await repository.countFailedLoginAttempts(
       email,
-      new Date(now().getTime() - lockoutDuration * 1000),
+      new Date(now().getTime() - lockoutDuration * 1000)
     );
 
     if (failedAttempts < maxAttempts) {
@@ -170,7 +166,7 @@ export function createAuthService(
         failedAttempts,
         lockedUntil: lock.lockedUntil.toISOString(),
       },
-      {},
+      {}
     );
     return lock;
   }
@@ -178,7 +174,7 @@ export function createAuthService(
   async function onSuccessfulLogin(
     result: AuthResult,
     meta: AuthActionMetadata | null,
-    rememberMe: boolean,
+    rememberMe: boolean
   ): Promise<void> {
     if (repository) {
       await repository.clearAccountLock(result.user.email);
@@ -216,7 +212,7 @@ export function createAuthService(
               deviceFingerprint: previous.fingerprint,
             }
           : null,
-        signal,
+        signal
       );
 
       if (assessment.isSuspicious) {
@@ -249,7 +245,7 @@ export function createAuthService(
         requestId: meta?.requestId ?? null,
         ipAddress: meta?.ipAddress ?? null,
         userAgent: meta?.userAgent ?? null,
-      },
+      }
     );
   }
 
@@ -327,7 +323,7 @@ export function createAuthService(
         },
         {
           requestId: data.meta?.requestId ?? null,
-        },
+        }
       );
       return result;
     },
@@ -383,7 +379,7 @@ export function createAuthService(
             sessionId: session.id,
             userId,
           });
-        }),
+        })
       );
       await recordAudit(
         "auth.sessions.invalidate_all",
@@ -391,7 +387,7 @@ export function createAuthService(
         {
           sessionCount: sessions.length,
         },
-        {},
+        {}
       );
     },
 
@@ -409,9 +405,7 @@ export function createAuthService(
       });
       await emit(AuthEventType.ProfileUpdated, {
         user,
-        previous: previous
-          ? (previous as unknown as Readonly<Record<string, unknown>>)
-          : {},
+        previous: previous ? (previous as unknown as Readonly<Record<string, unknown>>) : {},
       });
       await recordAudit(
         "auth.profile.update",
@@ -419,7 +413,7 @@ export function createAuthService(
         {
           userId,
         },
-        {},
+        {}
       );
       return user;
     },
@@ -466,7 +460,7 @@ export function createAuthService(
     async changePassword(
       userId: string,
       currentPassword: string,
-      newPassword: string,
+      newPassword: string
     ): Promise<void> {
       const strength = evaluatePasswordStrength(newPassword, {
         minLength: config?.security?.minPasswordLength ?? 12,
@@ -497,7 +491,7 @@ export function createAuthService(
     async getOAuthUrl(
       provider: OAuthProvider,
       redirectUrl: string,
-      state?: string,
+      state?: string
     ): Promise<string> {
       return base.getOAuthUrl(provider, redirectUrl, state);
     },
@@ -505,7 +499,7 @@ export function createAuthService(
     async handleOAuthCallback(
       provider: OAuthProvider,
       code: string,
-      state?: string,
+      state?: string
     ): Promise<AuthResult> {
       const result = await base.handleOAuthCallback(provider, code, state);
       await emit(AuthEventType.ProviderLinked, {
@@ -520,17 +514,14 @@ export function createAuthService(
       userId: string,
       provider: OAuthProvider,
       code: string,
-      state?: string,
+      state?: string
     ): Promise<AuthUser> {
       const user = await base.linkProvider(userId, provider, code, state);
       await emit(AuthEventType.ProviderLinked, { userId, provider });
       return user;
     },
 
-    async unlinkProvider(
-      userId: string,
-      provider: OAuthProvider,
-    ): Promise<AuthUser> {
+    async unlinkProvider(userId: string, provider: OAuthProvider): Promise<AuthUser> {
       const user = await base.unlinkProvider(userId, provider);
       await emit(AuthEventType.ProviderUnlinked, { userId, provider });
       return user;
@@ -538,7 +529,7 @@ export function createAuthService(
 
     async createOrganization(
       userId: string,
-      data: CreateOrganizationData,
+      data: CreateOrganizationData
     ): Promise<AuthOrganization> {
       const organization = await base.createOrganization(userId, data);
       await emit(AuthEventType.OrganizationCreated, { organization });
@@ -549,7 +540,7 @@ export function createAuthService(
 
     async updateOrganization(
       orgId: string,
-      data: UpdateOrganizationData,
+      data: UpdateOrganizationData
     ): Promise<AuthOrganization> {
       const organization = await base.updateOrganization(orgId, data);
       await emit(AuthEventType.OrganizationUpdated, { organization });
@@ -566,13 +557,9 @@ export function createAuthService(
     async inviteToOrganization(
       orgId: string,
       email: string,
-      role: OrganizationRole,
+      role: OrganizationRole
     ): Promise<AuthInvitation> {
-      const invitation = await base.inviteToOrganization(
-        orgId,
-        normalizeEmail(email),
-        role,
-      );
+      const invitation = await base.inviteToOrganization(orgId, normalizeEmail(email), role);
       await emit(AuthEventType.InvitationSent, { invitation });
       return invitation;
     },

@@ -57,9 +57,7 @@ export type AuthMiddlewareResult =
     };
 
 /** Auth middleware function signature. */
-export type AuthMiddleware = (
-  input: AuthMiddlewareInput,
-) => AuthMiddlewareResult;
+export type AuthMiddleware = (input: AuthMiddlewareInput) => AuthMiddlewareResult;
 
 /** Options for creating auth middleware. */
 export interface CreateAuthMiddlewareOptions {
@@ -75,9 +73,7 @@ export interface CreateAuthMiddlewareOptions {
  * @param matcher - Route matcher config.
  * @returns Normalized matcher.
  */
-export function normalizeRouteMatcher(
-  matcher: RouteMatcher | undefined,
-): Required<RouteMatcher> {
+export function normalizeRouteMatcher(matcher: RouteMatcher | undefined): Required<RouteMatcher> {
   return {
     exact: matcher?.exact ?? [],
     prefix: matcher?.prefix ?? [],
@@ -92,10 +88,7 @@ export function normalizeRouteMatcher(
  * @param matcher - Route matcher.
  * @returns `true` when the route matches.
  */
-export function matchesRoute(
-  pathname: string,
-  matcher: RouteMatcher | undefined,
-): boolean {
+export function matchesRoute(pathname: string, matcher: RouteMatcher | undefined): boolean {
   const normalized = normalizeRouteMatcher(matcher);
   const exactMatch = normalized.exact.some((entry) => entry === pathname);
   if (exactMatch) {
@@ -103,9 +96,7 @@ export function matchesRoute(
   }
 
   const prefixMatch = normalized.prefix.some((entry) => {
-    const normalizedEntry = entry.endsWith("*")
-      ? entry.slice(0, -1)
-      : entry;
+    const normalizedEntry = entry.endsWith("*") ? entry.slice(0, -1) : entry;
     return pathname.startsWith(normalizedEntry);
   });
   if (prefixMatch) {
@@ -135,9 +126,7 @@ export function matchesRoute(
  * });
  * ```
  */
-export function createAuthMiddleware(
-  options: CreateAuthMiddlewareOptions,
-): AuthMiddleware {
+export function createAuthMiddleware(options: CreateAuthMiddlewareOptions): AuthMiddleware {
   const permissions = options.permissions ?? createPermissionService();
 
   return (input) => {
@@ -156,7 +145,7 @@ export function createAuthMiddleware(
 
     if (matchesRoute(pathname, options.policy.admin)) {
       const allowed = context.roles.some((role: AnyRole) =>
-        permissions.hasPermission(role, Permission.AdminAccess),
+        permissions.hasPermission(role, Permission.AdminAccess)
       );
       if (!allowed) {
         return {

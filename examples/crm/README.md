@@ -76,15 +76,15 @@ examples/crm/
 
 ## Environment Variables
 
-| Variable | Description | Required | Default |
-|---|---|---|---|
-| `PORT` | HTTP server port | No | `3001` |
-| `NODE_ENV` | Runtime environment | No | `development` |
-| `DATABASE_URL` | PostgreSQL connection string | Yes | — |
-| `CLERK_SECRET_KEY` | Clerk backend API key | Yes | — |
-| `CLERK_PUBLISHABLE_KEY` | Clerk frontend publishable key | Yes | — |
-| `RESEND_API_KEY` | Resend API key for email outreach | Yes | — |
-| `EMAIL_FROM` | Default sender email address | No | `crm@yourdomain.com` |
+| Variable                | Description                       | Required | Default              |
+| ----------------------- | --------------------------------- | -------- | -------------------- |
+| `PORT`                  | HTTP server port                  | No       | `3001`               |
+| `NODE_ENV`              | Runtime environment               | No       | `development`        |
+| `DATABASE_URL`          | PostgreSQL connection string      | Yes      | —                    |
+| `CLERK_SECRET_KEY`      | Clerk backend API key             | Yes      | —                    |
+| `CLERK_PUBLISHABLE_KEY` | Clerk frontend publishable key    | Yes      | —                    |
+| `RESEND_API_KEY`        | Resend API key for email outreach | Yes      | —                    |
+| `EMAIL_FROM`            | Default sender email address      | No       | `crm@yourdomain.com` |
 
 ## Quick Start
 
@@ -109,35 +109,35 @@ pnpm dev
 
 ### Contacts
 
-| Method | Endpoint | Description | Role |
-|---|---|---|---|
-| `GET` | `/api/contacts` | List contacts (paginated, filterable) | Viewer+ |
-| `POST` | `/api/contacts` | Create a new contact | Member+ |
-| `GET` | `/api/contacts/:id` | Get contact details | Viewer+ |
-| `PUT` | `/api/contacts/:id` | Update a contact | Member+ |
-| `DELETE` | `/api/contacts/:id` | Delete a contact | Admin+ |
-| `POST` | `/api/contacts/:id/email` | Send outreach email | Member+ |
-| `GET` | `/api/contacts/search` | Full-text search contacts | Viewer+ |
+| Method   | Endpoint                  | Description                           | Role    |
+| -------- | ------------------------- | ------------------------------------- | ------- |
+| `GET`    | `/api/contacts`           | List contacts (paginated, filterable) | Viewer+ |
+| `POST`   | `/api/contacts`           | Create a new contact                  | Member+ |
+| `GET`    | `/api/contacts/:id`       | Get contact details                   | Viewer+ |
+| `PUT`    | `/api/contacts/:id`       | Update a contact                      | Member+ |
+| `DELETE` | `/api/contacts/:id`       | Delete a contact                      | Admin+  |
+| `POST`   | `/api/contacts/:id/email` | Send outreach email                   | Member+ |
+| `GET`    | `/api/contacts/search`    | Full-text search contacts             | Viewer+ |
 
 ### Deals
 
-| Method | Endpoint | Description | Role |
-|---|---|---|---|
-| `GET` | `/api/deals` | List deals (paginated, filterable) | Viewer+ |
-| `POST` | `/api/deals` | Create a new deal | Member+ |
-| `GET` | `/api/deals/:id` | Get deal details | Viewer+ |
-| `PUT` | `/api/deals/:id` | Update a deal | Member+ |
-| `PATCH` | `/api/deals/:id/stage` | Move deal to different stage | Member+ |
-| `DELETE` | `/api/deals/:id` | Delete a deal | Admin+ |
+| Method   | Endpoint               | Description                        | Role    |
+| -------- | ---------------------- | ---------------------------------- | ------- |
+| `GET`    | `/api/deals`           | List deals (paginated, filterable) | Viewer+ |
+| `POST`   | `/api/deals`           | Create a new deal                  | Member+ |
+| `GET`    | `/api/deals/:id`       | Get deal details                   | Viewer+ |
+| `PUT`    | `/api/deals/:id`       | Update a deal                      | Member+ |
+| `PATCH`  | `/api/deals/:id/stage` | Move deal to different stage       | Member+ |
+| `DELETE` | `/api/deals/:id`       | Delete a deal                      | Admin+  |
 
 ### Pipeline
 
-| Method | Endpoint | Description | Role |
-|---|---|---|---|
-| `GET` | `/api/pipeline` | Get pipeline configuration | Viewer+ |
-| `GET` | `/api/pipeline/summary` | Pipeline analytics summary | Viewer+ |
-| `PUT` | `/api/pipeline/stages` | Update pipeline stages | Admin+ |
-| `GET` | `/api/pipeline/forecast` | Revenue forecast | Admin+ |
+| Method | Endpoint                 | Description                | Role    |
+| ------ | ------------------------ | -------------------------- | ------- |
+| `GET`  | `/api/pipeline`          | Get pipeline configuration | Viewer+ |
+| `GET`  | `/api/pipeline/summary`  | Pipeline analytics summary | Viewer+ |
+| `PUT`  | `/api/pipeline/stages`   | Update pipeline stages     | Admin+  |
+| `GET`  | `/api/pipeline/forecast` | Revenue forecast           | Admin+  |
 
 ## Deployment Guide
 

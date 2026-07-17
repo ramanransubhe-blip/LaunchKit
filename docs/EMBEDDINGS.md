@@ -21,5 +21,5 @@ Map arrays of text to generate embeddings in parallel using Promise groups:
 
 ```typescript
 const texts = ["hello", "world"];
-const results = await Promise.all(texts.map(t => ai.embed(t)));
+const results = await Promise.all(texts.map((t) => ai.embed(t)));
 ```

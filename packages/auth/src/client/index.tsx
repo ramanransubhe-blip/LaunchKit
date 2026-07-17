@@ -130,16 +130,12 @@ export interface AuthClientTransport {
   /** Sends a typed operation to the backend. */
   request<K extends AuthClientOperation>(
     operation: K,
-    input: AuthClientRequestMap[K],
+    input: AuthClientRequestMap[K]
   ): Promise<AuthClientResponseMap[K]>;
 }
 
 /** Client status used by auth hooks. */
-export type AuthClientStatus =
-  | "anonymous"
-  | "authenticated"
-  | "loading"
-  | "error";
+export type AuthClientStatus = "anonymous" | "authenticated" | "loading" | "error";
 
 /** Snapshot of the current client state. */
 export interface AuthClientState {
@@ -207,48 +203,30 @@ export interface AuthClient {
   /** Reset a password. */
   resetPassword(token: string, newPassword: string): Promise<void>;
   /** Change a password. */
-  changePassword(
-    userId: string,
-    currentPassword: string,
-    newPassword: string,
-  ): Promise<void>;
+  changePassword(userId: string, currentPassword: string, newPassword: string): Promise<void>;
   /** Send a magic-link email. */
   sendMagicLink(email: string): Promise<void>;
   /** Verify a magic-link token. */
   verifyMagicLink(token: string): Promise<AuthResult>;
   /** Build an OAuth authorization URL. */
-  getOAuthUrl(
-    provider: OAuthProvider,
-    redirectUrl: string,
-    state?: string,
-  ): Promise<string>;
+  getOAuthUrl(provider: OAuthProvider, redirectUrl: string, state?: string): Promise<string>;
   /** Handle an OAuth callback. */
-  handleOAuthCallback(
-    provider: OAuthProvider,
-    code: string,
-    state?: string,
-  ): Promise<AuthResult>;
+  handleOAuthCallback(provider: OAuthProvider, code: string, state?: string): Promise<AuthResult>;
   /** Link a provider account. */
   linkProvider(
     userId: string,
     provider: OAuthProvider,
     code: string,
-    state?: string,
+    state?: string
   ): Promise<AuthUser>;
   /** Unlink a provider account. */
   unlinkProvider(userId: string, provider: OAuthProvider): Promise<AuthUser>;
   /** Create an organization. */
-  createOrganization(
-    userId: string,
-    data: CreateOrganizationData,
-  ): Promise<AuthOrganization>;
+  createOrganization(userId: string, data: CreateOrganizationData): Promise<AuthOrganization>;
   /** Fetch an organization by identifier. */
   getOrganization(orgId: string): Promise<AuthOrganization | null>;
   /** Update an organization. */
-  updateOrganization(
-    orgId: string,
-    data: UpdateOrganizationData,
-  ): Promise<AuthOrganization>;
+  updateOrganization(orgId: string, data: UpdateOrganizationData): Promise<AuthOrganization>;
   /** Delete an organization. */
   deleteOrganization(orgId: string): Promise<void>;
   /** List organization members. */
@@ -257,7 +235,7 @@ export interface AuthClient {
   inviteToOrganization(
     orgId: string,
     email: string,
-    role: OrganizationRole,
+    role: OrganizationRole
   ): Promise<AuthInvitation>;
   /** Accept an organization invitation. */
   acceptInvitation(token: string): Promise<void>;
@@ -281,7 +259,7 @@ const AuthClientContext = createContext<AuthClient | null>(null);
 export function createAuthClient(
   transport: AuthClientTransport,
   provider: AuthProviderType | null = null,
-  initialState: Partial<AuthClientState> = {},
+  initialState: Partial<AuthClientState> = {}
 ): AuthClient {
   let state: AuthClientState = {
     user: null,
@@ -340,7 +318,7 @@ export function createAuthClient(
 
   async function request<K extends AuthClientOperation>(
     operation: K,
-    input: AuthClientRequestMap[K],
+    input: AuthClientRequestMap[K]
   ): Promise<AuthClientResponseMap[K]> {
     try {
       return await transport.request(operation, input);
@@ -576,11 +554,7 @@ export function AuthClientProvider({
   client: AuthClient;
   children: ReactNode;
 }): ReactElement {
-  return (
-    <AuthClientContext.Provider value={client}>
-      {children}
-    </AuthClientContext.Provider>
-  );
+  return <AuthClientContext.Provider value={client}>{children}</AuthClientContext.Provider>;
 }
 
 /**
@@ -603,11 +577,7 @@ export function useAuthClient(): AuthClient {
  */
 export function useAuthClientState(): AuthClientState {
   const client = useAuthClient();
-  return useSyncExternalStore(
-    client.subscribe,
-    client.getState,
-    client.getState,
-  );
+  return useSyncExternalStore(client.subscribe, client.getState, client.getState);
 }
 
 export * from "./transport.js";

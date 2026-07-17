@@ -61,15 +61,10 @@ export async function sendNotificationAction(
   try {
     const input = sendNotificationSchema.parse(rawInput);
     const service = getGlobalCommunicationService();
-    const result = await service.sendNotification(
-      input.userId,
-      input.title,
-      input.body,
-      {
-        priority: input.priority,
-        category: input.category,
-      }
-    );
+    const result = await service.sendNotification(input.userId, input.title, input.body, {
+      priority: input.priority,
+      category: input.category,
+    });
     return { success: true, data: result };
   } catch (error) {
     return handleActionError(error);
@@ -82,14 +77,10 @@ export async function sendAnnouncementAction(
   try {
     const input = sendAnnouncementSchema.parse(rawInput);
     const service = getGlobalCommunicationService();
-    const result = await service.sendAnnouncement(
-      input.title,
-      input.body,
-      {
-        organizationId: input.organizationId,
-        isDismissible: input.isDismissible,
-      }
-    );
+    const result = await service.sendAnnouncement(input.title, input.body, {
+      organizationId: input.organizationId,
+      isDismissible: input.isDismissible,
+    });
     return { success: true, data: result };
   } catch (error) {
     return handleActionError(error);

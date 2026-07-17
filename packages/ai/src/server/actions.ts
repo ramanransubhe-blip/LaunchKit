@@ -52,9 +52,7 @@ export async function generateTextAction(
   }
 }
 
-export async function chatAction(
-  rawInput: unknown
-): Promise<AIActionResponse<AIChatResult>> {
+export async function chatAction(rawInput: unknown): Promise<AIActionResponse<AIChatResult>> {
   try {
     const input = chatSchema.parse(rawInput);
     const service = getGlobalAIService();
@@ -65,9 +63,7 @@ export async function chatAction(
   }
 }
 
-export async function summarizeAction(
-  rawInput: unknown
-): Promise<AIActionResponse<AITextResult>> {
+export async function summarizeAction(rawInput: unknown): Promise<AIActionResponse<AITextResult>> {
   try {
     const input = summarizeSchema.parse(rawInput);
     const service = getGlobalAIService();

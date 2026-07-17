@@ -11,18 +11,9 @@ import { OrganizationRole, Permission, UserRole } from "../src/index.js";
 
 test("permission service resolves inherited permissions", () => {
   const permissions = createPermissionService();
-  assert.equal(
-    permissions.hasPermission(UserRole.Admin, Permission.AdminAccess),
-    true,
-  );
-  assert.equal(
-    permissions.hasPermission(OrganizationRole.Owner, Permission.BillingWrite),
-    true,
-  );
-  assert.equal(
-    permissions.hasPermission(UserRole.Guest, Permission.OrganizationRead),
-    false,
-  );
+  assert.equal(permissions.hasPermission(UserRole.Admin, Permission.AdminAccess), true);
+  assert.equal(permissions.hasPermission(OrganizationRole.Owner, Permission.BillingWrite), true);
+  assert.equal(permissions.hasPermission(UserRole.Guest, Permission.OrganizationRead), false);
 });
 
 test("role hierarchy is computed deterministically", () => {
@@ -31,7 +22,10 @@ test("role hierarchy is computed deterministically", () => {
     UserRole.User,
     UserRole.Guest,
   ]);
-  assert.deepEqual(resolvePermissionsForRole(OrganizationRole.Member).includes(Permission.OrganizationRead), true);
+  assert.deepEqual(
+    resolvePermissionsForRole(OrganizationRole.Member).includes(Permission.OrganizationRead),
+    true
+  );
 });
 
 test("role helpers classify platform and organization roles", () => {
@@ -40,4 +34,3 @@ test("role helpers classify platform and organization roles", () => {
   assert.equal(isOrganizationRole(OrganizationRole.Owner), true);
   assert.equal(isOrganizationRole(UserRole.User), false);
 });
-

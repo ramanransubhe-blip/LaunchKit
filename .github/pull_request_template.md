@@ -2,8 +2,6 @@
 
 <!-- Provide a clear and concise description of this pull request. Explain the "why" behind your changes — what problem does this solve? What is the context a reviewer needs to understand your approach? -->
 
-
-
 ### Related Issues
 
 <!-- Link to the issue(s) this PR addresses. Use "Fixes #123" to auto-close issues on merge, or "Relates to #123" for related context. -->
@@ -34,7 +32,6 @@ Fixes #
 
 **Breaking change description:**
 
-
 **Migration steps:**
 
 1.
@@ -45,8 +42,8 @@ Fixes #
 
 <!-- For UI changes, include before/after screenshots or a short screen recording. For API changes, include example request/response payloads. Delete this section if not applicable. -->
 
-| Before | After |
-| :--- | :--- |
+| Before              | After               |
+| :------------------ | :------------------ |
 | <!-- screenshot --> | <!-- screenshot --> |
 
 ---

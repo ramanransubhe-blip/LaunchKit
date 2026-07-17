@@ -20,14 +20,14 @@ CLERK_PUBLISHABLE_KEY="pk_test_..."
 
 The Clerk bridge makes HTTP requests directly to the Clerk API (`https://api.clerk.com/v1`):
 
-| Operation | Clerk Endpoint | Method |
-| :--- | :--- | :--- |
-| `signIn` | `/users/verify-password` | `POST` |
-| `signUp` | `/users` | `POST` |
-| `signOut` | `/sessions/{sessionId}/revoke` | `POST` |
-| `getSession` | `/sessions/{token}` | `GET` |
-| `createOrganization` | `/organizations` | `POST` |
-| `inviteToOrganization`| `/organizations/{orgId}/invitations`| `POST` |
+| Operation              | Clerk Endpoint                       | Method |
+| :--------------------- | :----------------------------------- | :----- |
+| `signIn`               | `/users/verify-password`             | `POST` |
+| `signUp`               | `/users`                             | `POST` |
+| `signOut`              | `/sessions/{sessionId}/revoke`       | `POST` |
+| `getSession`           | `/sessions/{token}`                  | `GET`  |
+| `createOrganization`   | `/organizations`                     | `POST` |
+| `inviteToOrganization` | `/organizations/{orgId}/invitations` | `POST` |
 
 ---
 

@@ -164,7 +164,7 @@ class CrmSearchIndex {
    */
   private scoreDocument(
     doc: SearchDocument,
-    queryTokens: string[],
+    queryTokens: string[]
   ): { score: number; highlights: string[] } {
     const docText = doc.searchableText.toLowerCase();
     const docTokens = this.tokenize(doc.searchableText);
@@ -218,8 +218,15 @@ export const searchIndex = new CrmSearchIndex();
  * @param orgId - The owning organization.
  */
 export function indexContact(
-  contact: { id: string; name: string; email: string; company?: string; phone?: string; notes?: string },
-  orgId: string,
+  contact: {
+    id: string;
+    name: string;
+    email: string;
+    company?: string;
+    phone?: string;
+    notes?: string;
+  },
+  orgId: string
 ): void {
   const searchableText = [
     contact.name,
@@ -247,7 +254,7 @@ export function indexContact(
  */
 export function indexDeal(
   deal: { id: string; title: string; contactName?: string; company?: string; notes?: string },
-  orgId: string,
+  orgId: string
 ): void {
   const searchableText = [
     deal.title,

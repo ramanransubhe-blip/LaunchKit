@@ -49,11 +49,11 @@ internal-dashboard/
 
 ## Environment Variables
 
-| Variable | Description | Required |
-|---|---|---|
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `REDIS_URL` | Redis connection string | Yes |
-| `PORT` | Server port (default: `4003`) | No |
+| Variable       | Description                   | Required |
+| -------------- | ----------------------------- | -------- |
+| `DATABASE_URL` | PostgreSQL connection string  | Yes      |
+| `REDIS_URL`    | Redis connection string       | Yes      |
+| `PORT`         | Server port (default: `4003`) | No       |
 
 ## Quick Start
 
@@ -77,13 +77,13 @@ pnpm worker
 
 ## API Endpoints
 
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/api/dashboard` | Aggregate overview stats |
-| `GET` | `/api/metrics/system` | System metrics (memory, CPU, uptime) |
-| `GET` | `/api/metrics/business` | Business KPIs with `?period=30d` |
-| `GET` | `/api/health` | Overall health status |
-| `GET` | `/api/health/dependencies` | Detailed dependency checks |
+| Method | Path                       | Description                          |
+| ------ | -------------------------- | ------------------------------------ |
+| `GET`  | `/api/dashboard`           | Aggregate overview stats             |
+| `GET`  | `/api/metrics/system`      | System metrics (memory, CPU, uptime) |
+| `GET`  | `/api/metrics/business`    | Business KPIs with `?period=30d`     |
+| `GET`  | `/api/health`              | Overall health status                |
+| `GET`  | `/api/health/dependencies` | Detailed dependency checks           |
 
 ## Deployment
 

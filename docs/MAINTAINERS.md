@@ -6,14 +6,14 @@ This document defines the operational practices, responsibilities, and processes
 
 ## Core Team
 
-| Name | GitHub Handle | Primary Area | Time Zone |
-| :--- | :--- | :--- | :--- |
-| Raman Ransubhe | @ramanransubhe | Project Lead, Architecture | IST (UTC+5:30) |
-| Sarah Chen | @sarahchen | Auth, Payments, Security | PST (UTC−8) |
-| Marcus Webb | @marcuswebb | Database, API, Infrastructure | EST (UTC−5) |
-| Anika Patel | @anikapatel | UI, Design System, Frontend | GMT (UTC+0) |
-| Tomás Rivera | @tomasrivera | DevOps, CI/CD, Observability | CET (UTC+1) |
-| Yuki Tanaka | @yukitanaka | AI, Search, Queue Systems | JST (UTC+9) |
+| Name           | GitHub Handle  | Primary Area                  | Time Zone      |
+| :------------- | :------------- | :---------------------------- | :------------- |
+| Raman Ransubhe | @ramanransubhe | Project Lead, Architecture    | IST (UTC+5:30) |
+| Sarah Chen     | @sarahchen     | Auth, Payments, Security      | PST (UTC−8)    |
+| Marcus Webb    | @marcuswebb    | Database, API, Infrastructure | EST (UTC−5)    |
+| Anika Patel    | @anikapatel    | UI, Design System, Frontend   | GMT (UTC+0)    |
+| Tomás Rivera   | @tomasrivera   | DevOps, CI/CD, Observability  | CET (UTC+1)    |
+| Yuki Tanaka    | @yukitanaka    | AI, Search, Queue Systems     | JST (UTC+9)    |
 
 ---
 
@@ -32,27 +32,27 @@ All new issues must be triaged within **5 business days** of creation. Triaging 
 
 ### Priority Labels
 
-| Label | Meaning | Response Target |
-| :--- | :--- | :--- |
-| `priority: critical` | Security vulnerability, data loss, or complete service outage | Same day |
-| `priority: high` | Major feature broken, blocking significant workflows | Within 48 hours |
-| `priority: medium` | Non-blocking bug or important enhancement | Within 1 week |
-| `priority: low` | Minor cosmetic issue, nice-to-have improvement | Best effort |
+| Label                | Meaning                                                       | Response Target |
+| :------------------- | :------------------------------------------------------------ | :-------------- |
+| `priority: critical` | Security vulnerability, data loss, or complete service outage | Same day        |
+| `priority: high`     | Major feature broken, blocking significant workflows          | Within 48 hours |
+| `priority: medium`   | Non-blocking bug or important enhancement                     | Within 1 week   |
+| `priority: low`      | Minor cosmetic issue, nice-to-have improvement                | Best effort     |
 
 ### Category Labels
 
-| Label | Description |
-| :--- | :--- |
-| `bug` | Confirmed defect in existing functionality |
-| `feature` | New capability request |
-| `documentation` | Documentation improvement or correction |
-| `performance` | Performance regression or optimization |
-| `security` | Security-related issue (handle with care) |
-| `breaking-change` | Requires a major version bump |
-| `good first issue` | Suitable for new contributors |
-| `help wanted` | Core team needs community assistance |
-| `needs-reproduction` | Awaiting a minimal reproduction case |
-| `needs-design` | Requires design discussion before implementation |
+| Label                | Description                                      |
+| :------------------- | :----------------------------------------------- |
+| `bug`                | Confirmed defect in existing functionality       |
+| `feature`            | New capability request                           |
+| `documentation`      | Documentation improvement or correction          |
+| `performance`        | Performance regression or optimization           |
+| `security`           | Security-related issue (handle with care)        |
+| `breaking-change`    | Requires a major version bump                    |
+| `good first issue`   | Suitable for new contributors                    |
+| `help wanted`        | Core team needs community assistance             |
+| `needs-reproduction` | Awaiting a minimal reproduction case             |
+| `needs-design`       | Requires design discussion before implementation |
 
 ---
 
@@ -117,18 +117,18 @@ All squash commit messages must follow [Conventional Commits](https://www.conven
 
 ### Types
 
-| Type | Usage |
-| :--- | :--- |
-| `feat` | A new feature |
-| `fix` | A bug fix |
-| `docs` | Documentation-only changes |
-| `style` | Formatting, missing semicolons, etc. (no code change) |
+| Type       | Usage                                                   |
+| :--------- | :------------------------------------------------------ |
+| `feat`     | A new feature                                           |
+| `fix`      | A bug fix                                               |
+| `docs`     | Documentation-only changes                              |
+| `style`    | Formatting, missing semicolons, etc. (no code change)   |
 | `refactor` | Code change that neither fixes a bug nor adds a feature |
-| `perf` | Performance improvement |
-| `test` | Adding or correcting tests |
-| `build` | Changes to build system or external dependencies |
-| `ci` | Changes to CI configuration files and scripts |
-| `chore` | Other changes that don't modify `src` or `test` files |
+| `perf`     | Performance improvement                                 |
+| `test`     | Adding or correcting tests                              |
+| `build`    | Changes to build system or external dependencies        |
+| `ci`       | Changes to CI configuration files and scripts           |
+| `chore`    | Other changes that don't modify `src` or `test` files   |
 
 ### Scope
 
@@ -155,30 +155,34 @@ DevLaunchKit follows [Semantic Versioning](https://semver.org/) (SemVer).
 
 ### Release Cadence
 
-| Release Type | Cadence | Description |
-| :--- | :--- | :--- |
-| **Patch** (`x.y.Z`) | As needed | Bug fixes and security patches |
+| Release Type        | Cadence   | Description                        |
+| :------------------ | :-------- | :--------------------------------- |
+| **Patch** (`x.y.Z`) | As needed | Bug fixes and security patches     |
 | **Minor** (`x.Y.0`) | Bi-weekly | New features, non-breaking changes |
-| **Major** (`X.0.0`) | Quarterly | Breaking changes, major redesigns |
+| **Major** (`X.0.0`) | Quarterly | Breaking changes, major redesigns  |
 
 ### Release Steps
 
 1. **Create a release branch** from `main`:
+
    ```bash
    git checkout -b release/vX.Y.Z main
    ```
 
 2. **Update version numbers** across all packages:
+
    ```bash
    pnpm version:bump <major|minor|patch>
    ```
 
 3. **Generate the changelog** from conventional commits:
+
    ```bash
    pnpm changelog:generate
    ```
 
 4. **Run the full test suite** and verify CI passes:
+
    ```bash
    pnpm test:all
    pnpm build
@@ -208,17 +212,17 @@ For critical patches that cannot wait for the next scheduled release:
 
 Each package area has a designated owner responsible for reviewing PRs, triaging issues, and maintaining quality.
 
-| Area | Packages | Owner |
-| :--- | :--- | :--- |
-| **Core Platform** | `config`, `constants`, `env`, `errors`, `types`, `utils`, `validation` | @ramanransubhe |
-| **Authentication & Security** | `auth`, `middleware`, `permissions`, `security`, `rate-limit` | @sarahchen |
-| **Data & API** | `database`, `api`, `cache`, `events`, `queue` | @marcuswebb |
-| **Frontend & UI** | `ui`, `hooks`, `emails`, `cli` | @anikapatel |
-| **Infrastructure & Ops** | `observability`, `logger`, `telemetry`, `feature-flags`, `testing` | @tomasrivera |
-| **AI & Services** | `ai`, `search`, `storage`, `communication`, `notifications`, `analytics`, `payments` | @yukitanaka |
-| **Apps** | `apps/web`, `apps/api`, `apps/admin` | @ramanransubhe |
-| **Documentation** | `docs/`, `README.md`, guides | @anikapatel |
-| **CI/CD & DevOps** | `.github/`, `turbo.json`, `docker/` | @tomasrivera |
+| Area                          | Packages                                                                             | Owner          |
+| :---------------------------- | :----------------------------------------------------------------------------------- | :------------- |
+| **Core Platform**             | `config`, `constants`, `env`, `errors`, `types`, `utils`, `validation`               | @ramanransubhe |
+| **Authentication & Security** | `auth`, `middleware`, `permissions`, `security`, `rate-limit`                        | @sarahchen     |
+| **Data & API**                | `database`, `api`, `cache`, `events`, `queue`                                        | @marcuswebb    |
+| **Frontend & UI**             | `ui`, `hooks`, `emails`, `cli`                                                       | @anikapatel    |
+| **Infrastructure & Ops**      | `observability`, `logger`, `telemetry`, `feature-flags`, `testing`                   | @tomasrivera   |
+| **AI & Services**             | `ai`, `search`, `storage`, `communication`, `notifications`, `analytics`, `payments` | @yukitanaka    |
+| **Apps**                      | `apps/web`, `apps/api`, `apps/admin`                                                 | @ramanransubhe |
+| **Documentation**             | `docs/`, `README.md`, guides                                                         | @anikapatel    |
+| **CI/CD & DevOps**            | `.github/`, `turbo.json`, `docker/`                                                  | @tomasrivera   |
 
 ### Ownership Responsibilities
 
@@ -236,14 +240,14 @@ The on-call maintainer is the first responder for critical issues, security repo
 
 ### Weekly Rotation Schedule
 
-| Week | On-Call Primary | On-Call Secondary |
-| :--- | :--- | :--- |
-| Week 1 | @ramanransubhe | @sarahchen |
-| Week 2 | @marcuswebb | @anikapatel |
-| Week 3 | @tomasrivera | @yukitanaka |
-| Week 4 | @sarahchen | @ramanransubhe |
-| Week 5 | @anikapatel | @marcuswebb |
-| Week 6 | @yukitanaka | @tomasrivera |
+| Week   | On-Call Primary | On-Call Secondary |
+| :----- | :-------------- | :---------------- |
+| Week 1 | @ramanransubhe  | @sarahchen        |
+| Week 2 | @marcuswebb     | @anikapatel       |
+| Week 3 | @tomasrivera    | @yukitanaka       |
+| Week 4 | @sarahchen      | @ramanransubhe    |
+| Week 5 | @anikapatel     | @marcuswebb       |
+| Week 6 | @yukitanaka     | @tomasrivera      |
 
 The rotation repeats every 6 weeks. Swaps are permitted with advance notice in the `#maintainers` Discord channel.
 
@@ -261,14 +265,18 @@ The rotation repeats every 6 weeks. Swaps are permitted with advance notice in t
 ## On-Call Handoff — Week of [DATE]
 
 ### Open Critical Issues
+
 - [Issue #XXX]: Brief description — current status
 
 ### Security Reports
+
 - None / [Brief summary without sensitive details]
 
 ### Pending Decisions
+
 - [Topic]: Context and recommended next step
 
 ### Notes for Next On-Call
+
 - Any context the next person should know
 ```

@@ -49,7 +49,9 @@ export class DodoPaymentsService implements BillingService {
 
       if (!response.ok) {
         const text = await response.text();
-        throw new BillingProviderError(`Dodo Payments request failed: ${response.status} — ${text}`);
+        throw new BillingProviderError(
+          `Dodo Payments request failed: ${response.status} — ${text}`
+        );
       }
 
       return (await response.json()) as T;
@@ -61,7 +63,11 @@ export class DodoPaymentsService implements BillingService {
     }
   }
 
-  async createCustomer(email: string, name?: string, metadata?: Record<string, unknown>): Promise<BillingCustomer> {
+  async createCustomer(
+    email: string,
+    name?: string,
+    metadata?: Record<string, unknown>
+  ): Promise<BillingCustomer> {
     if (this.isMock) {
       return {
         id: "cust_dodo_mock_" + Math.random().toString(36).substring(7),
@@ -196,7 +202,9 @@ export class DodoPaymentsService implements BillingService {
         createdAt: new Date(),
       };
     }
-    return this.request<BillingSubscription>(`/subscriptions/${subscriptionId}/upgrade`, "POST", { newPriceId });
+    return this.request<BillingSubscription>(`/subscriptions/${subscriptionId}/upgrade`, "POST", {
+      newPriceId,
+    });
   }
 
   async downgradePlan(subscriptionId: string, newPriceId: string): Promise<BillingSubscription> {
@@ -225,7 +233,9 @@ export class DodoPaymentsService implements BillingService {
         },
       ];
     }
-    return this.request<readonly BillingInvoice[]>(`/invoices?customerId=${encodeURIComponent(customerId)}`);
+    return this.request<readonly BillingInvoice[]>(
+      `/invoices?customerId=${encodeURIComponent(customerId)}`
+    );
   }
 
   async downloadInvoice(invoiceId: string): Promise<string> {
@@ -289,7 +299,11 @@ export class DodoPaymentsService implements BillingService {
     return this.request<BillingRefund>("/refunds", "POST", { paymentId, amount });
   }
 
-  async validateWebhook(rawBody: string, signature: string, secret: string): Promise<BillingWebhookEvent> {
+  async validateWebhook(
+    rawBody: string,
+    signature: string,
+    secret: string
+  ): Promise<BillingWebhookEvent> {
     if (this.isMock) {
       if (signature === "invalid") {
         throw new BillingWebhookError("Invalid mock signature");

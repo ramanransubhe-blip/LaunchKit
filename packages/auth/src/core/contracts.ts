@@ -164,51 +164,33 @@ export interface AuthService {
   // Password
   forgotPassword(email: string): Promise<void>;
   resetPassword(token: string, newPassword: string): Promise<void>;
-  changePassword(
-    userId: string,
-    currentPassword: string,
-    newPassword: string,
-  ): Promise<void>;
+  changePassword(userId: string, currentPassword: string, newPassword: string): Promise<void>;
 
   // Magic link
   sendMagicLink(email: string): Promise<void>;
   verifyMagicLink(token: string): Promise<AuthResult>;
 
   // OAuth
-  getOAuthUrl(
-    provider: OAuthProvider,
-    redirectUrl: string,
-    state?: string,
-  ): Promise<string>;
-  handleOAuthCallback(
-    provider: OAuthProvider,
-    code: string,
-    state?: string,
-  ): Promise<AuthResult>;
+  getOAuthUrl(provider: OAuthProvider, redirectUrl: string, state?: string): Promise<string>;
+  handleOAuthCallback(provider: OAuthProvider, code: string, state?: string): Promise<AuthResult>;
   linkProvider(
     userId: string,
     provider: OAuthProvider,
     code: string,
-    state?: string,
+    state?: string
   ): Promise<AuthUser>;
   unlinkProvider(userId: string, provider: OAuthProvider): Promise<AuthUser>;
 
   // Organizations
-  createOrganization(
-    userId: string,
-    data: CreateOrganizationData,
-  ): Promise<AuthOrganization>;
+  createOrganization(userId: string, data: CreateOrganizationData): Promise<AuthOrganization>;
   getOrganization(orgId: string): Promise<AuthOrganization | null>;
-  updateOrganization(
-    orgId: string,
-    data: UpdateOrganizationData,
-  ): Promise<AuthOrganization>;
+  updateOrganization(orgId: string, data: UpdateOrganizationData): Promise<AuthOrganization>;
   deleteOrganization(orgId: string): Promise<void>;
   getOrganizationMembers(orgId: string): Promise<readonly AuthOrganizationMember[]>;
   inviteToOrganization(
     orgId: string,
     email: string,
-    role: OrganizationRole,
+    role: OrganizationRole
   ): Promise<AuthInvitation>;
   acceptInvitation(token: string): Promise<void>;
   removeFromOrganization(orgId: string, userId: string): Promise<void>;

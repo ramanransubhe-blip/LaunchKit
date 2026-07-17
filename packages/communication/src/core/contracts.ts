@@ -37,10 +37,30 @@ export interface DeliveryStatus {
 export interface CommunicationService {
   readonly providerName: string;
 
-  sendEmail(to: string, subject: string, templateName: string, variables?: Record<string, unknown>, options?: EmailOptions): Promise<EmailSendResult>;
-  sendNotification(userId: string, title: string, body: string, options?: NotificationOptions): Promise<NotificationSendResult>;
-  sendAnnouncement(title: string, body: string, options?: AnnouncementOptions): Promise<AnnouncementSendResult>;
-  schedule(time: Date, templateName: string, to: string, variables?: Record<string, unknown>): Promise<string>;
+  sendEmail(
+    to: string,
+    subject: string,
+    templateName: string,
+    variables?: Record<string, unknown>,
+    options?: EmailOptions
+  ): Promise<EmailSendResult>;
+  sendNotification(
+    userId: string,
+    title: string,
+    body: string,
+    options?: NotificationOptions
+  ): Promise<NotificationSendResult>;
+  sendAnnouncement(
+    title: string,
+    body: string,
+    options?: AnnouncementOptions
+  ): Promise<AnnouncementSendResult>;
+  schedule(
+    time: Date,
+    templateName: string,
+    to: string,
+    variables?: Record<string, unknown>
+  ): Promise<string>;
   cancel(scheduleId: string): Promise<void>;
   track(messageId: string): Promise<DeliveryStatus>;
 }

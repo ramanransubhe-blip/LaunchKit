@@ -17,6 +17,6 @@ const billing = getGlobalBillingService();
 await billing.updateCustomer("cust_123", {
   metadata: {
     appliedCoupon: "LAUNCH20",
-  }
+  },
 });
 ```

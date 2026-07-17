@@ -13,6 +13,7 @@ graph TD
 ## Security Credentials
 
 Operations controls are scoped behind Role-Based Access Control (RBAC):
+
 - `Admin`: full operational capabilities.
 - `Support Agent`: manage tickets and user states.
 - `Developer`: toggle feature flags and inspect log files.

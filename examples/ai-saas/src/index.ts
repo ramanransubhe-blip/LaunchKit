@@ -100,14 +100,18 @@ async function bootstrap(): Promise<void> {
 
   // --- Middleware Stack ---
   app.use("*", honoLogger());
-  app.use("*", cors({
-    origin: config.nodeEnv === "production"
-      ? ["https://yourdomain.com"]
-      : ["http://localhost:3000", "http://localhost:5173"],
-    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  }));
+  app.use(
+    "*",
+    cors({
+      origin:
+        config.nodeEnv === "production"
+          ? ["https://yourdomain.com"]
+          : ["http://localhost:3000", "http://localhost:5173"],
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "Authorization"],
+      credentials: true,
+    })
+  );
 
   // Authentication gate — all /api/* routes require a valid session
   app.use("/api/*", authMiddleware);
@@ -123,7 +127,7 @@ async function bootstrap(): Promise<void> {
       version: "1.0.0",
       uptime: process.uptime(),
       timestamp: new Date().toISOString(),
-    }),
+    })
   );
 
   // --- Start Server ---

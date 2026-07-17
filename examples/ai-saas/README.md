@@ -11,14 +11,14 @@ A production-ready AI-powered SaaS application demonstrating multi-provider LLM 
 ```mermaid
 graph TB
     Client["Client (Web/Mobile)"]
-    
+
     subgraph Server["Hono HTTP Server"]
         AuthMW["Auth Middleware"]
         RateMW["Rate Limiter"]
         ChatRoute["Chat Routes"]
         ImageRoute["Image Routes"]
     end
-    
+
     subgraph Services["DevLaunchKit Services"]
         AI["@devlaunchkit/ai<br/>OpenAI · Anthropic · Gemini"]
         Auth["@devlaunchkit/auth<br/>Better Auth"]
@@ -27,7 +27,7 @@ graph TB
         Storage["@devlaunchkit/storage<br/>S3-compatible"]
         RL["@devlaunchkit/rate-limit<br/>Sliding Window"]
     end
-    
+
     Client -->|HTTPS| AuthMW
     AuthMW --> RateMW
     RateMW --> ChatRoute
@@ -71,22 +71,22 @@ examples/ai-saas/
 
 ## Environment Variables
 
-| Variable | Description | Required | Default |
-|---|---|---|---|
-| `PORT` | HTTP server port | No | `3000` |
-| `NODE_ENV` | Runtime environment | No | `development` |
-| `DATABASE_URL` | PostgreSQL connection string | Yes | — |
-| `OPENAI_API_KEY` | OpenAI API key for GPT & DALL·E | Yes | — |
-| `ANTHROPIC_API_KEY` | Anthropic API key for Claude | No | — |
-| `GEMINI_API_KEY` | Google Gemini API key | No | — |
-| `STRIPE_SECRET_KEY` | Stripe secret API key | Yes | — |
-| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret | Yes | — |
-| `STRIPE_PRICE_PRO` | Stripe Price ID for Pro plan | Yes | — |
-| `STRIPE_PRICE_ENTERPRISE` | Stripe Price ID for Enterprise plan | Yes | — |
-| `BETTER_AUTH_SECRET` | Better Auth signing secret | Yes | — |
-| `BETTER_AUTH_URL` | Better Auth callback URL | Yes | — |
-| `STORAGE_BUCKET` | S3-compatible bucket name | Yes | — |
-| `STORAGE_REGION` | S3 region | No | `us-east-1` |
+| Variable                  | Description                         | Required | Default       |
+| ------------------------- | ----------------------------------- | -------- | ------------- |
+| `PORT`                    | HTTP server port                    | No       | `3000`        |
+| `NODE_ENV`                | Runtime environment                 | No       | `development` |
+| `DATABASE_URL`            | PostgreSQL connection string        | Yes      | —             |
+| `OPENAI_API_KEY`          | OpenAI API key for GPT & DALL·E     | Yes      | —             |
+| `ANTHROPIC_API_KEY`       | Anthropic API key for Claude        | No       | —             |
+| `GEMINI_API_KEY`          | Google Gemini API key               | No       | —             |
+| `STRIPE_SECRET_KEY`       | Stripe secret API key               | Yes      | —             |
+| `STRIPE_WEBHOOK_SECRET`   | Stripe webhook signing secret       | Yes      | —             |
+| `STRIPE_PRICE_PRO`        | Stripe Price ID for Pro plan        | Yes      | —             |
+| `STRIPE_PRICE_ENTERPRISE` | Stripe Price ID for Enterprise plan | Yes      | —             |
+| `BETTER_AUTH_SECRET`      | Better Auth signing secret          | Yes      | —             |
+| `BETTER_AUTH_URL`         | Better Auth callback URL            | Yes      | —             |
+| `STORAGE_BUCKET`          | S3-compatible bucket name           | Yes      | —             |
+| `STORAGE_REGION`          | S3 region                           | No       | `us-east-1`   |
 
 ## Quick Start
 
@@ -109,16 +109,16 @@ pnpm dev
 
 ## API Endpoints
 
-| Method | Endpoint | Description | Auth |
-|---|---|---|---|
-| `POST` | `/api/chat/completions` | Stream chat completion response | ✅ |
-| `GET` | `/api/chat/conversations` | List user conversations | ✅ |
-| `GET` | `/api/chat/conversations/:id` | Get conversation with messages | ✅ |
-| `DELETE` | `/api/chat/conversations/:id` | Delete a conversation | ✅ |
-| `POST` | `/api/images/generate` | Generate an image from prompt | ✅ |
-| `GET` | `/api/images` | List generated images | ✅ |
-| `GET` | `/api/images/:id` | Get image details and signed URL | ✅ |
-| `DELETE` | `/api/images/:id` | Delete a generated image | ✅ |
+| Method   | Endpoint                      | Description                      | Auth |
+| -------- | ----------------------------- | -------------------------------- | ---- |
+| `POST`   | `/api/chat/completions`       | Stream chat completion response  | ✅   |
+| `GET`    | `/api/chat/conversations`     | List user conversations          | ✅   |
+| `GET`    | `/api/chat/conversations/:id` | Get conversation with messages   | ✅   |
+| `DELETE` | `/api/chat/conversations/:id` | Delete a conversation            | ✅   |
+| `POST`   | `/api/images/generate`        | Generate an image from prompt    | ✅   |
+| `GET`    | `/api/images`                 | List generated images            | ✅   |
+| `GET`    | `/api/images/:id`             | Get image details and signed URL | ✅   |
+| `DELETE` | `/api/images/:id`             | Delete a generated image         | ✅   |
 
 ## Deployment Guide
 

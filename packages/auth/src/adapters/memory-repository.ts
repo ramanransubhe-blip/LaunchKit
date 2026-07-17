@@ -44,7 +44,7 @@ export class MemoryAuthRepository implements AuthRepository {
       (attempt) =>
         attempt.email === email &&
         !attempt.success &&
-        attempt.createdAt.getTime() >= since.getTime(),
+        attempt.createdAt.getTime() >= since.getTime()
     ).length;
   }
 
@@ -74,9 +74,7 @@ export class MemoryAuthRepository implements AuthRepository {
   }
 
   async listDevices(userId: string): Promise<readonly AuthDevice[]> {
-    return Array.from(this.devicesById.values()).filter(
-      (device) => device.userId === userId,
-    );
+    return Array.from(this.devicesById.values()).filter((device) => device.userId === userId);
   }
 
   async recordAuditEvent(record: AuthAuditRecord): Promise<void> {
@@ -110,4 +108,3 @@ export class MemoryAuthRepository implements AuthRepository {
 export function createMemoryAuthRepository(): MemoryAuthRepository {
   return new MemoryAuthRepository();
 }
-

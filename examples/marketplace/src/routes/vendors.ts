@@ -253,7 +253,10 @@ vendorsRouter.post("/onboard", async (c) => {
   vendor.updatedAt = new Date();
   vendorStore.set(vendor.id, vendor);
 
-  logger.info("Vendor onboarding link generated", { vendorId: vendor.id, stripeAccountId: vendor.stripeAccountId });
+  logger.info("Vendor onboarding link generated", {
+    vendorId: vendor.id,
+    stripeAccountId: vendor.stripeAccountId,
+  });
 
   return c.json({
     onboardingUrl: accountLink.url,
@@ -301,7 +304,9 @@ vendorsRouter.get("/me/payouts", async (c) => {
   ];
 
   const totalPaid = payouts.filter((p) => p.status === "paid").reduce((s, p) => s + p.amount, 0);
-  const totalPending = payouts.filter((p) => p.status !== "paid" && p.status !== "failed").reduce((s, p) => s + p.amount, 0);
+  const totalPending = payouts
+    .filter((p) => p.status !== "paid" && p.status !== "failed")
+    .reduce((s, p) => s + p.amount, 0);
 
   return c.json({
     payouts,
@@ -347,7 +352,8 @@ vendorsRouter.get("/me/analytics", async (c) => {
     orders: {
       total: vendor.totalOrders,
       thisMonth: Math.round(vendor.totalOrders * 0.15),
-      averageOrderValue: vendor.totalOrders > 0 ? Math.round(vendor.totalRevenue / vendor.totalOrders) : 0,
+      averageOrderValue:
+        vendor.totalOrders > 0 ? Math.round(vendor.totalRevenue / vendor.totalOrders) : 0,
     },
     topProducts: [
       { productId: "prod_sample_1", title: "Premium Widget", revenue: 15000, unitsSold: 50 },
@@ -372,7 +378,7 @@ vendorsRouter.get("/me/analytics", async (c) => {
     },
     customerInsights: {
       repeatCustomerRate: 35.2,
-      averageLifetimeValue: 245.00,
+      averageLifetimeValue: 245.0,
       topRegions: [
         { region: "US-CA", orders: 450, revenue: 67500 },
         { region: "US-NY", orders: 320, revenue: 48000 },

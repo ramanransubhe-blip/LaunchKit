@@ -50,7 +50,10 @@ class MemoryCache implements ICache {
 
 // 2. Namespaced Cache Wrapper
 export class NamespacedCache {
-  constructor(private cache: ICache, private namespace: string) {}
+  constructor(
+    private cache: ICache,
+    private namespace: string
+  ) {}
 
   private getFullKey(key: string): string {
     return `${this.namespace}:${key}`;

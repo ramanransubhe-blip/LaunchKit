@@ -5,7 +5,12 @@ export interface SystemEvents {
   "user:signup": { profileId: string; email: string; timestamp: Date };
   "organization:created": { organizationId: string; ownerId: string; slug: string };
   "subscription:updated": { organizationId: string; status: string; planName: string };
-  "notification:send": { profileId: string; title: string; message: string; type: "info" | "success" | "warning" | "error" };
+  "notification:send": {
+    profileId: string;
+    title: string;
+    message: string;
+    type: "info" | "success" | "warning" | "error";
+  };
   "audit:log": { profileId?: string; action: string; resource: string; payload?: any };
 }
 
@@ -25,7 +30,10 @@ export class EventBus<T extends Record<string, any>> {
   }
 
   // Subscribe to an event, returning an unsubscribe helper
-  subscribe<K extends keyof T & string>(event: K, handler: (payload: T[K]) => void | Promise<void>): () => void {
+  subscribe<K extends keyof T & string>(
+    event: K,
+    handler: (payload: T[K]) => void | Promise<void>
+  ): () => void {
     const wrapper = async (payload: any) => {
       try {
         await handler(payload);

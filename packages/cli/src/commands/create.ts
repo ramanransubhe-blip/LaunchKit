@@ -5,7 +5,7 @@ export function handleCreateCommand(projectName: string, shouldExit: boolean = t
   console.log(`\n🚀 [Scaffold] Initializing new SaaS application: "${projectName}"...`);
 
   const targetDir = path.resolve(process.cwd(), projectName);
-  
+
   if (fs.existsSync(targetDir)) {
     console.error(`❌ Directory "${projectName}" already exists.`);
     if (shouldExit) {
@@ -18,7 +18,7 @@ export function handleCreateCommand(projectName: string, shouldExit: boolean = t
     // Create directory structure
     fs.mkdirSync(targetDir, { recursive: true });
     fs.mkdirSync(path.join(targetDir, "src"), { recursive: true });
-    
+
     // Write package.json
     const packageJson = {
       name: projectName,
@@ -27,17 +27,17 @@ export function handleCreateCommand(projectName: string, shouldExit: boolean = t
       scripts: {
         dev: "next dev",
         build: "next build",
-        start: "next start"
+        start: "next start",
       },
       dependencies: {
-        "next": "^15.1.0",
-        "react": "^19.0.0",
+        next: "^15.1.0",
+        react: "^19.0.0",
         "react-dom": "^19.0.0",
         "@devlaunchkit/ui": "workspace:*",
         "@devlaunchkit/auth": "workspace:*",
         "@devlaunchkit/payments": "workspace:*",
-        "@devlaunchkit/env": "workspace:*"
-      }
+        "@devlaunchkit/env": "workspace:*",
+      },
     };
     fs.writeFileSync(
       path.join(targetDir, "package.json"),
@@ -61,9 +61,9 @@ export function handleCreateCommand(projectName: string, shouldExit: boolean = t
         resolveJsonModule: true,
         isolatedModules: true,
         jsx: "preserve",
-        incremental: true
+        incremental: true,
       },
-      include: ["src/**/*"]
+      include: ["src/**/*"],
     };
     fs.writeFileSync(
       path.join(targetDir, "tsconfig.json"),
@@ -81,7 +81,9 @@ export function handleCreateCommand(projectName: string, shouldExit: boolean = t
 
     console.log("✔️ Scaffolded folder structure templates...");
     console.log("✔️ Linked @devlaunchkit design tokens, billing client, and auth core packages...");
-    console.log(`\n🎉 Successfully created SaaS project! Run:\n   cd ${projectName}\n   pnpm install\n`);
+    console.log(
+      `\n🎉 Successfully created SaaS project! Run:\n   cd ${projectName}\n   pnpm install\n`
+    );
   } catch (error: any) {
     console.error(`❌ Failed to scaffold project:`, error.message || error);
     if (shouldExit) {

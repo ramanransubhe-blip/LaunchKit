@@ -63,11 +63,7 @@ export function createDeviceFingerprint(input: {
   userAgent?: string | null;
   deviceId?: string | null;
 }): string {
-  const source = [
-    input.ipAddress ?? "",
-    input.userAgent ?? "",
-    input.deviceId ?? "",
-  ].join("|");
+  const source = [input.ipAddress ?? "", input.userAgent ?? "", input.deviceId ?? ""].join("|");
   return createHash("sha256").update(source).digest("base64url");
 }
 
@@ -78,9 +74,7 @@ export function createDeviceFingerprint(input: {
  * @returns Human-readable role label.
  */
 export function formatRoleLabel(role: AnyRole): string {
-  return role
-    .replaceAll("_", " ")
-    .replace(/\b\w/g, (value) => value.toUpperCase());
+  return role.replaceAll("_", " ").replace(/\b\w/g, (value) => value.toUpperCase());
 }
 
 /**
@@ -112,9 +106,7 @@ export function resolveDisplayName(user: Pick<AuthUser, "name" | "email">): stri
  * @param organization - Organization or `null`.
  * @returns Display label.
  */
-export function resolveOrganizationLabel(
-  organization: AuthOrganization | null,
-): string {
+export function resolveOrganizationLabel(organization: AuthOrganization | null): string {
   return organization?.name ?? "Personal";
 }
 
@@ -149,10 +141,9 @@ export function createAuthContext(input: {
  * @param user - Auth user.
  * @returns Public user projection.
  */
-export function pickPublicUser(user: AuthUser): Pick<
-  AuthUser,
-  "id" | "name" | "email" | "image" | "role" | "organizationId"
-> {
+export function pickPublicUser(
+  user: AuthUser
+): Pick<AuthUser, "id" | "name" | "email" | "image" | "role" | "organizationId"> {
   return {
     id: user.id,
     name: user.name,

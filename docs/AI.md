@@ -5,9 +5,11 @@ Configuring and utilizing the provider-agnostic Multi-LLM AI Gateway.
 ---
 
 ## Purpose
+
 This document explains the architecture of `@devlaunchkit/ai`, providing developers with setup details, example code snippet patterns, and troubleshooting steps for OpenAI, Anthropic, and Google Gemini integrations.
 
 ## Prerequisites
+
 - AI API provider keys (OpenAI Key, Anthropic Key, or Google Gemini Key)
 - Decoupled API environment configs set up in `.env`
 
@@ -47,6 +49,7 @@ ANTHROPIC_API_KEY=sk-ant-...
 ## Usage Examples
 
 ### 1. Generating Text Completions
+
 ```typescript
 import { ai } from "@devlaunchkit/ai";
 
@@ -55,6 +58,7 @@ console.log(response);
 ```
 
 ### 2. Streaming Real-time Completions
+
 ```typescript
 import { ai } from "@devlaunchkit/ai";
 
@@ -64,16 +68,19 @@ await ai.streamText("List 5 feature flags use-cases:", (chunk) => {
 ```
 
 ### 3. Generating Structured JSON Output with Zod
+
 ```typescript
 import { ai } from "@devlaunchkit/ai";
 import { z } from "zod";
 
 const FeatureListSchema = z.object({
-  features: z.array(z.object({
-    name: z.string(),
-    description: z.string(),
-    complexity: z.enum(["low", "medium", "high"])
-  }))
+  features: z.array(
+    z.object({
+      name: z.string(),
+      description: z.string(),
+      complexity: z.enum(["low", "medium", "high"]),
+    })
+  ),
 });
 
 const schemaResponse = await ai.generateStructuredData(
@@ -87,22 +94,26 @@ console.log(schemaResponse.features);
 ---
 
 ## Screenshots Placeholder
+
 ![AI Stream UI Generation Component](/assets/ai_platform.png)
-*AI assistant chat module displaying real-time streaming output in the user dashboard.*
+_AI assistant chat module displaying real-time streaming output in the user dashboard._
 
 ---
 
 ## Best Practices
+
 - **Implement fallback rules**: Set up Anthropic or OpenAI as primary model providers, and keep Google Gemini as a cost-effective secondary fallback.
 - **Use Zod schemas for system integrations**: When utilizing LLM outputs inside database seeds or routing logic, always use `generateStructuredData` to ensure the structure is verified.
 
 ## Common Mistakes
+
 - **Leaking Keys to client side**: Importing `@devlaunchkit/ai` directly inside Next.js client component files instead of calling them within API Routes or Server Actions, causing keys to be exposed in browser bundles.
 - **Exceeding Rate Limits**: Failing to implement token/request limits on public user prompts, leading to high bills or API account suspensions.
 
 ---
 
 ## Troubleshooting
+
 - **API Key Invalid Error**:
   - Run `pnpm doctor` to confirm the AI keys are successfully loaded and parsed.
   - Verify that the target model is supported by your key tier (e.g. OpenAI GPT-4o requires active credit).

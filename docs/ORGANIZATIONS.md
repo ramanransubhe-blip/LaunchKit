@@ -6,7 +6,7 @@ DevLaunchKit provides built-in multi-tenant organization workspaces, allowing us
 
 ## Workspace Contexts & Switching
 
-Each authenticated request context optionally contains an active `organizationId`. 
+Each authenticated request context optionally contains an active `organizationId`.
 
 ```mermaid
 graph LR
@@ -38,10 +38,13 @@ export function OrganizationSelector() {
 ## Reusable Switcher Components
 
 ### 1. `OrgSwitcherPopover`
+
 Renders a popover switcher with user workspace choices, logo indicators, and active checkmarks.
 
 ### 2. `OrgMembersList`
+
 Renders member tables with display names, roles, joined timestamps, and member removal triggers.
 
 ### 3. `OrgInvitationsList`
+
 Renders pending invitation lists with access revoke actions.

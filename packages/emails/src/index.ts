@@ -2,5 +2,5 @@
 
 export const info = {
   name: "emails",
-  description: "React-email templates & configuration setups"
+  description: "React-email templates & configuration setups",
 };

@@ -39,7 +39,10 @@ export interface TitleProps extends HTMLAttributes<HTMLDivElement> {
 export function Title({ as: Component = "div", className, children, ...props }: TitleProps) {
   return (
     <Component
-      className={cn("text-5xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-slate-50", className)}
+      className={cn(
+        "text-5xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-slate-50",
+        className
+      )}
       {...props}
     >
       {children}
@@ -51,7 +54,10 @@ export function Title({ as: Component = "div", className, children, ...props }: 
 export function Subtitle({ className, children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={cn("text-lg md:text-xl text-slate-500 dark:text-slate-400 font-normal leading-relaxed", className)}
+      className={cn(
+        "text-lg md:text-xl text-slate-500 dark:text-slate-400 font-normal leading-relaxed",
+        className
+      )}
       {...props}
     >
       {children}
@@ -75,7 +81,10 @@ export function Body({ className, children, ...props }: HTMLAttributes<HTMLParag
 export function Caption({ className, children, ...props }: HTMLAttributes<HTMLSpanElement>) {
   return (
     <span
-      className={cn("text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide", className)}
+      className={cn(
+        "text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide",
+        className
+      )}
       {...props}
     >
       {children}

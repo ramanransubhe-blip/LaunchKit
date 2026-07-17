@@ -56,12 +56,12 @@ packages.forEach((pkg) => {
     types: "./dist/index.d.ts",
     scripts: {
       build: "tsc",
-      clean: "tsx ../../scripts/clean.ts"
+      clean: "tsx ../../scripts/clean.ts",
     },
     dependencies: {},
     devDependencies: {
-      typescript: "^5.7.2"
-    }
+      typescript: "^5.7.2",
+    },
   };
   writeJson(path.join(pkgDir, "package.json"), packageJson);
 
@@ -70,9 +70,9 @@ packages.forEach((pkg) => {
     extends: "../../tsconfig.base.json",
     compilerOptions: {
       outDir: "./dist",
-      rootDir: "./src"
+      rootDir: "./src",
     },
-    include: ["src/**/*"]
+    include: ["src/**/*"],
   };
   writeJson(path.join(pkgDir, "tsconfig.json"), tsconfigJson);
 

@@ -66,7 +66,10 @@ const dailyGenerationCounts = new Map<string, { count: number; resetAt: number }
  * @param tier - The user's subscription tier.
  * @returns An object indicating whether generation is allowed and remaining quota.
  */
-function checkDailyLimit(userId: string, tier: SubscriptionTier): { allowed: boolean; remaining: number } {
+function checkDailyLimit(
+  userId: string,
+  tier: SubscriptionTier
+): { allowed: boolean; remaining: number } {
   const now = Date.now();
   const limit = TIER_DAILY_LIMITS[tier];
   const entry = dailyGenerationCounts.get(userId);
@@ -161,9 +164,9 @@ imagesRouter.post("/generate", async (c) => {
     return c.json(
       sendFailure(
         `Daily image generation limit reached (${TIER_DAILY_LIMITS[tier as SubscriptionTier]}). Resets at midnight UTC.`,
-        "QUOTA_EXCEEDED",
+        "QUOTA_EXCEEDED"
       ),
-      402,
+      402
     );
   }
 
@@ -175,7 +178,10 @@ imagesRouter.post("/generate", async (c) => {
   }
 
   if (body.prompt.length > 4000) {
-    return c.json(sendFailure("Prompt exceeds maximum length of 4,000 characters", "VALIDATION_ERROR"), 400);
+    return c.json(
+      sendFailure("Prompt exceeds maximum length of 4,000 characters", "VALIDATION_ERROR"),
+      400
+    );
   }
 
   const size = body.size ?? "1024x1024";
@@ -184,7 +190,10 @@ imagesRouter.post("/generate", async (c) => {
 
   const validSizes = ["1024x1024", "1792x1024", "1024x1792"];
   if (!validSizes.includes(size)) {
-    return c.json(sendFailure(`Invalid size. Must be one of: ${validSizes.join(", ")}`, "VALIDATION_ERROR"), 400);
+    return c.json(
+      sendFailure(`Invalid size. Must be one of: ${validSizes.join(", ")}`, "VALIDATION_ERROR"),
+      400
+    );
   }
 
   try {
@@ -208,7 +217,7 @@ imagesRouter.post("/generate", async (c) => {
           revisedPrompt: { type: "string" },
         },
       },
-      { model: "dall-e-3" } as AIOptions,
+      { model: "dall-e-3" } as AIOptions
     );
 
     // --- Upload to Cloud Storage ---
@@ -247,7 +256,7 @@ imagesRouter.post("/generate", async (c) => {
         dailyRemaining: dailyCheck.remaining - 1,
         createdAt: imageRecord.createdAt.toISOString(),
       }),
-      201,
+      201
     );
   } catch (err) {
     const message = err instanceof Error ? err.message : "Image generation failed";
@@ -299,18 +308,20 @@ imagesRouter.get("/:id", async (c) => {
     return c.json(sendFailure("Image not found", "NOT_FOUND"), 404);
   }
 
-  return c.json(sendSuccess({
-    id: image.id,
-    prompt: image.prompt,
-    revisedPrompt: image.revisedPrompt,
-    url: image.storageUrl,
-    storagePath: image.storagePath,
-    model: image.model,
-    size: image.size,
-    style: image.style,
-    cost: image.cost,
-    createdAt: image.createdAt.toISOString(),
-  }));
+  return c.json(
+    sendSuccess({
+      id: image.id,
+      prompt: image.prompt,
+      revisedPrompt: image.revisedPrompt,
+      url: image.storageUrl,
+      storagePath: image.storagePath,
+      model: image.model,
+      size: image.size,
+      style: image.style,
+      cost: image.cost,
+      createdAt: image.createdAt.toISOString(),
+    })
+  );
 });
 
 /**

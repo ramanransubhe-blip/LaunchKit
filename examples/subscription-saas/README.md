@@ -51,15 +51,15 @@ subscription-saas/
 
 ## Environment Variables
 
-| Variable | Description | Required |
-|---|---|---|
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `DODO_API_KEY` | Dodo Payments API key | Yes |
-| `DODO_WEBHOOK_SECRET` | Webhook signature secret | Yes |
-| `BETTER_AUTH_SECRET` | Better Auth JWT signing secret | Yes |
-| `RESEND_API_KEY` | Resend email API key | Yes |
-| `APP_URL` | Public application URL | Yes |
-| `PORT` | Server port (default: `4002`) | No |
+| Variable              | Description                    | Required |
+| --------------------- | ------------------------------ | -------- |
+| `DATABASE_URL`        | PostgreSQL connection string   | Yes      |
+| `DODO_API_KEY`        | Dodo Payments API key          | Yes      |
+| `DODO_WEBHOOK_SECRET` | Webhook signature secret       | Yes      |
+| `BETTER_AUTH_SECRET`  | Better Auth JWT signing secret | Yes      |
+| `RESEND_API_KEY`      | Resend email API key           | Yes      |
+| `APP_URL`             | Public application URL         | Yes      |
+| `PORT`                | Server port (default: `4002`)  | No       |
 
 ## Quick Start
 
@@ -83,18 +83,18 @@ pnpm dev
 
 ## API Endpoints
 
-| Method | Path | Description |
-|---|---|---|
-| `POST` | `/api/subscriptions` | Create a new subscription |
-| `GET` | `/api/subscriptions/:id` | Retrieve subscription details |
-| `PATCH` | `/api/subscriptions/:id` | Update plan or billing interval |
-| `DELETE` | `/api/subscriptions/:id` | Cancel subscription at period end |
-| `GET` | `/api/billing/invoices` | List paginated invoices |
-| `GET` | `/api/billing/invoices/:id` | Get invoice with line items |
-| `POST` | `/api/billing/payment-method` | Update default payment method |
-| `GET` | `/api/billing/summary` | Current billing summary |
-| `POST` | `/webhooks/dodo` | Dodo Payments webhook receiver |
-| `GET` | `/health` | Health check |
+| Method   | Path                          | Description                       |
+| -------- | ----------------------------- | --------------------------------- |
+| `POST`   | `/api/subscriptions`          | Create a new subscription         |
+| `GET`    | `/api/subscriptions/:id`      | Retrieve subscription details     |
+| `PATCH`  | `/api/subscriptions/:id`      | Update plan or billing interval   |
+| `DELETE` | `/api/subscriptions/:id`      | Cancel subscription at period end |
+| `GET`    | `/api/billing/invoices`       | List paginated invoices           |
+| `GET`    | `/api/billing/invoices/:id`   | Get invoice with line items       |
+| `POST`   | `/api/billing/payment-method` | Update default payment method     |
+| `GET`    | `/api/billing/summary`        | Current billing summary           |
+| `POST`   | `/webhooks/dodo`              | Dodo Payments webhook receiver    |
+| `GET`    | `/health`                     | Health check                      |
 
 ## Deployment
 

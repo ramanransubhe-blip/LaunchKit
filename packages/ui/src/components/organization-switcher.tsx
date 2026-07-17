@@ -1,7 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { Plus, Check, Users, Sparkles, Building, Mail, ArrowRight, UserPlus, Trash } from "lucide-react";
+import {
+  Plus,
+  Check,
+  Users,
+  Sparkles,
+  Building,
+  Mail,
+  ArrowRight,
+  UserPlus,
+  Trash,
+} from "lucide-react";
 import { cn } from "../utils/cn.js";
 
 export interface OrganizationItem {
@@ -129,7 +139,11 @@ export function OrgMembersList({
             <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500">Email</th>
             <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500">Role</th>
             <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500">Joined</th>
-            {onRemoveMember && <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500 text-right">Actions</th>}
+            {onRemoveMember && (
+              <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500 text-right">
+                Actions
+              </th>
+            )}
           </tr>
         </thead>
         <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
@@ -190,7 +204,9 @@ export function OrgInvitationsList({
                 <Mail className="h-4 w-4" />
               </div>
               <div>
-                <p className="text-xs font-semibold text-neutral-900 dark:text-white">{invite.email}</p>
+                <p className="text-xs font-semibold text-neutral-900 dark:text-white">
+                  {invite.email}
+                </p>
                 <p className="text-[10px] text-neutral-400 mt-0.5">Role: {invite.role}</p>
               </div>
             </div>

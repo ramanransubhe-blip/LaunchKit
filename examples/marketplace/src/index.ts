@@ -105,7 +105,7 @@ function createApp(): Hono<AppContext> {
       // In production this calls Clerk's verifyToken; here we decode a
       // simplified JWT-like structure for demonstration purposes.
       const payload = JSON.parse(
-        Buffer.from(token.split(".")[1] ?? "{}", "base64url").toString("utf-8"),
+        Buffer.from(token.split(".")[1] ?? "{}", "base64url").toString("utf-8")
       );
 
       c.set("userId", payload.sub ?? null);
@@ -128,7 +128,7 @@ function createApp(): Hono<AppContext> {
       service: "marketplace",
       environment: NODE_ENV,
       timestamp: new Date().toISOString(),
-    }),
+    })
   );
 
   // ---------- Route modules ----------
@@ -161,15 +161,17 @@ function createApp(): Hono<AppContext> {
   app.onError((err, c) => {
     const message = err instanceof Error ? err.message : "Internal Server Error";
     const status = (err as any).status ?? 500;
-    logger.error("Unhandled request error", { path: c.req.path, method: c.req.method, error: message });
+    logger.error("Unhandled request error", {
+      path: c.req.path,
+      method: c.req.method,
+      error: message,
+    });
     return c.json({ error: message }, status);
   });
 
   // ---------- 404 fallback ----------
 
-  app.notFound((c) =>
-    c.json({ error: "Not Found", path: c.req.path }, 404),
-  );
+  app.notFound((c) => c.json({ error: "Not Found", path: c.req.path }, 404));
 
   return app;
 }
@@ -188,27 +190,32 @@ async function main(): Promise<void> {
 
   logger.info(`🏪 Marketplace server starting`, { port: PORT, environment: NODE_ENV });
 
-  const server = Bun?.serve?.({ port: PORT, fetch: app.fetch })
-    ?? (await import("node:http")).createServer(async (req, res) => {
-      // Fallback Node.js HTTP server for non-Bun runtimes
-      const url = new URL(req.url ?? "/", `http://localhost:${PORT}`);
-      const headers = new Headers();
-      for (const [key, val] of Object.entries(req.headers)) {
-        if (val) headers.set(key, Array.isArray(val) ? val.join(", ") : val);
-      }
-      const body = ["GET", "HEAD"].includes(req.method ?? "GET")
-        ? undefined
-        : await new Promise<string>((resolve) => {
-            let data = "";
-            req.on("data", (chunk: Buffer) => { data += chunk.toString(); });
-            req.on("end", () => resolve(data));
-          });
-      const request = new Request(url.toString(), { method: req.method, headers, body });
-      const response = await app.fetch(request);
-      res.writeHead(response.status, Object.fromEntries(response.headers.entries()));
-      const text = await response.text();
-      res.end(text);
-    }).listen(PORT);
+  const server =
+    Bun?.serve?.({ port: PORT, fetch: app.fetch }) ??
+    (await import("node:http"))
+      .createServer(async (req, res) => {
+        // Fallback Node.js HTTP server for non-Bun runtimes
+        const url = new URL(req.url ?? "/", `http://localhost:${PORT}`);
+        const headers = new Headers();
+        for (const [key, val] of Object.entries(req.headers)) {
+          if (val) headers.set(key, Array.isArray(val) ? val.join(", ") : val);
+        }
+        const body = ["GET", "HEAD"].includes(req.method ?? "GET")
+          ? undefined
+          : await new Promise<string>((resolve) => {
+              let data = "";
+              req.on("data", (chunk: Buffer) => {
+                data += chunk.toString();
+              });
+              req.on("end", () => resolve(data));
+            });
+        const request = new Request(url.toString(), { method: req.method, headers, body });
+        const response = await app.fetch(request);
+        res.writeHead(response.status, Object.fromEntries(response.headers.entries()));
+        const text = await response.text();
+        res.end(text);
+      })
+      .listen(PORT);
 
   logger.info(`🏪 Marketplace server listening on http://localhost:${PORT}`);
 

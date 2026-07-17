@@ -53,8 +53,18 @@ async function runAggregation(): Promise<void> {
 
     const aggregations: AggregationResult[] = [
       { metric: "hourly_signups", value: Number(signups?.count ?? 0), period, computed_at: now },
-      { metric: "hourly_revenue", value: Number(revenueResult?.total ?? 0), period, computed_at: now },
-      { metric: "hourly_api_requests", value: Number(apiRequests?.count ?? 0), period, computed_at: now },
+      {
+        metric: "hourly_revenue",
+        value: Number(revenueResult?.total ?? 0),
+        period,
+        computed_at: now,
+      },
+      {
+        metric: "hourly_api_requests",
+        value: Number(apiRequests?.count ?? 0),
+        period,
+        computed_at: now,
+      },
       { metric: "hourly_errors", value: Number(errorCount?.count ?? 0), period, computed_at: now },
     ];
 
@@ -67,17 +77,12 @@ async function runAggregation(): Promise<void> {
     }
 
     /** Cache the latest aggregations for quick dashboard reads */
-    await setCache(
-      "dashboard:latest-aggregations",
-      JSON.stringify(aggregations),
-      3600
-    );
+    await setCache("dashboard:latest-aggregations", JSON.stringify(aggregations), 3600);
 
     const totalApiRequests = Number(apiRequests?.count ?? 0);
     const totalErrors = Number(errorCount?.count ?? 0);
-    const errorRate = totalApiRequests > 0
-      ? ((totalErrors / totalApiRequests) * 100).toFixed(2)
-      : "0.00";
+    const errorRate =
+      totalApiRequests > 0 ? ((totalErrors / totalApiRequests) * 100).toFixed(2) : "0.00";
 
     /** If error rate exceeds threshold, enqueue an alert job */
     if (parseFloat(errorRate) > 5.0) {

@@ -23,7 +23,10 @@ export function generateSlug(text: string): string {
 }
 
 // 2. Date Helpers
-export function formatDate(date: Date | string | number, options?: Intl.DateTimeFormatOptions): string {
+export function formatDate(
+  date: Date | string | number,
+  options?: Intl.DateTimeFormatOptions
+): string {
   const d = new Date(date);
   return d.toLocaleDateString("en-US", {
     month: "short",
@@ -37,9 +40,9 @@ export function timeAgo(date: Date | string | number): string {
   const now = Date.now();
   const time = new Date(date).getTime();
   const diffMs = now - time;
-  
+
   if (diffMs < 0) return "in the future";
-  
+
   const seconds = Math.floor(diffMs / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
@@ -49,7 +52,7 @@ export function timeAgo(date: Date | string | number): string {
   if (minutes < 60) return `${minutes}m ago`;
   if (hours < 24) return `${hours}h ago`;
   if (days < 30) return `${days}d ago`;
-  
+
   return formatDate(date);
 }
 

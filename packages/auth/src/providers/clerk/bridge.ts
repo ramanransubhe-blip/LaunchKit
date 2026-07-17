@@ -20,16 +20,14 @@ export interface ClerkBridgeOptions {
 /**
  * Creates a Clerk Service Bridge.
  */
-export function createClerkBridge(
-  options: ClerkBridgeOptions,
-): ClerkServiceBridge {
+export function createClerkBridge(options: ClerkBridgeOptions): ClerkServiceBridge {
   const { baseUrl = "https://api.clerk.com/v1", secret, isMock = false } = options;
 
   async function request<T>(
     path: string,
     method: "GET" | "POST" | "PUT" | "DELETE",
     body?: unknown,
-    headers: Record<string, string> = {},
+    headers: Record<string, string> = {}
   ): Promise<T> {
     if (isMock) {
       throw new AuthProviderError("Clerk API not configured in mock mode.");
@@ -49,10 +47,9 @@ export function createClerkBridge(
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new AuthProviderError(
-          `Clerk API request failed (${response.status}): ${errorText}`,
-          { status: response.status },
-        );
+        throw new AuthProviderError(`Clerk API request failed (${response.status}): ${errorText}`, {
+          status: response.status,
+        });
       }
 
       return (await response.json()) as T;
@@ -61,7 +58,7 @@ export function createClerkBridge(
         throw error;
       }
       throw new AuthProviderError(
-        `Failed to execute Clerk request: ${error instanceof Error ? error.message : String(error)}`,
+        `Failed to execute Clerk request: ${error instanceof Error ? error.message : String(error)}`
       );
     }
   }
@@ -366,7 +363,10 @@ export function createClerkBridge(
       if (isMock) {
         return [];
       }
-      return request<readonly AuthOrganizationMember[]>(`/organizations/${orgId}/memberships`, "GET");
+      return request<readonly AuthOrganizationMember[]>(
+        `/organizations/${orgId}/memberships`,
+        "GET"
+      );
     },
 
     async inviteToOrganization(orgId, email, role) {
@@ -384,7 +384,10 @@ export function createClerkBridge(
         };
         return invitation;
       }
-      return request<AuthInvitation>(`/organizations/${orgId}/invitations`, "POST", { email, role });
+      return request<AuthInvitation>(`/organizations/${orgId}/invitations`, "POST", {
+        email,
+        role,
+      });
     },
 
     async acceptInvitation(token) {
@@ -406,7 +409,9 @@ export function createClerkBridge(
         return;
       }
       // Clerk organization switching is handled client-side or during session configuration updates
-      await request<void>(`/users/${userId}/active-organization`, "POST", { organizationId: orgId });
+      await request<void>(`/users/${userId}/active-organization`, "POST", {
+        organizationId: orgId,
+      });
     },
   };
 }

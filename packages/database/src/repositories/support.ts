@@ -3,13 +3,22 @@ import { SupportTicket, InsertSupportTicket } from "../types";
 import { supportTickets, announcements, feedback } from "../schema";
 import { eq, and, sql } from "drizzle-orm";
 
-export class SupportRepository extends BaseRepository<SupportTicket, InsertSupportTicket, typeof supportTickets> {
+export class SupportRepository extends BaseRepository<
+  SupportTicket,
+  InsertSupportTicket,
+  typeof supportTickets
+> {
   constructor() {
     super(supportTickets);
   }
 
   // Create a new support ticket
-  async createTicket(profileId: string, subject: string, description: string, priority: "low" | "normal" | "high" = "normal"): Promise<SupportTicket> {
+  async createTicket(
+    profileId: string,
+    subject: string,
+    description: string,
+    priority: "low" | "normal" | "high" = "normal"
+  ): Promise<SupportTicket> {
     return await this.insert({
       profileId,
       subject,

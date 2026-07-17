@@ -127,12 +127,16 @@ export function Drawer({ open, onOpenChange, title, children, side = "right" }: 
               >
                 <div>
                   <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-900 pb-3 mb-4">
-                    <DialogPrimitive.Title className="text-lg font-bold">{title}</DialogPrimitive.Title>
+                    <DialogPrimitive.Title className="text-lg font-bold">
+                      {title}
+                    </DialogPrimitive.Title>
                     <DialogPrimitive.Close className="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-400 hover:text-slate-650 cursor-pointer">
                       <X className="w-4 h-4" />
                     </DialogPrimitive.Close>
                   </div>
-                  <div className="overflow-y-auto text-sm text-slate-700 dark:text-slate-350">{children}</div>
+                  <div className="overflow-y-auto text-sm text-slate-700 dark:text-slate-350">
+                    {children}
+                  </div>
                 </div>
               </motion.div>
             </DialogPrimitive.Content>
@@ -202,10 +206,16 @@ export function ConfirmationDialog({
         <div
           className={cn(
             "p-2.5 rounded-xl shrink-0",
-            type === "danger" ? "bg-red-50 dark:bg-red-950/20 text-red-500" : "bg-indigo-50 dark:bg-indigo-950/20 text-indigo-500"
+            type === "danger"
+              ? "bg-red-50 dark:bg-red-950/20 text-red-500"
+              : "bg-indigo-50 dark:bg-indigo-950/20 text-indigo-500"
           )}
         >
-          {type === "danger" ? <AlertTriangle className="w-5 h-5" /> : <HelpCircle className="w-5 h-5" />}
+          {type === "danger" ? (
+            <AlertTriangle className="w-5 h-5" />
+          ) : (
+            <HelpCircle className="w-5 h-5" />
+          )}
         </div>
         <p className="text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">{message}</p>
       </div>
@@ -258,12 +268,14 @@ export function DeleteDialog({ open, onOpenChange, onConfirm, itemName }: Delete
         <div className="flex gap-3 items-start bg-red-50/25 dark:bg-red-950/5 border border-red-100 dark:border-red-900/30 p-4 rounded-xl text-red-650 dark:text-red-400">
           <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
           <p className="text-xs leading-normal">
-            This action is irreversible. It will immediately and permanently erase the item and delete its data.
+            This action is irreversible. It will immediately and permanently erase the item and
+            delete its data.
           </p>
         </div>
         <div className="space-y-1.5 text-left">
           <label className="text-xs font-bold text-slate-550 dark:text-slate-405">
-            Type <span className="font-mono font-black text-red-500">{itemName}</span> to confirm deletion:
+            Type <span className="font-mono font-black text-red-500">{itemName}</span> to confirm
+            deletion:
           </label>
           <input
             type="text"
@@ -278,7 +290,15 @@ export function DeleteDialog({ open, onOpenChange, onConfirm, itemName }: Delete
 }
 
 // Image Viewer (Lightbox)
-export function ImageViewer({ src, open, onOpenChange }: { src: string; open: boolean; onOpenChange: (open: boolean) => void }) {
+export function ImageViewer({
+  src,
+  open,
+  onOpenChange,
+}: {
+  src: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <AnimatePresence>
@@ -301,7 +321,11 @@ export function ImageViewer({ src, open, onOpenChange }: { src: string; open: bo
                     exit={{ opacity: 0, scale: 0.9 }}
                     className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl flex items-center justify-center focus:outline-none"
                   >
-                    <img src={src} alt="Enlarged view" className="max-w-full max-h-[80vh] object-contain rounded-xl border border-slate-800" />
+                    <img
+                      src={src}
+                      alt="Enlarged view"
+                      className="max-w-full max-h-[80vh] object-contain rounded-xl border border-slate-800"
+                    />
                   </motion.div>
                 </DialogPrimitive.Content>
               </motion.div>

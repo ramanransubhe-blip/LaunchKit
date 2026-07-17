@@ -55,9 +55,7 @@ app.get("/api/dashboard", async (_req, res) => {
       .sum("amount as total")
       .first();
 
-    const recentEvents = await db("audit_logs")
-      .orderBy("created_at", "desc")
-      .limit(10);
+    const recentEvents = await db("audit_logs").orderBy("created_at", "desc").limit(10);
 
     res.json({
       overview: {

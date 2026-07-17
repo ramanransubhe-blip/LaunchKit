@@ -48,8 +48,22 @@ export async function queryRequestLogsAction(
   try {
     const input = logsQuerySchema.parse(rawInput);
     const mockLogs = [
-      { id: "log_1", method: "POST", path: "/v1/ai/generate", status: 200, latency: 120, timestamp: new Date() },
-      { id: "log_2", method: "GET", path: "/v1/billing/invoices", status: 200, latency: 45, timestamp: new Date() },
+      {
+        id: "log_1",
+        method: "POST",
+        path: "/v1/ai/generate",
+        status: 200,
+        latency: 120,
+        timestamp: new Date(),
+      },
+      {
+        id: "log_2",
+        method: "GET",
+        path: "/v1/billing/invoices",
+        status: 200,
+        latency: 45,
+        timestamp: new Date(),
+      },
     ];
     return {
       success: true,

@@ -7,7 +7,9 @@ const program = new Command();
 
 program
   .name("devlaunchkit")
-  .description("Official DevLaunchKit command-line developer operations and scaffoldings helper CLI")
+  .description(
+    "Official DevLaunchKit command-line developer operations and scaffoldings helper CLI"
+  )
   .version("1.0.0");
 
 program

@@ -16,7 +16,10 @@ export interface BreadcrumbItem {
 
 export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500 font-semibold select-none text-left">
+    <nav
+      aria-label="Breadcrumb"
+      className="flex items-center gap-1.5 text-xs text-slate-500 font-semibold select-none text-left"
+    >
       <a href="/" className="hover:text-slate-700 dark:hover:text-slate-300 flex items-center">
         <Home className="w-3.5 h-3.5" />
       </a>
@@ -37,7 +40,15 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
 }
 
 // SearchBar with shortcut trigger placeholder
-export function SearchBar({ value, onChange, onFocus }: { value: string; onChange: (val: string) => void; onFocus?: () => void }) {
+export function SearchBar({
+  value,
+  onChange,
+  onFocus,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  onFocus?: () => void;
+}) {
   return (
     <div className="relative w-full max-w-sm">
       <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -57,7 +68,15 @@ export function SearchBar({ value, onChange, onFocus }: { value: string; onChang
 }
 
 // CommandMenu
-export function CommandMenu({ open, onOpenChange, items }: { open: boolean; onOpenChange: (open: boolean) => void; items: { label: string; action: () => void }[] }) {
+export function CommandMenu({
+  open,
+  onOpenChange,
+  items,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  items: { label: string; action: () => void }[];
+}) {
   const [filter, setFilter] = useState("");
 
   const filtered = items.filter((item) => item.label.toLowerCase().includes(filter.toLowerCase()));
@@ -133,7 +152,11 @@ export function Tabs({ items, defaultValue }: { items: TabItem[]; defaultValue: 
         ))}
       </TabsPrimitive.List>
       {items.map((tab) => (
-        <TabsPrimitive.Content key={tab.value} value={tab.value} className="py-4 focus:outline-none">
+        <TabsPrimitive.Content
+          key={tab.value}
+          value={tab.value}
+          className="py-4 focus:outline-none"
+        >
           {tab.content}
         </TabsPrimitive.Content>
       ))}
@@ -142,7 +165,15 @@ export function Tabs({ items, defaultValue }: { items: TabItem[]; defaultValue: 
 }
 
 // Pagination
-export function Pagination({ current, total, onChange }: { current: number; total: number; onChange: (page: number) => void }) {
+export function Pagination({
+  current,
+  total,
+  onChange,
+}: {
+  current: number;
+  total: number;
+  onChange: (page: number) => void;
+}) {
   return (
     <div className="flex items-center gap-1.5 justify-center select-none py-4">
       <button
@@ -178,7 +209,10 @@ export function DropdownMenu({ trigger, items }: { trigger: ReactNode; items: Dr
     <DropdownMenuPrimitive.Root>
       <DropdownMenuPrimitive.Trigger asChild>{trigger}</DropdownMenuPrimitive.Trigger>
       <DropdownMenuPrimitive.Portal>
-        <DropdownMenuPrimitive.Content align="end" className="z-50 w-48 p-1 mt-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg focus:outline-none">
+        <DropdownMenuPrimitive.Content
+          align="end"
+          className="z-50 w-48 p-1 mt-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg focus:outline-none"
+        >
           {items.map((item, idx) => (
             <DropdownMenuPrimitive.Item
               key={idx}
@@ -237,7 +271,15 @@ export function ContextMenu({ children, items }: { children: ReactNode; items: D
 }
 
 // Navbar Layout
-export function Navbar({ logo, links, actions }: { logo: ReactNode; links: ReactNode; actions?: ReactNode }) {
+export function Navbar({
+  logo,
+  links,
+  actions,
+}: {
+  logo: ReactNode;
+  links: ReactNode;
+  actions?: ReactNode;
+}) {
   return (
     <nav className="w-full border-b border-slate-100 dark:border-slate-900 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -252,14 +294,24 @@ export function Navbar({ logo, links, actions }: { logo: ReactNode; links: React
 }
 
 // Sidebar Layout
-export function Sidebar({ title, links, footer }: { title: ReactNode; links: ReactNode; footer?: ReactNode }) {
+export function Sidebar({
+  title,
+  links,
+  footer,
+}: {
+  title: ReactNode;
+  links: ReactNode;
+  footer?: ReactNode;
+}) {
   return (
     <div className="w-full h-full flex flex-col justify-between p-4 bg-slate-50 dark:bg-slate-950 border-r border-slate-100 dark:border-slate-900 text-left">
       <div className="space-y-6">
         <div className="px-2 py-1.5 font-black text-lg">{title}</div>
         <div className="space-y-1">{links}</div>
       </div>
-      {footer && <div className="border-t border-slate-100 dark:border-slate-900 pt-3">{footer}</div>}
+      {footer && (
+        <div className="border-t border-slate-100 dark:border-slate-900 pt-3">{footer}</div>
+      )}
     </div>
   );
 }
@@ -271,7 +323,10 @@ export function MobileNavigation({ logo, links }: { logo: ReactNode; links: Reac
   return (
     <div className="md:hidden w-full border-b border-slate-150 dark:border-slate-900 bg-white dark:bg-slate-950 px-4 h-14 flex items-center justify-between sticky top-0 z-40">
       <div>{logo}</div>
-      <button onClick={() => setIsOpen(!isOpen)} className="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-900 cursor-pointer">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-900 cursor-pointer"
+      >
         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
 
@@ -295,7 +350,10 @@ export function NavigationMenu({ children }: { children: ReactNode }) {
 }
 export function NavigationMenuItem({ href, label }: { href: string; label: string }) {
   return (
-    <a href={href} className="px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">
+    <a
+      href={href}
+      className="px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+    >
       {label}
     </a>
   );

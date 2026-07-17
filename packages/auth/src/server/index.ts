@@ -1,12 +1,6 @@
-import type {
-  AuthContext,
-  AuthContextStore,
-} from "../core/context.js";
+import type { AuthContext, AuthContextStore } from "../core/context.js";
 import type { AuthService } from "../core/contracts.js";
-import {
-  AuthForbiddenError,
-  AuthUnauthorizedError,
-} from "../core/errors.js";
+import { AuthForbiddenError, AuthUnauthorizedError } from "../core/errors.js";
 import type { PermissionService } from "../permissions/index.js";
 import type {
   AnyRole,
@@ -32,9 +26,7 @@ export interface AuthServerHelpers {
   /** Require a role or one of several roles. */
   requireRole(role: AnyRole | readonly AnyRole[]): AuthContext;
   /** Require a permission or one of several permissions. */
-  requirePermission(
-    permission: Permission | readonly Permission[],
-  ): AuthContext;
+  requirePermission(permission: Permission | readonly Permission[]): AuthContext;
 }
 
 /** Options used to create server helpers. */
@@ -58,7 +50,7 @@ export interface CreateAuthServerHelpersOptions {
  * ```
  */
 export function createAuthServerHelpers(
-  options: CreateAuthServerHelpersOptions,
+  options: CreateAuthServerHelpersOptions
 ): AuthServerHelpers {
   const permissions = options.permissions ?? createPermissionService();
 
@@ -78,9 +70,7 @@ export function createAuthServerHelpers(
     const context = ensureContext();
     const roles = Array.isArray(role) ? role : [role];
     const allowed = roles.some((requiredRole) =>
-      context.roles.some((currentRole) =>
-        permissions.isAtLeast(currentRole, requiredRole),
-      ),
+      context.roles.some((currentRole) => permissions.isAtLeast(currentRole, requiredRole))
     );
     if (!allowed) {
       throw new AuthForbiddenError("You do not have access to this resource.");
@@ -88,15 +78,11 @@ export function createAuthServerHelpers(
     return context;
   }
 
-  function ensurePermission(
-    permission: Permission | readonly Permission[],
-  ): AuthContext {
+  function ensurePermission(permission: Permission | readonly Permission[]): AuthContext {
     const context = ensureContext();
-    const permissionsToCheck = Array.isArray(permission)
-      ? permission
-      : [permission];
+    const permissionsToCheck = Array.isArray(permission) ? permission : [permission];
     const allowed = permissionsToCheck.every((requiredPermission) =>
-      context.permissions.includes(requiredPermission),
+      context.permissions.includes(requiredPermission)
     );
     if (!allowed) {
       throw new AuthForbiddenError("You do not have access to this resource.");
@@ -139,10 +125,11 @@ export function setGlobalAuthService(service: AuthService): void {
 /** Resolves the global active auth service instance. */
 export function getGlobalAuthService(): AuthService {
   if (!activeAuthService) {
-    throw new Error("Global AuthService has not been set. Call setGlobalAuthService() during initialization.");
+    throw new Error(
+      "Global AuthService has not been set. Call setGlobalAuthService() during initialization."
+    );
   }
   return activeAuthService;
 }
 
 export * from "./actions.js";
-

@@ -152,9 +152,7 @@ export function usePermissions(): UsePermissionsResult {
       return currentPermissions.includes(permission);
     },
     hasAnyPermission(permissionList) {
-      return permissionList.some((permission) =>
-        currentPermissions.includes(permission),
-      );
+      return permissionList.some((permission) => currentPermissions.includes(permission));
     },
     isAuthenticated: Boolean(user),
   };
@@ -179,4 +177,3 @@ export function useOrganization(): UseOrganizationResult {
     switchOrganization: client.switchOrganization,
   };
 }
-

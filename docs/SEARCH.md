@@ -22,12 +22,13 @@ const commands = [
     category: "Navigation",
     action: () => router.push("/dashboard/analytics"),
     shortcut: ["G", "A"],
-  }
+  },
 ];
 ```
 
 ## Fuzzy Search Groups
 
 Typing in the search input performs category and title filter matching, grouping results dynamically into categories.
+
 - Up and down arrows adjust the selected item index.
 - Enter runs the command's callback.

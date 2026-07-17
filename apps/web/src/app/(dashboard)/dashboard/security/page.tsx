@@ -2,7 +2,14 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { PageContainer, ContentWrapper, PageHeader, SettingsLayout, SettingsCard, DangerZone } from "@devlaunchkit/ui";
+import {
+  PageContainer,
+  ContentWrapper,
+  PageHeader,
+  SettingsLayout,
+  SettingsCard,
+  DangerZone,
+} from "@devlaunchkit/ui";
 import { User, Settings, ShieldAlert, CreditCard } from "lucide-react";
 
 export default function SecurityPage() {
@@ -19,17 +26,25 @@ export default function SecurityPage() {
   return (
     <PageContainer>
       <ContentWrapper>
-        <PageHeader title="Security Controls" description="Configure multi-factor credentials, security keys, and active user sessions." />
+        <PageHeader
+          title="Security Controls"
+          description="Configure multi-factor credentials, security keys, and active user sessions."
+        />
 
         <SettingsLayout
           sidebarItems={settingsTabs}
           activeId="security"
           onSectionSelect={(id) => router.push(`/dashboard/${id}`)}
         >
-          <SettingsCard title="Password and Credential Keys" description="Change your account sign-in password below.">
+          <SettingsCard
+            title="Password and Credential Keys"
+            description="Change your account sign-in password below."
+          >
             <form className="space-y-4 max-w-md">
               <div>
-                <label className="block text-xs font-semibold text-neutral-500 uppercase">Current Password</label>
+                <label className="block text-xs font-semibold text-neutral-500 uppercase">
+                  Current Password
+                </label>
                 <input
                   type="password"
                   className="mt-1.5 w-full rounded-lg border border-neutral-200 dark:border-neutral-800 bg-transparent px-3.5 py-2 text-xs outline-none focus:border-indigo-500"
@@ -37,7 +52,9 @@ export default function SecurityPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-neutral-500 uppercase">New Password</label>
+                <label className="block text-xs font-semibold text-neutral-500 uppercase">
+                  New Password
+                </label>
                 <input
                   type="password"
                   className="mt-1.5 w-full rounded-lg border border-neutral-200 dark:border-neutral-800 bg-transparent px-3.5 py-2 text-xs outline-none focus:border-indigo-500"

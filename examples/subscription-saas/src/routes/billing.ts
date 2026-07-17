@@ -24,9 +24,7 @@ router.get("/invoices", async (req: Request, res: Response) => {
       .limit(limit)
       .offset(offset);
 
-    const [{ count }] = await db("invoices")
-      .where({ user_id: userId })
-      .count("* as count");
+    const [{ count }] = await db("invoices").where({ user_id: userId }).count("* as count");
 
     res.json({
       invoices,
@@ -47,17 +45,14 @@ router.get("/invoices", async (req: Request, res: Response) => {
 router.get("/invoices/:id", async (req: Request, res: Response) => {
   try {
     const userId = req.user!.id;
-    const invoice = await db("invoices")
-      .where({ id: req.params.id, user_id: userId })
-      .first();
+    const invoice = await db("invoices").where({ id: req.params.id, user_id: userId }).first();
 
     if (!invoice) {
       res.status(404).json({ error: "Invoice not found" });
       return;
     }
 
-    const lineItems = await db("invoice_line_items")
-      .where({ invoice_id: invoice.id });
+    const lineItems = await db("invoice_line_items").where({ invoice_id: invoice.id });
 
     res.json({ invoice: { ...invoice, lineItems } });
   } catch (error) {
@@ -81,12 +76,10 @@ router.post("/payment-method", async (req: Request, res: Response) => {
       metadata: { paymentMethodId },
     });
 
-    await db("users")
-      .where({ id: userId })
-      .update({
-        default_payment_method: paymentMethodId,
-        updated_at: new Date(),
-      });
+    await db("users").where({ id: userId }).update({
+      default_payment_method: paymentMethodId,
+      updated_at: new Date(),
+    });
 
     logger.info("Payment method updated", { userId });
     res.json({ message: "Payment method updated successfully" });

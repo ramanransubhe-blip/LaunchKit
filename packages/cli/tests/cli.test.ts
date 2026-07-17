@@ -28,7 +28,9 @@ after(() => {
 test("CLI Create command simulation", () => {
   let logOutput = "";
   const originalLog = console.log;
-  console.log = (msg: string) => { logOutput += msg + "\n"; };
+  console.log = (msg: string) => {
+    logOutput += msg + "\n";
+  };
 
   try {
     handleCreateCommand("saas-demo", false);
@@ -42,7 +44,9 @@ test("CLI Create command simulation", () => {
 test("CLI Add command simulation", () => {
   let logOutput = "";
   const originalLog = console.log;
-  console.log = (msg: string) => { logOutput += msg + "\n"; };
+  console.log = (msg: string) => {
+    logOutput += msg + "\n";
+  };
 
   try {
     handleAddCommand("stripe", false);
@@ -56,7 +60,9 @@ test("CLI Add command simulation", () => {
 test("CLI Doctor command simulation", async () => {
   let logOutput = "";
   const originalLog = console.log;
-  console.log = (msg: string) => { logOutput += msg + "\n"; };
+  console.log = (msg: string) => {
+    logOutput += msg + "\n";
+  };
 
   try {
     await handleDoctorCommand(false);

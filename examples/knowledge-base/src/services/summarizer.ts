@@ -15,10 +15,7 @@ const MAX_INPUT_LENGTH = 100_000;
  * @param maxTokens - Maximum tokens for the summary (default: 500)
  * @returns The generated summary string
  */
-export async function summarizeDocument(
-  content: string,
-  maxTokens: number = 500
-): Promise<string> {
+export async function summarizeDocument(content: string, maxTokens: number = 500): Promise<string> {
   if (!content || content.trim().length === 0) {
     return "";
   }
@@ -51,8 +48,7 @@ export async function summarizeDocument(
       ],
     });
 
-    const summary =
-      response.choices?.[0]?.message?.content?.trim() ?? "";
+    const summary = response.choices?.[0]?.message?.content?.trim() ?? "";
 
     logger.info("Document summarized", {
       inputLength: content.length,

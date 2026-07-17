@@ -63,13 +63,9 @@ router.get("/business", async (req: Request, res: Response) => {
     startDate.setDate(startDate.getDate() - daysBack);
 
     const [totalUsers] = await db("users").count("* as count");
-    const [newUsers] = await db("users")
-      .where("created_at", ">=", startDate)
-      .count("* as count");
+    const [newUsers] = await db("users").where("created_at", ">=", startDate).count("* as count");
 
-    const [activeSubs] = await db("subscriptions")
-      .where({ status: "active" })
-      .count("* as count");
+    const [activeSubs] = await db("subscriptions").where({ status: "active" }).count("* as count");
 
     const [cancelledSubs] = await db("subscriptions")
       .where({ status: "cancelled" })
@@ -92,9 +88,10 @@ router.get("/business", async (req: Request, res: Response) => {
 
     const totalActive = Number(activeSubs?.count ?? 0);
     const totalCancelled = Number(cancelledSubs?.count ?? 0);
-    const churnRate = totalActive > 0
-      ? ((totalCancelled / (totalActive + totalCancelled)) * 100).toFixed(2)
-      : "0.00";
+    const churnRate =
+      totalActive > 0
+        ? ((totalCancelled / (totalActive + totalCancelled)) * 100).toFixed(2)
+        : "0.00";
 
     const metrics = {
       period,

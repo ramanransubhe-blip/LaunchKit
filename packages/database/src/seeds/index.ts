@@ -48,11 +48,15 @@ async function main() {
           email: "admin@devlaunchkit.com",
           name: "Super Administrator",
           avatarUrl: "https://avatar.vercel.sh/admin",
+          role: "admin",
+          status: "active",
         },
         {
           email: "user@devlaunchkit.com",
           name: "Test Developer",
           avatarUrl: "https://avatar.vercel.sh/test-user",
+          role: "user",
+          status: "active",
         },
       ])
       .onConflictDoNothing()

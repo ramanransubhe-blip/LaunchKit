@@ -36,7 +36,7 @@ RESEND_API_KEY=re_placeholder
   redis: `
 # Cache & Queues (Redis)
 REDIS_URL=redis://localhost:6379
-`
+`,
 };
 
 export function handleAddCommand(provider: string, shouldExit: boolean = true): void {
@@ -45,7 +45,9 @@ export function handleAddCommand(provider: string, shouldExit: boolean = true): 
 
   const template = PROVIDER_TEMPLATES[normalized];
   if (!template) {
-    console.log(`❌ Provider "${provider}" is not recognized. Supported providers: stripe, clerk, betterauth, gemini, openai, anthropic, resend, redis.`);
+    console.log(
+      `❌ Provider "${provider}" is not recognized. Supported providers: stripe, clerk, betterauth, gemini, openai, anthropic, resend, redis.`
+    );
     if (shouldExit) {
       process.exit(1);
     }
@@ -80,7 +82,9 @@ export function handleAddCommand(provider: string, shouldExit: boolean = true): 
   // Check if provider variables are already configured
   const checkKey = template.trim().split("\n")[1]?.split("=")[0];
   if (checkKey && content.includes(checkKey)) {
-    console.log(`⚠️  Provider "${provider}" environment variables are already configured in your .env file.`);
+    console.log(
+      `⚠️  Provider "${provider}" environment variables are already configured in your .env file.`
+    );
   } else {
     // Append template
     const updatedContent = content.trim() + "\n" + template;
@@ -88,5 +92,7 @@ export function handleAddCommand(provider: string, shouldExit: boolean = true): 
     console.log(`✔️ Injected environment variable templates for ${provider} into .env.`);
   }
 
-  console.log(`🎉 Successfully added and configured ${provider}! Remember to set your actual credentials in .env.\n`);
+  console.log(
+    `🎉 Successfully added and configured ${provider}! Remember to set your actual credentials in .env.\n`
+  );
 }

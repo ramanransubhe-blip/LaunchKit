@@ -45,7 +45,8 @@ const UpdateStatusSchema = z.object({
 // Types
 // ---------------------------------------------------------------------------
 
-type OrderStatus = "pending" | "paid" | "processing" | "shipped" | "delivered" | "cancelled" | "refunded";
+type OrderStatus =
+  "pending" | "paid" | "processing" | "shipped" | "delivered" | "cancelled" | "refunded";
 
 interface OrderItem {
   productId: string;
@@ -103,7 +104,7 @@ function generateOrderId(): string {
  */
 async function sendOrderNotification(
   order: Order,
-  event: "placed" | "paid" | "shipped" | "delivered" | "refunded",
+  event: "placed" | "paid" | "shipped" | "delivered" | "refunded"
 ): Promise<void> {
   const subjectMap: Record<string, string> = {
     placed: `Order ${order.id} — Confirmation`,
@@ -288,7 +289,7 @@ ordersRouter.post("/", async (c) => {
       clientSecret: paymentIntent.clientSecret,
       instantCheckout,
     },
-    201,
+    201
   );
 });
 
@@ -329,7 +330,7 @@ ordersRouter.put("/:id/status", async (c) => {
   if (!allowed.includes(validated.status)) {
     return c.json(
       { error: `Cannot transition from '${order.status}' to '${validated.status}'` },
-      400,
+      400
     );
   }
 

@@ -35,7 +35,10 @@ export class S3StorageService implements StorageService {
     body: Buffer | ArrayBuffer | string,
     options?: UploadOptions
   ): Promise<StorageUploadResult> {
-    const size = typeof body === "string" ? Buffer.byteLength(body) : (body as any).byteLength || (body as Buffer).length || 0;
+    const size =
+      typeof body === "string"
+        ? Buffer.byteLength(body)
+        : (body as any).byteLength || (body as Buffer).length || 0;
     if (this.isMock) {
       return {
         path,
@@ -81,7 +84,13 @@ export class S3StorageService implements StorageService {
 
   async list(bucket: string, folderPath?: string): Promise<readonly StorageObject[]> {
     return [
-      { name: "s3_file.txt", path: folderPath ? `${folderPath}/s3_file.txt` : "s3_file.txt", isFolder: false, size: 2048, updatedAt: new Date() },
+      {
+        name: "s3_file.txt",
+        path: folderPath ? `${folderPath}/s3_file.txt` : "s3_file.txt",
+        isFolder: false,
+        size: 2048,
+        updatedAt: new Date(),
+      },
     ];
   }
 

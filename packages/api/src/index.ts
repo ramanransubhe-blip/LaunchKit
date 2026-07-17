@@ -35,7 +35,11 @@ export function sendSuccess<T>(data: T, meta?: Record<string, any>): ApiResponse
   };
 }
 
-export function sendFailure(message: string, code = "INTERNAL_ERROR", details?: any): ApiResponse<null> {
+export function sendFailure(
+  message: string,
+  code = "INTERNAL_ERROR",
+  details?: any
+): ApiResponse<null> {
   return {
     success: false,
     error: {
@@ -80,7 +84,11 @@ export function sendPagination<T>(
   };
 }
 
-export function sendCursor<T>(data: T[], nextCursor: string | null, hasMore: boolean): CursorResponse<T> {
+export function sendCursor<T>(
+  data: T[],
+  nextCursor: string | null,
+  hasMore: boolean
+): CursorResponse<T> {
   return {
     success: true,
     data,

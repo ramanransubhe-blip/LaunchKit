@@ -3,7 +3,11 @@ import { Subscription, InsertSubscription } from "../types";
 import { subscriptions, prices, products, credits, usageTracking, invoices } from "../schema";
 import { eq, and, sql } from "drizzle-orm";
 
-export class SubscriptionRepository extends BaseRepository<Subscription, InsertSubscription, typeof subscriptions> {
+export class SubscriptionRepository extends BaseRepository<
+  Subscription,
+  InsertSubscription,
+  typeof subscriptions
+> {
   constructor() {
     super(subscriptions);
   }
@@ -20,10 +24,7 @@ export class SubscriptionRepository extends BaseRepository<Subscription, InsertS
       .innerJoin(prices, eq(subscriptions.priceId, prices.id))
       .innerJoin(products, eq(prices.productId, products.id))
       .where(
-        and(
-          eq(subscriptions.organizationId, organizationId),
-          eq(subscriptions.status, "active")
-        )
+        and(eq(subscriptions.organizationId, organizationId), eq(subscriptions.status, "active"))
       )
       .limit(1);
     return results[0] || null;
@@ -124,7 +125,10 @@ export class SubscriptionRepository extends BaseRepository<Subscription, InsertS
   }
 
   // Deduct credits
-  async deductCredits(organizationId: string, amount: number): Promise<{ success: boolean; balance: number }> {
+  async deductCredits(
+    organizationId: string,
+    amount: number
+  ): Promise<{ success: boolean; balance: number }> {
     const balance = await this.getCreditBalance(organizationId);
     if (balance < amount) {
       return { success: false, balance };

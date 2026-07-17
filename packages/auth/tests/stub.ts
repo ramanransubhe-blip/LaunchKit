@@ -120,7 +120,7 @@ export function createAuthServiceStub(): StubAuthService {
     async changePassword(
       userId: string,
       currentPassword: string,
-      newPassword: string,
+      newPassword: string
     ): Promise<void> {
       push("changePassword", { userId, currentPassword, newPassword });
     },
@@ -134,7 +134,7 @@ export function createAuthServiceStub(): StubAuthService {
     async getOAuthUrl(
       provider: OAuthProvider,
       redirectUrl: string,
-      state?: string,
+      state?: string
     ): Promise<string> {
       push("getOAuthUrl", { provider, redirectUrl, state });
       return `https://auth.example.com/${provider}?redirect=${encodeURIComponent(redirectUrl)}`;
@@ -142,7 +142,7 @@ export function createAuthServiceStub(): StubAuthService {
     async handleOAuthCallback(
       provider: OAuthProvider,
       code: string,
-      state?: string,
+      state?: string
     ): Promise<AuthResult> {
       push("handleOAuthCallback", { provider, code, state });
       return fixtures.result;
@@ -151,21 +151,18 @@ export function createAuthServiceStub(): StubAuthService {
       userId: string,
       provider: OAuthProvider,
       code: string,
-      state?: string,
+      state?: string
     ): Promise<AuthUser> {
       push("linkProvider", { userId, provider, code, state });
       return fixtures.user;
     },
-    async unlinkProvider(
-      userId: string,
-      provider: OAuthProvider,
-    ): Promise<AuthUser> {
+    async unlinkProvider(userId: string, provider: OAuthProvider): Promise<AuthUser> {
       push("unlinkProvider", { userId, provider });
       return fixtures.user;
     },
     async createOrganization(
       userId: string,
-      data: CreateOrganizationData,
+      data: CreateOrganizationData
     ): Promise<AuthOrganization> {
       push("createOrganization", { userId, data });
       return fixtures.organization;
@@ -176,7 +173,7 @@ export function createAuthServiceStub(): StubAuthService {
     },
     async updateOrganization(
       orgId: string,
-      data: UpdateOrganizationData,
+      data: UpdateOrganizationData
     ): Promise<AuthOrganization> {
       push("updateOrganization", { orgId, data });
       return {
@@ -187,16 +184,14 @@ export function createAuthServiceStub(): StubAuthService {
     async deleteOrganization(orgId: string): Promise<void> {
       push("deleteOrganization", { orgId });
     },
-    async getOrganizationMembers(
-      orgId: string,
-    ): Promise<readonly AuthOrganizationMember[]> {
+    async getOrganizationMembers(orgId: string): Promise<readonly AuthOrganizationMember[]> {
       push("getOrganizationMembers", { orgId });
       return [];
     },
     async inviteToOrganization(
       orgId: string,
       email: string,
-      role: OrganizationRole,
+      role: OrganizationRole
     ): Promise<AuthInvitation> {
       push("inviteToOrganization", { orgId, email, role });
       return fixtures.invitation;

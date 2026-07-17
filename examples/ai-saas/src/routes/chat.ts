@@ -123,10 +123,7 @@ chatRouter.post("/completions", async (c) => {
     c.header("X-RateLimit-Remaining", "0");
     c.header("X-RateLimit-Reset", String(rlResult.resetSeconds));
     c.header("Retry-After", String(rlResult.retryAfterSeconds));
-    return c.json(
-      sendFailure("Rate limit exceeded. Please try again later.", "RATE_LIMITED"),
-      429,
-    );
+    return c.json(sendFailure("Rate limit exceeded. Please try again later.", "RATE_LIMITED"), 429);
   }
 
   // --- Token Budget Check ---
@@ -134,9 +131,9 @@ chatRouter.post("/completions", async (c) => {
     return c.json(
       sendFailure(
         "Monthly token quota exhausted. Upgrade your plan for additional capacity.",
-        "QUOTA_EXCEEDED",
+        "QUOTA_EXCEEDED"
       ),
-      402,
+      402
     );
   }
 
@@ -148,7 +145,10 @@ chatRouter.post("/completions", async (c) => {
   }
 
   if (body.message.length > 32_000) {
-    return c.json(sendFailure("Message exceeds maximum length of 32,000 characters", "VALIDATION_ERROR"), 400);
+    return c.json(
+      sendFailure("Message exceeds maximum length of 32,000 characters", "VALIDATION_ERROR"),
+      400
+    );
   }
 
   // --- Resolve or Create Conversation ---
@@ -194,7 +194,7 @@ chatRouter.post("/completions", async (c) => {
       try {
         const readable = await ai.streamText(
           messages.map((m) => `${m.role}: ${m.content}`).join("\n"),
-          aiOptions,
+          aiOptions
         );
 
         const reader = readable.getReader();
@@ -262,7 +262,7 @@ chatRouter.post("/completions", async (c) => {
         model: result.model,
         usage: result.usage,
         cost: result.cost,
-      }),
+      })
     );
   } catch (err) {
     const message = err instanceof Error ? err.message : "Chat completion failed";
@@ -313,15 +313,17 @@ chatRouter.get("/conversations/:id", async (c) => {
     return c.json(sendFailure("Conversation not found", "NOT_FOUND"), 404);
   }
 
-  return c.json(sendSuccess({
-    id: conversation.id,
-    title: conversation.title,
-    model: conversation.model,
-    messages: conversation.messages,
-    totalTokens: conversation.totalTokens,
-    createdAt: conversation.createdAt.toISOString(),
-    updatedAt: conversation.updatedAt.toISOString(),
-  }));
+  return c.json(
+    sendSuccess({
+      id: conversation.id,
+      title: conversation.title,
+      model: conversation.model,
+      messages: conversation.messages,
+      totalTokens: conversation.totalTokens,
+      createdAt: conversation.createdAt.toISOString(),
+      updatedAt: conversation.updatedAt.toISOString(),
+    })
+  );
 });
 
 /**

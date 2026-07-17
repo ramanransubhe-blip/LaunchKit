@@ -3,13 +3,13 @@ import type { BillingWebhookEvent } from "../core/contracts.js";
 import { BillingWebhookError } from "../core/errors.js";
 
 /**
-  * Standard dispatcher for verification of provider webhook signatures.
-  *
-  * @param rawBody - Raw text request body.
-  * @param signature - Signature header.
-  * @param secret - Configured webhook secret.
-  * @returns Validated webhook event payload.
-  */
+ * Standard dispatcher for verification of provider webhook signatures.
+ *
+ * @param rawBody - Raw text request body.
+ * @param signature - Signature header.
+ * @param secret - Configured webhook secret.
+ * @returns Validated webhook event payload.
+ */
 export async function handleIncomingWebhook(
   rawBody: string,
   signature: string,

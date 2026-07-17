@@ -60,8 +60,10 @@ export class LaunchKitClient {
 
   // Billing Operations
   readonly billing = {
-    createCheckout: async (payload: unknown) => this.request<any>("/billing/checkout", "POST", payload),
-    listInvoices: async (customerId: string) => this.request<any>(`/billing/invoices?customer=${customerId}`),
+    createCheckout: async (payload: unknown) =>
+      this.request<any>("/billing/checkout", "POST", payload),
+    listInvoices: async (customerId: string) =>
+      this.request<any>(`/billing/invoices?customer=${customerId}`),
   };
 
   // AI Operations
@@ -80,7 +82,9 @@ export class LaunchKitClient {
 
   // Communication Operations
   readonly communication = {
-    sendEmail: async (payload: unknown) => this.request<any>("/communication/email", "POST", payload),
-    sendNotification: async (payload: unknown) => this.request<any>("/communication/notification", "POST", payload),
+    sendEmail: async (payload: unknown) =>
+      this.request<any>("/communication/email", "POST", payload),
+    sendNotification: async (payload: unknown) =>
+      this.request<any>("/communication/notification", "POST", payload),
   };
 }

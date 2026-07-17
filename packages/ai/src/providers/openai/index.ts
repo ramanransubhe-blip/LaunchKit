@@ -102,7 +102,11 @@ export class OpenAIService implements AIService {
     });
   }
 
-  async generateObject<T>(prompt: string, schema: any, options?: AIOptions): Promise<AIObjectResult<T>> {
+  async generateObject<T>(
+    prompt: string,
+    schema: any,
+    options?: AIOptions
+  ): Promise<AIObjectResult<T>> {
     if (this.isMock) {
       // Return a basic mock structure conforming to simple JSON outputs
       return {
@@ -179,7 +183,11 @@ export class OpenAIService implements AIService {
     return this.generateText(`Summarize this text: ${text}`, options);
   }
 
-  async classify(text: string, categories: readonly string[], options?: AIOptions): Promise<AIClassifyResult> {
+  async classify(
+    text: string,
+    categories: readonly string[],
+    options?: AIOptions
+  ): Promise<AIClassifyResult> {
     return {
       category: categories[0] || "unknown",
       confidence: 0.95,
@@ -187,11 +195,21 @@ export class OpenAIService implements AIService {
   }
 
   async rewrite(text: string, instruction: string, options?: AIOptions): Promise<AITextResult> {
-    return this.generateText(`Rewrite this text: "${text}" following this instruction: "${instruction}"`, options);
+    return this.generateText(
+      `Rewrite this text: "${text}" following this instruction: "${instruction}"`,
+      options
+    );
   }
 
-  async translate(text: string, targetLanguage: string, options?: AIOptions): Promise<AITextResult> {
-    return this.generateText(`Translate this text: "${text}" into language: ${targetLanguage}`, options);
+  async translate(
+    text: string,
+    targetLanguage: string,
+    options?: AIOptions
+  ): Promise<AITextResult> {
+    return this.generateText(
+      `Translate this text: "${text}" into language: ${targetLanguage}`,
+      options
+    );
   }
 
   async extract(text: string, schema: any, options?: AIOptions): Promise<AIObjectResult<any>> {
@@ -217,12 +235,18 @@ export class OpenAIService implements AIService {
   }
 
   async generateTitle(prompt: string, options?: AIOptions): Promise<string> {
-    const res = await this.generateText(`Generate a short, title of less than 6 words summarizing this prompt: "${prompt}"`, options);
+    const res = await this.generateText(
+      `Generate a short, title of less than 6 words summarizing this prompt: "${prompt}"`,
+      options
+    );
     return res.text.replace(/["']/g, "").trim();
   }
 
   async generateTags(prompt: string, options?: AIOptions): Promise<readonly string[]> {
-    const res = await this.generateText(`Generate a comma-separated list of tags for: "${prompt}"`, options);
+    const res = await this.generateText(
+      `Generate a comma-separated list of tags for: "${prompt}"`,
+      options
+    );
     return res.text.split(",").map((t) => t.trim().toLowerCase());
   }
 }

@@ -52,12 +52,12 @@ developer-tool/
 
 ## Environment Variables
 
-| Variable | Description | Required |
-|---|---|---|
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `REDIS_URL` | Redis connection string (for rate limiting & caching) | Yes |
-| `WEBHOOK_SIGNING_SECRET` | HMAC secret for webhook signatures | Yes |
-| `PORT` | Server port (default: `4004`) | No |
+| Variable                 | Description                                           | Required |
+| ------------------------ | ----------------------------------------------------- | -------- |
+| `DATABASE_URL`           | PostgreSQL connection string                          | Yes      |
+| `REDIS_URL`              | Redis connection string (for rate limiting & caching) | Yes      |
+| `WEBHOOK_SIGNING_SECRET` | HMAC secret for webhook signatures                    | Yes      |
+| `PORT`                   | Server port (default: `4004`)                         | No       |
 
 ## Quick Start
 
@@ -81,24 +81,24 @@ pnpm worker
 
 ## API Endpoints
 
-| Method | Path | Description | Auth |
-|---|---|---|---|
-| `POST` | `/api/keys` | Create a new API key | None |
-| `GET` | `/api/keys` | List all API keys | None |
-| `DELETE` | `/api/keys/:id` | Revoke an API key | None |
-| `GET` | `/api/usage` | Usage statistics (`?keyId=&period=24h`) | None |
-| `GET` | `/api/v1/echo` | Echo endpoint | API Key |
-| `POST` | `/api/v1/transform` | Text transform endpoint | API Key |
-| `GET` | `/health` | Health check | None |
+| Method   | Path                | Description                             | Auth    |
+| -------- | ------------------- | --------------------------------------- | ------- |
+| `POST`   | `/api/keys`         | Create a new API key                    | None    |
+| `GET`    | `/api/keys`         | List all API keys                       | None    |
+| `DELETE` | `/api/keys/:id`     | Revoke an API key                       | None    |
+| `GET`    | `/api/usage`        | Usage statistics (`?keyId=&period=24h`) | None    |
+| `GET`    | `/api/v1/echo`      | Echo endpoint                           | API Key |
+| `POST`   | `/api/v1/transform` | Text transform endpoint                 | API Key |
+| `GET`    | `/health`           | Health check                            | None    |
 
 ## Rate Limit Tiers
 
-| Tier | Requests/Hour | Use Case |
-|---|---|---|
-| `free` | 100 | Evaluation and testing |
-| `starter` | 1,000 | Side projects and prototypes |
-| `pro` | 10,000 | Production applications |
-| `enterprise` | 100,000 | High-traffic services |
+| Tier         | Requests/Hour | Use Case                     |
+| ------------ | ------------- | ---------------------------- |
+| `free`       | 100           | Evaluation and testing       |
+| `starter`    | 1,000         | Side projects and prototypes |
+| `pro`        | 10,000        | Production applications      |
+| `enterprise` | 100,000       | High-traffic services        |
 
 ## Deployment
 

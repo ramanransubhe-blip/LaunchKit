@@ -65,8 +65,8 @@ class Logger {
       // Pretty printing for local development
       const colors = {
         debug: "\x1b[36m", // Cyan
-        info: "\x1b[32m",  // Green
-        warn: "\x1b[33m",  // Yellow
+        info: "\x1b[32m", // Green
+        warn: "\x1b[33m", // Yellow
         error: "\x1b[31m", // Red
         fatal: "\x1b[35m", // Magenta
       };
@@ -74,9 +74,7 @@ class Logger {
       const color = colors[level] || reset;
       const contextStr = context.requestId ? ` [reqId:${context.requestId}]` : "";
 
-      console.log(
-        `${timestamp} ${color}${level.toUpperCase()}${reset}${contextStr}: ${message}`
-      );
+      console.log(`${timestamp} ${color}${level.toUpperCase()}${reset}${contextStr}: ${message}`);
       if (formattedMeta) {
         console.log(JSON.stringify(formattedMeta, null, 2));
       }

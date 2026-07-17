@@ -20,16 +20,14 @@ export interface BetterAuthBridgeOptions {
 /**
  * Creates a Better Auth Service Bridge.
  */
-export function createBetterAuthBridge(
-  options: BetterAuthBridgeOptions,
-): BetterAuthServiceBridge {
+export function createBetterAuthBridge(options: BetterAuthBridgeOptions): BetterAuthServiceBridge {
   const { baseUrl, secret, isMock = false } = options;
 
   async function request<T>(
     path: string,
     method: "GET" | "POST" | "PUT" | "DELETE",
     body?: unknown,
-    headers: Record<string, string> = {},
+    headers: Record<string, string> = {}
   ): Promise<T> {
     if (isMock) {
       throw new AuthProviderError("Better Auth API not configured in mock mode.");
@@ -51,7 +49,7 @@ export function createBetterAuthBridge(
         const errorText = await response.text();
         throw new AuthProviderError(
           `Better Auth API request failed (${response.status}): ${errorText}`,
-          { status: response.status },
+          { status: response.status }
         );
       }
 
@@ -61,7 +59,7 @@ export function createBetterAuthBridge(
         throw error;
       }
       throw new AuthProviderError(
-        `Failed to execute Better Auth request: ${error instanceof Error ? error.message : String(error)}`,
+        `Failed to execute Better Auth request: ${error instanceof Error ? error.message : String(error)}`
       );
     }
   }
@@ -140,7 +138,10 @@ export function createBetterAuthBridge(
         }
         return null;
       }
-      return request<AuthSession | null>(`/api/auth/get-session?token=${encodeURIComponent(token)}`, "GET");
+      return request<AuthSession | null>(
+        `/api/auth/get-session?token=${encodeURIComponent(token)}`,
+        "GET"
+      );
     },
 
     async refreshSession(token) {
@@ -173,7 +174,10 @@ export function createBetterAuthBridge(
       if (isMock) {
         return [createMockResult("test@example.com").session];
       }
-      return request<readonly AuthSession[]>(`/api/auth/sessions?userId=${encodeURIComponent(userId)}`, "GET");
+      return request<readonly AuthSession[]>(
+        `/api/auth/sessions?userId=${encodeURIComponent(userId)}`,
+        "GET"
+      );
     },
 
     async getUser(userId) {
@@ -190,7 +194,10 @@ export function createBetterAuthBridge(
       if (isMock) {
         return createMockResult(email).user;
       }
-      return request<AuthUser | null>(`/api/auth/user-by-email?email=${encodeURIComponent(email)}`, "GET");
+      return request<AuthUser | null>(
+        `/api/auth/user-by-email?email=${encodeURIComponent(email)}`,
+        "GET"
+      );
     },
 
     async updateProfile(userId, data) {
@@ -318,7 +325,10 @@ export function createBetterAuthBridge(
         };
         return organization;
       }
-      return request<AuthOrganization>("/api/auth/organization/create", "POST", { userId, ...data });
+      return request<AuthOrganization>("/api/auth/organization/create", "POST", {
+        userId,
+        ...data,
+      });
     },
 
     async getOrganization(orgId) {
@@ -337,7 +347,10 @@ export function createBetterAuthBridge(
         }
         return null;
       }
-      return request<AuthOrganization | null>(`/api/auth/organization?orgId=${encodeURIComponent(orgId)}`, "GET");
+      return request<AuthOrganization | null>(
+        `/api/auth/organization?orgId=${encodeURIComponent(orgId)}`,
+        "GET"
+      );
     },
 
     async updateOrganization(orgId, data) {
@@ -367,7 +380,10 @@ export function createBetterAuthBridge(
       if (isMock) {
         return [];
       }
-      return request<readonly AuthOrganizationMember[]>(`/api/auth/organization/members?orgId=${encodeURIComponent(orgId)}`, "GET");
+      return request<readonly AuthOrganizationMember[]>(
+        `/api/auth/organization/members?orgId=${encodeURIComponent(orgId)}`,
+        "GET"
+      );
     },
 
     async inviteToOrganization(orgId, email, role) {
@@ -385,7 +401,11 @@ export function createBetterAuthBridge(
         };
         return invitation;
       }
-      return request<AuthInvitation>("/api/auth/organization/invite", "POST", { orgId, email, role });
+      return request<AuthInvitation>("/api/auth/organization/invite", "POST", {
+        orgId,
+        email,
+        role,
+      });
     },
 
     async acceptInvitation(token) {

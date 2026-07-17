@@ -5,9 +5,11 @@ Managing the multi-package Turborepo workspace.
 ---
 
 ## Purpose
+
 This guide covers how DevLaunchKit uses Turborepo and pnpm workspaces to manage, compile, lint, and test multiple packages concurrently with fast incremental caching.
 
 ## Prerequisites
+
 - Familiarity with Turborepo task pipelines
 - Basic understanding of the pnpm lockfile structure
 
@@ -59,16 +61,19 @@ The monorepo configuration is managed by the root `turbo.json` file. It maps out
 To optimize local development, use Turborepo filter flags to target specific applications or packages:
 
 ### Build only the CLI package
+
 ```bash
 pnpm build --filter=@devlaunchkit/cli
 ```
 
 ### Start development server for Next.js app only
+
 ```bash
 pnpm dev --filter=@devlaunchkit/web
 ```
 
 ### Run tests in database package
+
 ```bash
 pnpm test --filter=@devlaunchkit/database
 ```
@@ -76,22 +81,26 @@ pnpm test --filter=@devlaunchkit/database
 ---
 
 ## Screenshots Placeholder
+
 ![Turborepo Build Cache In Action](/assets/readme_illustration.png)
-*Turborepo logging build hits and cached packages execution.*
+_Turborepo logging build hits and cached packages execution._
 
 ---
 
 ## Best Practices
+
 - **Enable Remote Caching**: For distributed teams or CI/CD pipelines, configure Vercel Remote Caching (`npx turbo login`) to share compilation caches and slash build times.
 - **Declare Outputs Correctly**: Always verify that compilation output directories (like `dist/` or `out/`) are declared in the task's `outputs` array in `turbo.json` so Turborepo can cache them.
 
 ## Common Mistakes
+
 - **Running tsc manually**: Avoid running global `tsc` at root without filter flags, as this will attempt to compile all workspace packages in a single thread, bypassing Turborepo's multi-threaded pipeline.
 - **Forgetting dependencies build**: Trying to start the web app dev server without compiling dependencies first. Next.js might complain about missing workspace files. (Running `pnpm dev` automatically handles dependencies builds).
 
 ---
 
 ## Troubleshooting
+
 - **Build Cache Not Invalidation**:
   - If a package build is behaving unexpectedly, clear Turborepo's local cache folders:
     ```bash

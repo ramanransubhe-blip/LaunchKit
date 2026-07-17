@@ -11,12 +11,18 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-indigo-600 text-white shadow-md shadow-indigo-600/10 hover:bg-indigo-500 hover:shadow-indigo-500/20 active:bg-indigo-700",
-        secondary: "bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 hover:bg-slate-200/60 dark:hover:bg-slate-800",
-        outline: "border border-slate-200 dark:border-slate-800 bg-transparent text-slate-800 dark:text-slate-255 hover:bg-slate-50 dark:hover:bg-slate-900",
-        ghost: "bg-transparent text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900",
-        danger: "bg-red-600 text-white shadow-md shadow-red-600/10 hover:bg-red-500 hover:shadow-red-500/20",
-        success: "bg-emerald-600 text-white shadow-md shadow-emerald-600/10 hover:bg-emerald-500 hover:shadow-emerald-500/20",
+        primary:
+          "bg-indigo-600 text-white shadow-md shadow-indigo-600/10 hover:bg-indigo-500 hover:shadow-indigo-500/20 active:bg-indigo-700",
+        secondary:
+          "bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 hover:bg-slate-200/60 dark:hover:bg-slate-800",
+        outline:
+          "border border-slate-200 dark:border-slate-800 bg-transparent text-slate-800 dark:text-slate-255 hover:bg-slate-50 dark:hover:bg-slate-900",
+        ghost:
+          "bg-transparent text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900",
+        danger:
+          "bg-red-600 text-white shadow-md shadow-red-600/10 hover:bg-red-500 hover:shadow-red-500/20",
+        success:
+          "bg-emerald-600 text-white shadow-md shadow-emerald-600/10 hover:bg-emerald-500 hover:shadow-emerald-500/20",
         warning: "bg-amber-500 text-slate-950 hover:bg-amber-400",
       },
       size: {
@@ -34,8 +40,7 @@ export const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   loading?: boolean;
   icon?: ReactNode;
   iconRight?: ReactNode;
@@ -61,7 +66,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 // IconButton
-export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+export interface IconButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   icon: ReactNode;
   "aria-label": string;
 }
@@ -147,7 +153,13 @@ export interface CopyButtonProps extends ButtonProps {
   value: string;
 }
 
-export function CopyButton({ value, variant = "secondary", size = "sm", className, ...props }: CopyButtonProps) {
+export function CopyButton({
+  value,
+  variant = "secondary",
+  size = "sm",
+  className,
+  ...props
+}: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -165,7 +177,10 @@ export function CopyButton({ value, variant = "secondary", size = "sm", classNam
       variant={variant}
       size={size}
       onClick={handleCopy}
-      className={cn("relative overflow-hidden w-9 h-9 p-0 flex items-center justify-center", className)}
+      className={cn(
+        "relative overflow-hidden w-9 h-9 p-0 flex items-center justify-center",
+        className
+      )}
       {...props}
     >
       {copied ? (
@@ -182,7 +197,12 @@ export interface AnimatedButtonProps extends ButtonProps {
   glow?: boolean;
 }
 
-export function AnimatedButton({ children, glow = false, className, ...props }: AnimatedButtonProps) {
+export function AnimatedButton({
+  children,
+  glow = false,
+  className,
+  ...props
+}: AnimatedButtonProps) {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}

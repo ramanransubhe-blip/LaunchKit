@@ -32,10 +32,7 @@ router.get("/", async (req: Request, res: Response) => {
       .where("status_code", ">=", 400)
       .count("* as count");
 
-    const avgLatency = await baseQuery
-      .clone()
-      .avg("duration_ms as avg")
-      .first();
+    const avgLatency = await baseQuery.clone().avg("duration_ms as avg").first();
 
     const p95Latency = await baseQuery
       .clone()

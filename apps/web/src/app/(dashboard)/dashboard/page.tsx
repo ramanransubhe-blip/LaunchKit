@@ -1,12 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  PageContainer,
-  ContentWrapper,
-  PageHeader,
-  SettingsCard,
-} from "@devlaunchkit/ui";
+import { PageContainer, ContentWrapper, PageHeader, SettingsCard } from "@devlaunchkit/ui";
 import {
   TrendingUp,
   Users,
@@ -139,8 +134,12 @@ export default function DashboardIndexPage() {
                   <ShieldCheck className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-semibold text-neutral-950 dark:text-white">Workspace Security Hardening</h3>
-                  <p className="text-[11px] text-neutral-500 mt-0.5">Two-factor credentials and key rotation checks completed.</p>
+                  <h3 className="text-xs font-semibold text-neutral-950 dark:text-white">
+                    Workspace Security Hardening
+                  </h3>
+                  <p className="text-[11px] text-neutral-500 mt-0.5">
+                    Two-factor credentials and key rotation checks completed.
+                  </p>
                 </div>
               </div>
               <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400">
@@ -154,8 +153,12 @@ export default function DashboardIndexPage() {
                   <Zap className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-semibold text-neutral-950 dark:text-white">Supabase Endpoint Status</h3>
-                  <p className="text-[11px] text-neutral-500 mt-0.5">Postgres database connection pools are responsive.</p>
+                  <h3 className="text-xs font-semibold text-neutral-950 dark:text-white">
+                    Supabase Endpoint Status
+                  </h3>
+                  <p className="text-[11px] text-neutral-500 mt-0.5">
+                    Postgres database connection pools are responsive.
+                  </p>
                 </div>
               </div>
               <span className="inline-flex items-center rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-medium text-indigo-700 dark:bg-indigo-950/30 dark:text-indigo-400">

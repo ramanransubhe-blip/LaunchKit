@@ -7,12 +7,13 @@ import { CheckCircle2, AlertOctagon, Info, AlertTriangle, Loader2, X, Hammer } f
 
 // Spinner Component
 export function LoadingSpinner({ className, size = 5 }: { className?: string; size?: number }) {
-  const sizeClasses = {
-    4: "w-4 h-4",
-    5: "w-5 h-5",
-    8: "w-8 h-8",
-    12: "w-12 h-12",
-  }[size] || "w-5 h-5";
+  const sizeClasses =
+    {
+      4: "w-4 h-4",
+      5: "w-5 h-5",
+      8: "w-8 h-8",
+      12: "w-12 h-12",
+    }[size] || "w-5 h-5";
 
   return <Loader2 className={cn("animate-spin text-indigo-500", sizeClasses, className)} />;
 }
@@ -105,7 +106,8 @@ export function NotFoundComponent() {
       </h1>
       <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">Page not found</h2>
       <p className="text-slate-500 dark:text-slate-400 max-w-md">
-        The link you followed may be broken, or the page may have been removed. Please check the URL.
+        The link you followed may be broken, or the page may have been removed. Please check the
+        URL.
       </p>
       <div className="pt-2">
         <a
@@ -130,7 +132,8 @@ export function MaintenanceComponent() {
         <div className="space-y-2">
           <h2 className="text-2xl font-extrabold tracking-tight">Under Maintenance</h2>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            We are performing updates to improve your experience. Please check back in a few minutes.
+            We are performing updates to improve your experience. Please check back in a few
+            minutes.
           </p>
         </div>
         <div className="text-xs text-slate-400 font-medium bg-slate-50 dark:bg-slate-900/50 p-2.5 rounded-xl border border-slate-100 dark:border-slate-900">
@@ -142,7 +145,15 @@ export function MaintenanceComponent() {
 }
 
 // Notification Banner
-export function Notification({ title, description, onClose }: { title: string; description: string; onClose?: () => void }) {
+export function Notification({
+  title,
+  description,
+  onClose,
+}: {
+  title: string;
+  description: string;
+  onClose?: () => void;
+}) {
   return (
     <div className="p-4 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-950 shadow-md flex justify-between gap-4 text-left max-w-md">
       <div className="space-y-1">

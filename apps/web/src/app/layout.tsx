@@ -22,9 +22,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable}`}>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <ThemeProvider defaultTheme="system">
-          <ToastProvider>
-            {children}
-          </ToastProvider>
+          <ToastProvider>{children}</ToastProvider>
         </ThemeProvider>
       </body>
     </html>

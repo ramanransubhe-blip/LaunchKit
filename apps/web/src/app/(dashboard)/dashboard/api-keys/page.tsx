@@ -7,7 +7,12 @@ import { Key, Copy, Check, Eye, EyeOff, Plus, Trash } from "lucide-react";
 export default function ApiKeysPage() {
   const [keys, setKeys] = React.useState([
     { id: "1", name: "Production Gateway Key", token: "dlk_live_51P0...d8f2", created: new Date() },
-    { id: "2", name: "Staging Test Webhook", token: "dlk_test_51P0...a871", created: new Date(Date.now() - 86400000) },
+    {
+      id: "2",
+      name: "Staging Test Webhook",
+      token: "dlk_test_51P0...a871",
+      created: new Date(Date.now() - 86400000),
+    },
   ]);
 
   const [visibleKeys, setVisibleKeys] = React.useState<Record<string, boolean>>({});
@@ -50,7 +55,9 @@ export default function ApiKeysPage() {
                   <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500">Name</th>
                   <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500">Token</th>
                   <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500">Created</th>
-                  <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500 text-right">Actions</th>
+                  <th className="px-4 py-2.5 text-xs font-semibold text-neutral-500 text-right">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
@@ -58,7 +65,9 @@ export default function ApiKeysPage() {
                   const isVisible = visibleKeys[key.id];
                   return (
                     <tr key={key.id} className="hover:bg-neutral-50/50">
-                      <td className="px-4 py-3 text-xs font-semibold text-neutral-950 dark:text-white">{key.name}</td>
+                      <td className="px-4 py-3 text-xs font-semibold text-neutral-950 dark:text-white">
+                        {key.name}
+                      </td>
                       <td className="px-4 py-3 text-xs font-mono text-neutral-500">
                         {isVisible ? key.token : "••••••••••••••••••••••••••••"}
                       </td>
@@ -70,7 +79,11 @@ export default function ApiKeysPage() {
                           onClick={() => toggleVisibility(key.id)}
                           className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800"
                         >
-                          {isVisible ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
+                          {isVisible ? (
+                            <EyeOff className="h-3.5 w-3.5" />
+                          ) : (
+                            <Eye className="h-3.5 w-3.5" />
+                          )}
                         </button>
                         <button
                           onClick={() => handleCopy(key.token)}

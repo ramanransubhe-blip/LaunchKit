@@ -16,8 +16,7 @@ export const AuthProviderType = {
 } as const;
 
 /** Supported provider families for the auth platform. */
-export type AuthProviderType =
-  (typeof AuthProviderType)[keyof typeof AuthProviderType];
+export type AuthProviderType = (typeof AuthProviderType)[keyof typeof AuthProviderType];
 
 /** OAuth providers supported by the platform. */
 export const OAuthProvider = {
@@ -26,8 +25,7 @@ export const OAuthProvider = {
 } as const;
 
 /** OAuth providers supported by the platform. */
-export type OAuthProvider =
-  (typeof OAuthProvider)[keyof typeof OAuthProvider];
+export type OAuthProvider = (typeof OAuthProvider)[keyof typeof OAuthProvider];
 
 // =============================================================================
 // Roles and Permissions
@@ -52,8 +50,7 @@ export const OrganizationRole = {
 } as const;
 
 /** Organization-scoped roles supported by the auth layer. */
-export type OrganizationRole =
-  (typeof OrganizationRole)[keyof typeof OrganizationRole];
+export type OrganizationRole = (typeof OrganizationRole)[keyof typeof OrganizationRole];
 
 /** Any role supported by the auth layer. */
 export type AnyRole = UserRole | OrganizationRole;
@@ -120,12 +117,7 @@ export interface SubscriptionInfo {
 
 /** Subscription lifecycle states. */
 export type SubscriptionStatus =
-  | "active"
-  | "canceled"
-  | "past_due"
-  | "trialing"
-  | "unpaid"
-  | "incomplete";
+  "active" | "canceled" | "past_due" | "trialing" | "unpaid" | "incomplete";
 
 /** Captured device metadata for session tracking. */
 export interface DeviceInfo {
@@ -503,8 +495,7 @@ export const AuthEventType = {
 } as const;
 
 /** Typed auth event names. */
-export type AuthEventType =
-  (typeof AuthEventType)[keyof typeof AuthEventType];
+export type AuthEventType = (typeof AuthEventType)[keyof typeof AuthEventType];
 
 /** Metadata attached to auth events. */
 export interface AuthEventMetadata {
@@ -564,8 +555,7 @@ export const AuthErrorCode = {
 } as const;
 
 /** Typed auth error catalog. */
-export type AuthErrorCode =
-  (typeof AuthErrorCode)[keyof typeof AuthErrorCode];
+export type AuthErrorCode = (typeof AuthErrorCode)[keyof typeof AuthErrorCode];
 
 // =============================================================================
 // Email Types
@@ -573,11 +563,7 @@ export type AuthErrorCode =
 
 /** Supported auth email templates. */
 export type AuthEmailTemplate =
-  | "verification"
-  | "magic-link"
-  | "password-reset"
-  | "welcome"
-  | "organization-invitation";
+  "verification" | "magic-link" | "password-reset" | "welcome" | "organization-invitation";
 
 /** Payload used by auth email transports. */
 export interface AuthEmailPayload {

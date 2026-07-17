@@ -68,15 +68,13 @@ router.post("/", async (req: Request, res: Response) => {
     });
 
     /** Update document status */
-    await db("documents")
-      .where({ id: document.id })
-      .update({
-        summary,
-        chunk_count: chunks.length,
-        storage_key: storageKey,
-        status: "indexed",
-        updated_at: new Date(),
-      });
+    await db("documents").where({ id: document.id }).update({
+      summary,
+      chunk_count: chunks.length,
+      storage_key: storageKey,
+      status: "indexed",
+      updated_at: new Date(),
+    });
 
     logger.info("Document indexed", {
       documentId: document.id,

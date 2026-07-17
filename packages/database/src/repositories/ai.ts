@@ -3,7 +3,11 @@ import { AIConversation, InsertAIConversation } from "../types";
 import { aiConversations, aiMessages, aiUsage, modelUsage, promptTemplates } from "../schema";
 import { eq, and, sql } from "drizzle-orm";
 
-export class AIRepository extends BaseRepository<AIConversation, InsertAIConversation, typeof aiConversations> {
+export class AIRepository extends BaseRepository<
+  AIConversation,
+  InsertAIConversation,
+  typeof aiConversations
+> {
   constructor() {
     super(aiConversations);
   }
@@ -23,10 +27,7 @@ export class AIRepository extends BaseRepository<AIConversation, InsertAIConvers
     content: string;
     thinking?: string;
   }): Promise<any> {
-    const results = await this.db
-      .insert(aiMessages)
-      .values(data)
-      .returning();
+    const results = await this.db.insert(aiMessages).values(data).returning();
     return results[0];
   }
 

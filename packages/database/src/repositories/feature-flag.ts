@@ -3,7 +3,11 @@ import { FeatureFlag, InsertFeatureFlag } from "../types";
 import { featureFlags, featureFlagAssignments } from "../schema";
 import { eq, and } from "drizzle-orm";
 
-export class FeatureFlagRepository extends BaseRepository<FeatureFlag, InsertFeatureFlag, typeof featureFlags> {
+export class FeatureFlagRepository extends BaseRepository<
+  FeatureFlag,
+  InsertFeatureFlag,
+  typeof featureFlags
+> {
   constructor() {
     super(featureFlags);
   }
@@ -19,7 +23,10 @@ export class FeatureFlagRepository extends BaseRepository<FeatureFlag, InsertFea
   }
 
   // Evaluate a feature flag for a user or organization
-  async evaluate(key: string, target?: { type: "user" | "organization"; id: string }): Promise<boolean> {
+  async evaluate(
+    key: string,
+    target?: { type: "user" | "organization"; id: string }
+  ): Promise<boolean> {
     const flag = await this.findByKey(key);
     if (!flag || !flag.active) return false;
 
@@ -45,7 +52,12 @@ export class FeatureFlagRepository extends BaseRepository<FeatureFlag, InsertFea
   }
 
   // Assign custom flag override value
-  async assignOverride(flagId: string, targetType: "user" | "organization", targetId: string, value: boolean): Promise<void> {
+  async assignOverride(
+    flagId: string,
+    targetType: "user" | "organization",
+    targetId: string,
+    value: boolean
+  ): Promise<void> {
     await this.db
       .insert(featureFlagAssignments)
       .values({
@@ -55,7 +67,11 @@ export class FeatureFlagRepository extends BaseRepository<FeatureFlag, InsertFea
         value,
       })
       .onConflictDoUpdate({
-        target: [featureFlagAssignments.flagId, featureFlagAssignments.targetType, featureFlagAssignments.targetId],
+        target: [
+          featureFlagAssignments.flagId,
+          featureFlagAssignments.targetType,
+          featureFlagAssignments.targetId,
+        ],
         set: { value },
       });
   }

@@ -52,12 +52,7 @@ const crmRoles: Role[] = [
   {
     name: "member",
     inherits: ["viewer"],
-    permissions: [
-      "write:contacts",
-      "write:deals",
-      "write:notes",
-      "send:emails",
-    ],
+    permissions: ["write:contacts", "write:deals", "write:notes", "send:emails"],
   },
   {
     name: "admin",
@@ -100,14 +95,18 @@ async function bootstrap(): Promise<void> {
 
   // --- Middleware ---
   app.use("*", honoLogger());
-  app.use("*", cors({
-    origin: nodeEnv === "production"
-      ? ["https://yourdomain.com"]
-      : ["http://localhost:3000", "http://localhost:5173"],
-    allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowHeaders: ["Content-Type", "Authorization", "X-Org-Id"],
-    credentials: true,
-  }));
+  app.use(
+    "*",
+    cors({
+      origin:
+        nodeEnv === "production"
+          ? ["https://yourdomain.com"]
+          : ["http://localhost:3000", "http://localhost:5173"],
+      allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "Authorization", "X-Org-Id"],
+      credentials: true,
+    })
+  );
 
   /**
    * Authentication middleware — validates the Clerk session and resolves
@@ -128,10 +127,11 @@ async function bootstrap(): Promise<void> {
           success: false,
           error: {
             code: "UNAUTHORIZED",
-            message: "Authentication required. Provide X-User-Id, X-User-Email, and X-Org-Id headers.",
+            message:
+              "Authentication required. Provide X-User-Id, X-User-Email, and X-Org-Id headers.",
           },
         },
-        401,
+        401
       );
     }
 
@@ -152,7 +152,7 @@ async function bootstrap(): Promise<void> {
       version: "1.0.0",
       uptime: process.uptime(),
       timestamp: new Date().toISOString(),
-    }),
+    })
   );
 
   // --- Start Server ---

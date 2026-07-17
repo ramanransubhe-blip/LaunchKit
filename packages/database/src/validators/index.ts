@@ -117,8 +117,12 @@ export const selectMediaSchema = createSelectSchema(schema.media);
 export const insertNotificationSchema = createInsertSchema(schema.notifications);
 export const selectNotificationSchema = createSelectSchema(schema.notifications);
 
-export const insertNotificationPreferenceSchema = createInsertSchema(schema.notificationPreferences);
-export const selectNotificationPreferenceSchema = createSelectSchema(schema.notificationPreferences);
+export const insertNotificationPreferenceSchema = createInsertSchema(
+  schema.notificationPreferences
+);
+export const selectNotificationPreferenceSchema = createSelectSchema(
+  schema.notificationPreferences
+);
 
 export const insertFeedbackSchema = createInsertSchema(schema.feedback);
 export const selectFeedbackSchema = createSelectSchema(schema.feedback);

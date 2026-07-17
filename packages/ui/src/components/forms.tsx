@@ -212,7 +212,10 @@ export function Checkbox({ checked, onCheckedChange, label, id }: CheckboxProps)
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
       {label && (
-        <label htmlFor={id} className="text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
+        <label
+          htmlFor={id}
+          className="text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer"
+        >
           {label}
         </label>
       )}
@@ -237,7 +240,9 @@ export function Switch({ checked, onCheckedChange, label }: SwitchProps) {
       >
         <SwitchPrimitive.Thumb className="block w-5 h-5 bg-white rounded-full shadow transition-transform translate-x-0.5 will-change-transform data-[state=checked]:translate-x-5" />
       </SwitchPrimitive.Root>
-      {label && <span className="text-sm font-medium text-slate-700 dark:text-slate-350">{label}</span>}
+      {label && (
+        <span className="text-sm font-medium text-slate-700 dark:text-slate-350">{label}</span>
+      )}
     </div>
   );
 }
@@ -285,7 +290,13 @@ export interface SelectProps {
   label?: string;
 }
 
-export function Select({ options, value, onValueChange, placeholder = "Select option", label }: SelectProps) {
+export function Select({
+  options,
+  value,
+  onValueChange,
+  placeholder = "Select option",
+  label,
+}: SelectProps) {
   return (
     <div className="space-y-1.5 text-left w-full">
       {label && <Label>{label}</Label>}
@@ -346,7 +357,10 @@ export function RadioGroup({ options, value, onValueChange, label }: RadioGroupP
             >
               <RadioGroupPrimitive.Indicator className="w-2.5 h-2.5 rounded-full bg-indigo-650" />
             </RadioGroupPrimitive.Item>
-            <label htmlFor={opt.value} className="text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
+            <label
+              htmlFor={opt.value}
+              className="text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer"
+            >
               {opt.label}
             </label>
           </div>
@@ -365,7 +379,13 @@ export interface MultiSelectProps {
   label?: string;
 }
 
-export function MultiSelect({ options, selected, onChange, placeholder = "Select items", label }: MultiSelectProps) {
+export function MultiSelect({
+  options,
+  selected,
+  onChange,
+  placeholder = "Select items",
+  label,
+}: MultiSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSelect = (val: string) => {
@@ -422,7 +442,8 @@ export function MultiSelect({ options, selected, onChange, placeholder = "Select
                 onClick={() => toggleSelect(opt.value)}
                 className={cn(
                   "flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm select-none cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-900",
-                  isSel && "bg-indigo-50/20 dark:bg-indigo-950/10 text-indigo-600 dark:text-indigo-400"
+                  isSel &&
+                    "bg-indigo-50/20 dark:bg-indigo-950/10 text-indigo-600 dark:text-indigo-400"
                 )}
               >
                 <span>{opt.label}</span>
@@ -449,7 +470,13 @@ export interface AutocompleteProps {
   label?: string;
 }
 
-export function Autocomplete({ options, value, onValueChange, placeholder = "Search...", label }: AutocompleteProps) {
+export function Autocomplete({
+  options,
+  value,
+  onValueChange,
+  placeholder = "Search...",
+  label,
+}: AutocompleteProps) {
   const [filter, setFilter] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -500,7 +527,15 @@ export function Autocomplete({ options, value, onValueChange, placeholder = "Sea
 }
 
 // DatePicker & TimePicker Mock Shells
-export function DatePicker({ label, value, onChange }: { label?: string; value: string; onChange: (val: string) => void }) {
+export function DatePicker({
+  label,
+  value,
+  onChange,
+}: {
+  label?: string;
+  value: string;
+  onChange: (val: string) => void;
+}) {
   return (
     <div className="space-y-1.5 text-left w-full">
       {label && <Label>{label}</Label>}
@@ -517,7 +552,15 @@ export function DatePicker({ label, value, onChange }: { label?: string; value: 
   );
 }
 
-export function TimePicker({ label, value, onChange }: { label?: string; value: string; onChange: (val: string) => void }) {
+export function TimePicker({
+  label,
+  value,
+  onChange,
+}: {
+  label?: string;
+  value: string;
+  onChange: (val: string) => void;
+}) {
   return (
     <div className="space-y-1.5 text-left w-full">
       {label && <Label>{label}</Label>}
@@ -590,7 +633,9 @@ export function FileUpload({ label, onFileSelect, accept }: FileUploadProps) {
         ) : (
           <div className="text-center space-y-1">
             <UploadCloud className="w-8 h-8 text-slate-400 mx-auto" />
-            <p className="text-sm font-bold text-slate-700 dark:text-slate-300">Click to upload files</p>
+            <p className="text-sm font-bold text-slate-700 dark:text-slate-300">
+              Click to upload files
+            </p>
             <p className="text-xs text-slate-400">PDF, ZIP, DOCX up to 10MB</p>
           </div>
         )}
@@ -600,7 +645,13 @@ export function FileUpload({ label, onFileSelect, accept }: FileUploadProps) {
 }
 
 // Image Upload
-export function ImageUpload({ label, onImageSelect }: { label?: string; onImageSelect?: (src: string) => void }) {
+export function ImageUpload({
+  label,
+  onImageSelect,
+}: {
+  label?: string;
+  onImageSelect?: (src: string) => void;
+}) {
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -645,7 +696,15 @@ export function ImageUpload({ label, onImageSelect }: { label?: string; onImageS
 }
 
 // Color Picker Component
-export function ColorPicker({ label, value, onChange }: { label?: string; value: string; onChange: (val: string) => void }) {
+export function ColorPicker({
+  label,
+  value,
+  onChange,
+}: {
+  label?: string;
+  value: string;
+  onChange: (val: string) => void;
+}) {
   return (
     <div className="space-y-1.5 text-left w-fit">
       {label && <Label>{label}</Label>}
@@ -677,7 +736,9 @@ export function MarkdownEditor({ label }: { label?: string }) {
           className="p-4 min-h-[160px] font-mono text-sm focus:outline-none border-r border-slate-200 dark:border-slate-800 bg-transparent resize-none"
         />
         <div className="p-4 min-h-[160px] bg-slate-50 dark:bg-slate-900/50 prose prose-sm dark:prose-invert">
-          <p className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Live Preview</p>
+          <p className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">
+            Live Preview
+          </p>
           <div className="text-sm leading-relaxed">{text}</div>
         </div>
       </div>
@@ -692,9 +753,24 @@ export function RichTextEditor({ label }: { label?: string }) {
       {label && <Label>{label}</Label>}
       <div className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-950">
         <div className="flex gap-2 border-b border-slate-200 dark:border-slate-800 p-2 bg-slate-50/50 dark:bg-slate-950/20">
-          <button type="button" className="px-2.5 py-1 text-xs font-bold rounded hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer">B</button>
-          <button type="button" className="px-2.5 py-1 text-xs font-italic rounded hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer">I</button>
-          <button type="button" className="px-2.5 py-1 text-xs underline rounded hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer">U</button>
+          <button
+            type="button"
+            className="px-2.5 py-1 text-xs font-bold rounded hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer"
+          >
+            B
+          </button>
+          <button
+            type="button"
+            className="px-2.5 py-1 text-xs font-italic rounded hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer"
+          >
+            I
+          </button>
+          <button
+            type="button"
+            className="px-2.5 py-1 text-xs underline rounded hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer"
+          >
+            U
+          </button>
         </div>
         <textarea
           value={text}

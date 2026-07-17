@@ -13,12 +13,7 @@ export class APIKeyRepository extends BaseRepository<APIKey, InsertAPIKey, typeo
     const results = await this.db
       .select()
       .from(apiKeys)
-      .where(
-        and(
-          eq(apiKeys.keyHash, keyHash),
-          eq(apiKeys.active, true)
-        )
-      )
+      .where(and(eq(apiKeys.keyHash, keyHash), eq(apiKeys.active, true)))
       .limit(1);
 
     const key = results[0];
@@ -45,7 +40,11 @@ export class APIKeyRepository extends BaseRepository<APIKey, InsertAPIKey, typeo
   }
 
   // Check rate limit using sliding window
-  async checkRateLimit(targetId: string, limit: number, windowSeconds = 60): Promise<{ allowed: boolean; remaining: number }> {
+  async checkRateLimit(
+    targetId: string,
+    limit: number,
+    windowSeconds = 60
+  ): Promise<{ allowed: boolean; remaining: number }> {
     const now = new Date();
     const windowStart = new Date(now.getTime() - windowSeconds * 1000);
 
@@ -65,12 +64,7 @@ export class APIKeyRepository extends BaseRepository<APIKey, InsertAPIKey, typeo
       .set({
         count: sql`${rateLimits.count} + 1`,
       })
-      .where(
-        and(
-          eq(rateLimits.targetId, targetId),
-          eq(rateLimits.windowStart, windowStart)
-        )
-      )
+      .where(and(eq(rateLimits.targetId, targetId), eq(rateLimits.windowStart, windowStart)))
       .returning();
 
     const row = results[0];

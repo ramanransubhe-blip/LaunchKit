@@ -57,12 +57,21 @@ importers:
 
   apps/web:
     dependencies:
+      '@devlaunchkit/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
+      '@devlaunchkit/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@devlaunchkit/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      drizzle-orm:
+        specifier: ^0.45.2
+        version: 0.45.2(gel@2.2.0)(postgres@3.4.9)
       framer-motion:
         specifier: ^11.15.0
         version: 11.18.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)

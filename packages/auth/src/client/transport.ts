@@ -18,22 +18,16 @@ import { isAuthError, toAuthError } from "../core/errors.js";
  * const client = createAuthClient(transport);
  * ```
  */
-export function createFetchAuthTransport(
-  apiBaseUrl = "/api/auth",
-): AuthClientTransport {
+export function createFetchAuthTransport(apiBaseUrl = "/api/auth"): AuthClientTransport {
   return {
     async request<K extends AuthClientOperation>(
       operation: K,
-      input: AuthClientRequestMap[K],
+      input: AuthClientRequestMap[K]
     ): Promise<AuthClientResponseMap[K]> {
       try {
-        const cleanBaseUrl = apiBaseUrl.endsWith("/")
-          ? apiBaseUrl.slice(0, -1)
-          : apiBaseUrl;
+        const cleanBaseUrl = apiBaseUrl.endsWith("/") ? apiBaseUrl.slice(0, -1) : apiBaseUrl;
 
-        const isReadOperation =
-          operation.startsWith("get") ||
-          operation.startsWith("list");
+        const isReadOperation = operation.startsWith("get") || operation.startsWith("list");
 
         const method = isReadOperation ? "GET" : "POST";
         let url = `${cleanBaseUrl}/${operation}`;
@@ -81,10 +75,7 @@ export function createFetchAuthTransport(
             code: "PROVIDER_ERROR",
             message: `API request failed with status ${response.status}`,
           };
-          const constructedError = toAuthError(
-            new Error(errorPayload.message),
-            errorPayload.code,
-          );
+          const constructedError = toAuthError(new Error(errorPayload.message), errorPayload.code);
           throw constructedError;
         }
 

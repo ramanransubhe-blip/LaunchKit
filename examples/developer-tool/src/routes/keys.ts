@@ -27,9 +27,7 @@ router.post("/", async (req: Request, res: Response) => {
     const key = `${prefix}_${tier.charAt(0)}${tier === "enterprise" ? "e" : ""}${secret.slice(0, 32)}`;
     const keyHash = await hashKey(key);
 
-    const expiresAt = expiresInDays
-      ? new Date(Date.now() + expiresInDays * 86400000)
-      : null;
+    const expiresAt = expiresInDays ? new Date(Date.now() + expiresInDays * 86400000) : null;
 
     const [apiKey] = await db("api_keys")
       .insert({
@@ -71,8 +69,15 @@ router.get("/", async (_req: Request, res: Response) => {
   try {
     const keys = await db("api_keys")
       .select(
-        "id", "name", "key_prefix", "tier", "rate_limit",
-        "is_active", "expires_at", "last_used_at", "request_count",
+        "id",
+        "name",
+        "key_prefix",
+        "tier",
+        "rate_limit",
+        "is_active",
+        "expires_at",
+        "last_used_at",
+        "request_count",
         "created_at"
       )
       .orderBy("created_at", "desc");

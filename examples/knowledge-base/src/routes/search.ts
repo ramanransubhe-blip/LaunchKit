@@ -51,10 +51,9 @@ router.post("/", async (req: Request, res: Response) => {
         )
       )
       .where(
-        db.raw(
-          `1 - (dc.embedding::vector <=> '${JSON.stringify(queryEmbedding)}'::vector) >= ?`,
-          [body.threshold]
-        )
+        db.raw(`1 - (dc.embedding::vector <=> '${JSON.stringify(queryEmbedding)}'::vector) >= ?`, [
+          body.threshold,
+        ])
       )
       .orderBy("similarity", "desc")
       .limit(body.limit);

@@ -1,7 +1,4 @@
-import type {
-  AuthEmailPayload,
-  AuthEmailTemplate,
-} from "../types/index.js";
+import type { AuthEmailPayload, AuthEmailTemplate } from "../types/index.js";
 
 /** Branding used when rendering auth emails. */
 export interface AuthEmailBranding {
@@ -55,9 +52,7 @@ export interface AuthEmailRenderer {
  * });
  * ```
  */
-export function createAuthEmailRenderer(
-  branding: AuthEmailBranding,
-): AuthEmailRenderer {
+export function createAuthEmailRenderer(branding: AuthEmailBranding): AuthEmailRenderer {
   return {
     render(payload) {
       return renderAuthEmail(payload, branding);
@@ -74,7 +69,7 @@ export function createAuthEmailRenderer(
  */
 export function renderAuthEmail(
   payload: AuthEmailPayload,
-  branding: AuthEmailBranding,
+  branding: AuthEmailBranding
 ): AuthEmailMessage {
   switch (payload.template) {
     case "verification":
@@ -129,10 +124,7 @@ export function renderAuthEmail(
  * @param verificationUrl - Verification URL.
  * @returns Email payload.
  */
-export function buildVerificationEmail(
-  to: string,
-  verificationUrl: string,
-): AuthEmailPayload {
+export function buildVerificationEmail(to: string, verificationUrl: string): AuthEmailPayload {
   return {
     to,
     subject: "Verify your email",
@@ -148,10 +140,7 @@ export function buildVerificationEmail(
  * @param magicLinkUrl - Magic link URL.
  * @returns Email payload.
  */
-export function buildMagicLinkEmail(
-  to: string,
-  magicLinkUrl: string,
-): AuthEmailPayload {
+export function buildMagicLinkEmail(to: string, magicLinkUrl: string): AuthEmailPayload {
   return {
     to,
     subject: "Sign in to your account",
@@ -167,10 +156,7 @@ export function buildMagicLinkEmail(
  * @param resetPasswordUrl - Reset URL.
  * @returns Email payload.
  */
-export function buildPasswordResetEmail(
-  to: string,
-  resetPasswordUrl: string,
-): AuthEmailPayload {
+export function buildPasswordResetEmail(to: string, resetPasswordUrl: string): AuthEmailPayload {
   return {
     to,
     subject: "Reset your password",
@@ -203,7 +189,7 @@ export function buildWelcomeEmail(to: string): AuthEmailPayload {
  */
 export function buildOrganizationInvitationEmail(
   to: string,
-  invitationUrl: string,
+  invitationUrl: string
 ): AuthEmailPayload {
   return {
     to,
@@ -221,7 +207,7 @@ function renderActionEmail(
     body: string;
     ctaLabel: string;
     ctaUrl: string;
-  },
+  }
 ): AuthEmailMessage {
   const subject = payload.subject;
   const html = [
@@ -274,4 +260,3 @@ function escapeHtml(value: string): string {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 }
-

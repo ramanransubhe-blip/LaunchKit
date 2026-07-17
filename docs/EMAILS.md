@@ -12,10 +12,7 @@ To send an email:
 import { getGlobalCommunicationService } from "@devlaunchkit/communication";
 
 const comm = getGlobalCommunicationService();
-await comm.sendEmail(
-  "test@user.com",
-  "Welcome aboard",
-  "welcome_email",
-  { username: "LaunchKitUser" }
-);
+await comm.sendEmail("test@user.com", "Welcome aboard", "welcome_email", {
+  username: "LaunchKitUser",
+});
 ```

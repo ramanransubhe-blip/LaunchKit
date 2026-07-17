@@ -139,9 +139,7 @@ function DashboardShellInner({ children }: { children: React.ReactNode }) {
   ]);
 
   const handleMarkRead = (id: string) => {
-    setNotificationsList((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
-    );
+    setNotificationsList((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)));
   };
 
   const handleMarkAllRead = () => {
@@ -150,13 +148,55 @@ function DashboardShellInner({ children }: { children: React.ReactNode }) {
 
   // Commands definition lists
   const globalCommands: CommandItem[] = [
-    { id: "go-dash", title: "Go to Dashboard", category: "Navigation", action: () => router.push("/dashboard"), icon: Home },
-    { id: "go-anal", title: "Go to Analytics", category: "Navigation", action: () => router.push("/dashboard/analytics"), icon: BarChart3 },
-    { id: "go-proj", title: "Go to Projects", category: "Navigation", action: () => router.push("/dashboard/projects"), icon: FolderKanban },
-    { id: "go-orgs", title: "Go to Organizations", category: "Navigation", action: () => router.push("/dashboard/organizations"), icon: Building2 },
-    { id: "go-billing", title: "Go to Billing", category: "Navigation", action: () => router.push("/dashboard/billing"), icon: CreditCard },
-    { id: "go-settings", title: "Go to Settings", category: "Navigation", action: () => router.push("/dashboard/settings"), icon: Settings },
-    { id: "action-logout", title: "Logout from session", category: "Actions", action: () => alert("Logged out!"), icon: ShieldAlert },
+    {
+      id: "go-dash",
+      title: "Go to Dashboard",
+      category: "Navigation",
+      action: () => router.push("/dashboard"),
+      icon: Home,
+    },
+    {
+      id: "go-anal",
+      title: "Go to Analytics",
+      category: "Navigation",
+      action: () => router.push("/dashboard/analytics"),
+      icon: BarChart3,
+    },
+    {
+      id: "go-proj",
+      title: "Go to Projects",
+      category: "Navigation",
+      action: () => router.push("/dashboard/projects"),
+      icon: FolderKanban,
+    },
+    {
+      id: "go-orgs",
+      title: "Go to Organizations",
+      category: "Navigation",
+      action: () => router.push("/dashboard/organizations"),
+      icon: Building2,
+    },
+    {
+      id: "go-billing",
+      title: "Go to Billing",
+      category: "Navigation",
+      action: () => router.push("/dashboard/billing"),
+      icon: CreditCard,
+    },
+    {
+      id: "go-settings",
+      title: "Go to Settings",
+      category: "Navigation",
+      action: () => router.push("/dashboard/settings"),
+      icon: Settings,
+    },
+    {
+      id: "action-logout",
+      title: "Logout from session",
+      category: "Actions",
+      action: () => alert("Logged out!"),
+      icon: ShieldAlert,
+    },
   ];
 
   return (
@@ -170,7 +210,12 @@ function DashboardShellInner({ children }: { children: React.ReactNode }) {
       />
 
       {/* Primary Layout offset */}
-      <div className={React.useMemo(() => (isCollapsed ? "md:pl-16" : "md:pl-64"), [isCollapsed]) + " flex flex-col min-h-screen transition-all duration-300"}>
+      <div
+        className={
+          React.useMemo(() => (isCollapsed ? "md:pl-16" : "md:pl-64"), [isCollapsed]) +
+          " flex flex-col min-h-screen transition-all duration-300"
+        }
+      >
         <Topbar
           onSearchClick={() => setCommandPaletteOpen(true)}
           onNotificationsClick={() => setNotificationsOpen(true)}

@@ -33,6 +33,7 @@ erDiagram
 To support secure multi-tenant isolation, we recommend executing the following RLS policies on the Supabase console or via migration files:
 
 ### 1. Enable RLS on Tenant Tables
+
 ```sql
 ALTER TABLE organizations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE organization_members ENABLE ROW LEVEL SECURITY;
@@ -41,14 +42,15 @@ ALTER TABLE api_keys ENABLE ROW LEVEL SECURITY;
 ```
 
 ### 2. Tenant Isolation Policy Template
+
 ```sql
 -- Organization Members can only select/update data belonging to their organization
 CREATE POLICY tenant_isolation_policy ON subscriptions
     FOR ALL
     USING (
         organization_id IN (
-            SELECT organization_id 
-            FROM organization_members 
+            SELECT organization_id
+            FROM organization_members
             WHERE profile_id = auth.uid()
         )
     );
@@ -59,7 +61,9 @@ CREATE POLICY tenant_isolation_policy ON subscriptions
 ## 🛠️ Triggers & Audits
 
 ### 1. `updated_at` Timestamp Trigger
+
 To automate timestamp updates, configure the following trigger function:
+
 ```sql
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
@@ -71,6 +75,7 @@ $$ language 'plpgsql';
 ```
 
 Apply to tables (e.g. `profiles`, `organizations`):
+
 ```sql
 CREATE TRIGGER update_profiles_updated_at
     BEFORE UPDATE ON profiles
@@ -91,6 +96,6 @@ const orgRepo = new OrganizationRepository();
 
 // Update tenant configuration
 const org = await orgRepo.update("org-id-uuid", {
-  name: "Acme Enterprise LLC"
+  name: "Acme Enterprise LLC",
 });
 ```

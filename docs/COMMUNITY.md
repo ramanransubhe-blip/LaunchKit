@@ -10,19 +10,19 @@ Our Discord server is the heartbeat of the DevLaunchKit community. Join us at **
 
 ### Channel Structure
 
-| Channel | Purpose | Who Should Use It |
-| :--- | :--- | :--- |
-| **#announcements** | Official project announcements, releases, and important updates | Maintainers post; everyone reads |
-| **#general** | Casual conversation, introductions, and community bonding | Everyone |
-| **#help** | Quick questions about setup, configuration, and usage | Anyone needing real-time assistance |
-| **#contributing** | Discussion about contributing, PR help, and finding good first issues | New and active contributors |
-| **#architecture** | Deep technical discussions about design patterns and system architecture | Contributors and maintainers |
-| **#showcase** | Share what you have built with DevLaunchKit | Everyone |
-| **#feedback** | Product feedback, UX suggestions, and feature brainstorming | Everyone |
-| **#jobs** | Job postings from companies using DevLaunchKit (must be relevant) | Employers and job seekers |
-| **#off-topic** | Non-project conversation, memes, and general banter | Everyone |
-| **#maintainers** | Private channel for core team coordination | Maintainers only |
-| **#triage** | Issue triage coordination and on-call handoffs | Maintainers and Committers |
+| Channel            | Purpose                                                                  | Who Should Use It                   |
+| :----------------- | :----------------------------------------------------------------------- | :---------------------------------- |
+| **#announcements** | Official project announcements, releases, and important updates          | Maintainers post; everyone reads    |
+| **#general**       | Casual conversation, introductions, and community bonding                | Everyone                            |
+| **#help**          | Quick questions about setup, configuration, and usage                    | Anyone needing real-time assistance |
+| **#contributing**  | Discussion about contributing, PR help, and finding good first issues    | New and active contributors         |
+| **#architecture**  | Deep technical discussions about design patterns and system architecture | Contributors and maintainers        |
+| **#showcase**      | Share what you have built with DevLaunchKit                              | Everyone                            |
+| **#feedback**      | Product feedback, UX suggestions, and feature brainstorming              | Everyone                            |
+| **#jobs**          | Job postings from companies using DevLaunchKit (must be relevant)        | Employers and job seekers           |
+| **#off-topic**     | Non-project conversation, memes, and general banter                      | Everyone                            |
+| **#maintainers**   | Private channel for core team coordination                               | Maintainers only                    |
+| **#triage**        | Issue triage coordination and on-call handoffs                           | Maintainers and Committers          |
 
 ### Discord Rules
 
@@ -40,11 +40,11 @@ We host regular office hours where community members can ask questions, pair pro
 
 ### Schedule
 
-| Session | Day | Time | Host | Focus |
-| :--- | :--- | :--- | :--- | :--- |
-| **Community Office Hours** | Every Tuesday | 5:00 PM UTC | Rotating maintainer | Open Q&A, contributor support |
-| **Architecture Deep Dive** | First Thursday of the month | 6:00 PM UTC | @ramanransubhe | Design reviews, RFC walkthroughs |
-| **New Contributor Onboarding** | Third Saturday of the month | 3:00 PM UTC | @anikapatel | Getting started, finding issues, setting up the dev environment |
+| Session                        | Day                         | Time        | Host                | Focus                                                           |
+| :----------------------------- | :-------------------------- | :---------- | :------------------ | :-------------------------------------------------------------- |
+| **Community Office Hours**     | Every Tuesday               | 5:00 PM UTC | Rotating maintainer | Open Q&A, contributor support                                   |
+| **Architecture Deep Dive**     | First Thursday of the month | 6:00 PM UTC | @ramanransubhe      | Design reviews, RFC walkthroughs                                |
+| **New Contributor Onboarding** | Third Saturday of the month | 3:00 PM UTC | @anikapatel         | Getting started, finding issues, setting up the dev environment |
 
 ### How to Join
 
@@ -88,33 +88,37 @@ We believe every contribution matters. Here is how we recognize community member
 
 ### Contribution Types We Celebrate
 
-| Contribution | Examples |
-| :--- | :--- |
-| **Code** | Bug fixes, features, performance improvements, refactors |
-| **Documentation** | Guides, tutorials, API docs, translations |
-| **Community** | Answering questions, mentoring, organizing meetups |
-| **Design** | UI/UX improvements, icons, branding assets |
-| **Testing** | Bug reports, test coverage, QA feedback |
-| **Content** | Blog posts, videos, conference talks about DevLaunchKit |
+| Contribution      | Examples                                                 |
+| :---------------- | :------------------------------------------------------- |
+| **Code**          | Bug fixes, features, performance improvements, refactors |
+| **Documentation** | Guides, tutorials, API docs, translations                |
+| **Community**     | Answering questions, mentoring, organizing meetups       |
+| **Design**        | UI/UX improvements, icons, branding assets               |
+| **Testing**       | Bug reports, test coverage, QA feedback                  |
+| **Content**       | Blog posts, videos, conference talks about DevLaunchKit  |
 
 ### Recognition Tiers
 
 #### 🌱 First-Time Contributor
+
 - **Criteria:** First merged PR or accepted contribution
 - **Recognition:** Welcome message from a maintainer, added to the Contributors list in the README
 - **Reward:** DevLaunchKit contributor badge for your GitHub profile
 
 #### ⭐ Regular Contributor
+
 - **Criteria:** 5 or more merged PRs or sustained community participation over 2 months
 - **Recognition:** Shoutout in the monthly community call and release notes
 - **Reward:** Invitation to the private `#contributors` Discord channel
 
 #### 🏆 Outstanding Contributor
+
 - **Criteria:** 15 or more significant contributions, or leadership in a major initiative
 - **Recognition:** Featured in the project README, spotlight blog post on the website
 - **Reward:** DevLaunchKit swag pack (t-shirt, stickers, and laptop decal)
 
 #### 💎 Core Contributor
+
 - **Criteria:** Sustained, high-impact contributions over 6+ months; nominated by a Maintainer
 - **Recognition:** Listed on the project website team page, permanent credit in the repository
 - **Reward:** Considered for the Committer role (see [Governance](./GOVERNANCE.md))
@@ -179,12 +183,14 @@ When representing DevLaunchKit on social media, please follow these guidelines:
 ### For Community Members
 
 **Do:**
+
 - Share your experiences building with DevLaunchKit
 - Use the hashtag **#DevLaunchKit** so we can find and amplify your posts
 - Tag the official account when sharing projects, tutorials, or feedback
 - Be authentic — speak from your personal experience, not as a project spokesperson
 
 **Don't:**
+
 - Imply official endorsement unless you are a Maintainer or Ambassador
 - Share confidential information from private channels (security reports, unreleased features)
 - Engage in heated arguments on behalf of the project — disengage and let the core team handle it

@@ -34,9 +34,7 @@ export async function rateLimitMiddleware(
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
 
-    const keyRecord = await db("api_keys")
-      .where({ key_hash: keyHash, is_active: true })
-      .first();
+    const keyRecord = await db("api_keys").where({ key_hash: keyHash, is_active: true }).first();
 
     if (!keyRecord) {
       res.status(403).json({ error: "Invalid or revoked API key" });

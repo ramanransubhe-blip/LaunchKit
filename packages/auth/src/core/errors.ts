@@ -23,7 +23,10 @@ export abstract class AuthError extends Error {
    * @param message - Human-readable message.
    * @param details - Structured error details.
    */
-  constructor(message: string, public readonly details?: AuthErrorDetails) {
+  constructor(
+    message: string,
+    public readonly details?: AuthErrorDetails
+  ) {
     super(message);
     this.name = new.target.name;
     Object.setPrototypeOf(this, new.target.prototype);
@@ -150,7 +153,7 @@ export function isAuthError(error: unknown): error is AuthError {
  */
 export function toAuthError(
   error: unknown,
-  fallback: AuthErrorCode = "AUTH_INTERNAL_ERROR",
+  fallback: AuthErrorCode = "AUTH_INTERNAL_ERROR"
 ): AuthError {
   if (isAuthError(error)) {
     return error;
@@ -186,9 +189,10 @@ export function serializeAuthError(error: unknown): {
   }
 
   const isDev = process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test";
-  const message = error instanceof Error && isDev
-    ? error.message
-    : "An unexpected error occurred. Please try again later.";
+  const message =
+    error instanceof Error && isDev
+      ? error.message
+      : "An unexpected error occurred. Please try again later.";
   return {
     success: false,
     error: {

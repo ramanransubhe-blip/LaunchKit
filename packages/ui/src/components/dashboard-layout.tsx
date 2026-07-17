@@ -99,9 +99,7 @@ export function DashboardProviders({ children }: { children: React.ReactNode }) 
   };
 
   const togglePin = (href: string) => {
-    setPinned((prev) =>
-      prev.includes(href) ? prev.filter((h) => h !== href) : [...prev, href]
-    );
+    setPinned((prev) => (prev.includes(href) ? prev.filter((h) => h !== href) : [...prev, href]));
   };
 
   return (
@@ -138,7 +136,16 @@ export function DashboardSidebar({
   organizationName?: string;
   onOrgSwitch?: () => void;
 }) {
-  const { isCollapsed, setIsCollapsed, favorites, toggleFavorite, pinned, togglePin, isOpen, setIsOpen } = useSidebar();
+  const {
+    isCollapsed,
+    setIsCollapsed,
+    favorites,
+    toggleFavorite,
+    pinned,
+    togglePin,
+    isOpen,
+    setIsOpen,
+  } = useSidebar();
   const [expandedItems, setExpandedItems] = React.useState<Record<string, boolean>>({});
 
   const toggleExpand = (title: string) => {
@@ -299,7 +306,9 @@ export function DashboardSidebar({
             <h4 className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider">
               Need assistance?
             </h4>
-            <p className="mt-1 text-[11px] text-neutral-500">View documentation templates or guides.</p>
+            <p className="mt-1 text-[11px] text-neutral-500">
+              View documentation templates or guides.
+            </p>
             <button
               onClick={() => onNavigate("/dashboard/docs")}
               className="mt-2.5 inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-white border border-neutral-200 dark:border-neutral-700 px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-50 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 transition-colors"
@@ -353,7 +362,10 @@ export function Topbar({
           <Menu className="h-5 w-5" />
         </button>
 
-        <nav className="hidden sm:flex items-center text-xs font-medium text-neutral-500 space-x-1" aria-label="Breadcrumb">
+        <nav
+          className="hidden sm:flex items-center text-xs font-medium text-neutral-500 space-x-1"
+          aria-label="Breadcrumb"
+        >
           {breadcrumbs.map((crumb, idx) => (
             <React.Fragment key={idx}>
               {idx > 0 && <span className="text-neutral-300 dark:text-neutral-700">/</span>}
@@ -365,7 +377,9 @@ export function Topbar({
                   {crumb.title}
                 </button>
               ) : (
-                <span className="text-neutral-900 dark:text-white font-semibold">{crumb.title}</span>
+                <span className="text-neutral-900 dark:text-white font-semibold">
+                  {crumb.title}
+                </span>
               )}
             </React.Fragment>
           ))}
@@ -487,18 +501,12 @@ export function Topbar({
 // Container wrappers
 export function PageContainer({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex-1 flex flex-col min-w-0 bg-neutral-50 dark:bg-neutral-950">
-      {children}
-    </div>
+    <div className="flex-1 flex flex-col min-w-0 bg-neutral-50 dark:bg-neutral-950">{children}</div>
   );
 }
 
 export function ContentWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <main className="flex-1 p-4 md:p-6 max-w-7xl w-full mx-auto space-y-6">
-      {children}
-    </main>
-  );
+  return <main className="flex-1 p-4 md:p-6 max-w-7xl w-full mx-auto space-y-6">{children}</main>;
 }
 
 export function PageHeader({
@@ -513,7 +521,9 @@ export function PageHeader({
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-neutral-200 dark:border-neutral-800 pb-5">
       <div>
-        <h1 className="text-xl font-bold text-neutral-950 dark:text-white tracking-tight">{title}</h1>
+        <h1 className="text-xl font-bold text-neutral-950 dark:text-white tracking-tight">
+          {title}
+        </h1>
         {description && (
           <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{description}</p>
         )}

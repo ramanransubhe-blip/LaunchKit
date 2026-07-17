@@ -129,8 +129,7 @@ dealsRouter.get("/", async (c) => {
   const priorityFilter = c.req.query("priority");
   const assignedFilter = c.req.query("assignedTo");
 
-  let orgDeals = Array.from(deals.values())
-    .filter((d) => d.orgId === orgId);
+  let orgDeals = Array.from(deals.values()).filter((d) => d.orgId === orgId);
 
   if (stageFilter) orgDeals = orgDeals.filter((d) => d.stageId === stageFilter);
   if (priorityFilter) orgDeals = orgDeals.filter((d) => d.priority === priorityFilter);
@@ -209,8 +208,14 @@ dealsRouter.post("/", async (c) => {
 
   // Index for search
   indexDeal(
-    { id: deal.id, title: deal.title, contactName: deal.contactName ?? undefined, company: deal.company ?? undefined, notes: deal.notes },
-    orgId,
+    {
+      id: deal.id,
+      title: deal.title,
+      contactName: deal.contactName ?? undefined,
+      company: deal.company ?? undefined,
+      notes: deal.notes,
+    },
+    orgId
   );
 
   return c.json(
@@ -220,7 +225,7 @@ dealsRouter.post("/", async (c) => {
       createdAt: deal.createdAt.toISOString(),
       updatedAt: deal.updatedAt.toISOString(),
     }),
-    201,
+    201
   );
 });
 
@@ -249,20 +254,22 @@ dealsRouter.get("/:id", async (c) => {
     .filter((h) => h.dealId === dealId)
     .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
 
-  return c.json(sendSuccess({
-    ...deal,
-    stageName: stage?.name ?? "Unknown",
-    stageProbability: stage?.probability ?? 0,
-    weightedValue: deal.value * ((stage?.probability ?? 0) / 100),
-    stageHistory: history.map((h) => ({
-      fromStage: stages.find((s) => s.id === h.fromStage)?.name ?? h.fromStage,
-      toStage: stages.find((s) => s.id === h.toStage)?.name ?? h.toStage,
-      userId: h.userId,
-      timestamp: h.timestamp.toISOString(),
-    })),
-    createdAt: deal.createdAt.toISOString(),
-    updatedAt: deal.updatedAt.toISOString(),
-  }));
+  return c.json(
+    sendSuccess({
+      ...deal,
+      stageName: stage?.name ?? "Unknown",
+      stageProbability: stage?.probability ?? 0,
+      weightedValue: deal.value * ((stage?.probability ?? 0) / 100),
+      stageHistory: history.map((h) => ({
+        fromStage: stages.find((s) => s.id === h.fromStage)?.name ?? h.fromStage,
+        toStage: stages.find((s) => s.id === h.toStage)?.name ?? h.toStage,
+        userId: h.userId,
+        timestamp: h.timestamp.toISOString(),
+      })),
+      createdAt: deal.createdAt.toISOString(),
+      updatedAt: deal.updatedAt.toISOString(),
+    })
+  );
 });
 
 /**
@@ -302,8 +309,14 @@ dealsRouter.put("/:id", async (c) => {
 
   // Re-index for search
   indexDeal(
-    { id: deal.id, title: deal.title, contactName: deal.contactName ?? undefined, company: deal.company ?? undefined, notes: deal.notes },
-    orgId,
+    {
+      id: deal.id,
+      title: deal.title,
+      contactName: deal.contactName ?? undefined,
+      company: deal.company ?? undefined,
+      notes: deal.notes,
+    },
+    orgId
   );
 
   return c.json(sendSuccess(deal));
@@ -362,13 +375,15 @@ dealsRouter.patch("/:id/stage", async (c) => {
 
   const previousStage = stages.find((s) => s.id === previousStageId);
 
-  return c.json(sendSuccess({
-    dealId: deal.id,
-    previousStage: { id: previousStageId, name: previousStage?.name ?? "Unknown" },
-    currentStage: { id: newStage.id, name: newStage.name },
-    weightedValue: deal.value * (newStage.probability / 100),
-    updatedAt: deal.updatedAt.toISOString(),
-  }));
+  return c.json(
+    sendSuccess({
+      dealId: deal.id,
+      previousStage: { id: previousStageId, name: previousStage?.name ?? "Unknown" },
+      currentStage: { id: newStage.id, name: newStage.name },
+      weightedValue: deal.value * (newStage.probability / 100),
+      updatedAt: deal.updatedAt.toISOString(),
+    })
+  );
 });
 
 /**

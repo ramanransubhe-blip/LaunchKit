@@ -21,8 +21,20 @@ export default function OrganizationsPage() {
   ];
 
   const initialMembers = [
-    { id: "mem_1", name: "Alex Admin", email: "alex@saas.com", role: "admin", joinedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) },
-    { id: "mem_2", name: "Blake Engineer", email: "blake@saas.com", role: "member", joinedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000) },
+    {
+      id: "mem_1",
+      name: "Alex Admin",
+      email: "alex@saas.com",
+      role: "admin",
+      joinedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
+    },
+    {
+      id: "mem_2",
+      name: "Blake Engineer",
+      email: "blake@saas.com",
+      role: "member",
+      joinedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
+    },
   ];
 
   const [members, setMembers] = React.useState(initialMembers);

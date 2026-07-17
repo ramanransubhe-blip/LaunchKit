@@ -17,7 +17,7 @@ try {
 
     fs.writeFileSync(commitMsgHook, `npx --no -- commitlint --edit "$1"\n`, "utf8");
     fs.writeFileSync(preCommitHook, `npx lint-staged\n`, "utf8");
-    
+
     try {
       fs.chmodSync(commitMsgHook, 0o755);
       fs.chmodSync(preCommitHook, 0o755);

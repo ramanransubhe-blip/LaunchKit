@@ -17,7 +17,7 @@ export type BetterAuthServiceBridge = Omit<AuthService, "provider">;
  */
 export function createBetterAuthService(
   bridgeOrOptions: BetterAuthServiceBridge | BetterAuthBridgeOptions,
-  options: AuthServiceFactoryOptions = {},
+  options: AuthServiceFactoryOptions = {}
 ): AuthService {
   const bridge =
     typeof (bridgeOrOptions as any).signIn === "function"
@@ -29,6 +29,6 @@ export function createBetterAuthService(
       provider: AuthProviderType.BetterAuth,
       ...bridge,
     },
-    options,
+    options
   );
 }

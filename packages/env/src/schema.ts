@@ -3,9 +3,12 @@ import { z } from "zod";
 // Environment specifications schema
 export const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
-  PORT: z.string().transform((val) => parseInt(val, 10)).default("3000"),
+  PORT: z
+    .string()
+    .transform((val) => parseInt(val, 10))
+    .default("3000"),
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
-  
+
   // Database Connection
   DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
 

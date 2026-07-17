@@ -2,7 +2,16 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Command, ArrowRight, CornerDownLeft, Sparkles, Settings, User, CreditCard } from "lucide-react";
+import {
+  Search,
+  Command,
+  ArrowRight,
+  CornerDownLeft,
+  Sparkles,
+  Settings,
+  User,
+  CreditCard,
+} from "lucide-react";
 import { cn } from "../utils/cn.js";
 
 export interface CommandItem {
@@ -200,13 +209,19 @@ export function CommandPalette({
               <div className="flex items-center justify-between border-t border-neutral-100 dark:border-neutral-800 px-4 py-2 bg-neutral-50 dark:bg-neutral-800/20 text-[10px] text-neutral-400">
                 <span className="flex items-center gap-1">
                   <span>Use arrows</span>
-                  <kbd className="px-0.5 rounded border border-neutral-200 dark:border-neutral-700">↓</kbd>
-                  <kbd className="px-0.5 rounded border border-neutral-200 dark:border-neutral-700">↑</kbd>
+                  <kbd className="px-0.5 rounded border border-neutral-200 dark:border-neutral-700">
+                    ↓
+                  </kbd>
+                  <kbd className="px-0.5 rounded border border-neutral-200 dark:border-neutral-700">
+                    ↑
+                  </kbd>
                   <span>to navigate</span>
                 </span>
                 <span className="flex items-center gap-0.5">
                   <span>Confirm with</span>
-                  <kbd className="px-0.5 rounded border border-neutral-200 dark:border-neutral-700 font-mono">↵</kbd>
+                  <kbd className="px-0.5 rounded border border-neutral-200 dark:border-neutral-700 font-mono">
+                    ↵
+                  </kbd>
                 </span>
               </div>
             </motion.div>

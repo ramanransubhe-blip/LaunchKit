@@ -239,7 +239,10 @@ productsRouter.post("/", async (c) => {
 
   // Index in search engine asynchronously
   searchService.indexProduct(product).catch((err) => {
-    logger.error("Failed to index product in search", { productId: product.id, error: String(err) });
+    logger.error("Failed to index product in search", {
+      productId: product.id,
+      error: String(err),
+    });
   });
 
   // Invalidate list caches
@@ -323,7 +326,10 @@ productsRouter.delete("/:id", async (c) => {
 
   // Remove from search index
   searchService.removeProduct(id).catch((err) => {
-    logger.error("Failed to remove product from search index", { productId: id, error: String(err) });
+    logger.error("Failed to remove product from search index", {
+      productId: id,
+      error: String(err),
+    });
   });
 
   await cache.invalidateByTags(["products:list"]);

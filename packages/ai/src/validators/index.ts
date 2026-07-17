@@ -1,12 +1,14 @@
 import { z } from "zod";
 
-export const optionsSchema = z.object({
-  model: z.string().optional(),
-  temperature: z.number().min(0).max(2).optional(),
-  maxTokens: z.number().int().positive().optional(),
-  systemPrompt: z.string().optional(),
-  jsonMode: z.boolean().optional(),
-}).optional();
+export const optionsSchema = z
+  .object({
+    model: z.string().optional(),
+    temperature: z.number().min(0).max(2).optional(),
+    maxTokens: z.number().int().positive().optional(),
+    systemPrompt: z.string().optional(),
+    jsonMode: z.boolean().optional(),
+  })
+  .optional();
 
 export const generateTextSchema = z.object({
   prompt: z.string().min(1, "Prompt cannot be empty"),
@@ -48,7 +50,9 @@ export const moderateSchema = z.object({
 export function validatePayload<T>(schema: z.Schema<T>, data: unknown): T {
   const result = schema.safeParse(data);
   if (!result.success) {
-    throw new Error(`AI payload validation failed: ${result.error.errors.map((e) => e.message).join(", ")}`);
+    throw new Error(
+      `AI payload validation failed: ${result.error.errors.map((e) => e.message).join(", ")}`
+    );
   }
   return result.data;
 }

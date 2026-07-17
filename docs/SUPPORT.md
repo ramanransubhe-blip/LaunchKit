@@ -6,14 +6,14 @@ Welcome to DevLaunchKit support. This guide helps you find the fastest path to a
 
 ## Support Channels
 
-| Channel | Best For | Link |
-| :--- | :--- | :--- |
-| **GitHub Issues** | Confirmed bugs and actionable feature requests | [Open an Issue](https://github.com/devlaunchkit/devlaunchkit/issues/new/choose) |
-| **GitHub Discussions** | Architecture questions, "how do I…" queries, and RFCs | [Start a Discussion](https://github.com/devlaunchkit/devlaunchkit/discussions) |
-| **Discord** | Real-time help, community chat, and pairing sessions | [Join Discord](https://discord.gg/devlaunchkit) |
-| **Stack Overflow** | Searchable Q&A (tag: `devlaunchkit`) | [Browse Questions](https://stackoverflow.com/questions/tagged/devlaunchkit) |
-| **Security Reports** | Vulnerabilities and security-sensitive disclosures | [security@devlaunchkit.dev](mailto:security@devlaunchkit.dev) |
-| **Email** | Enterprise inquiries and partnership discussions | [hello@devlaunchkit.dev](mailto:hello@devlaunchkit.dev) |
+| Channel                | Best For                                              | Link                                                                            |
+| :--------------------- | :---------------------------------------------------- | :------------------------------------------------------------------------------ |
+| **GitHub Issues**      | Confirmed bugs and actionable feature requests        | [Open an Issue](https://github.com/devlaunchkit/devlaunchkit/issues/new/choose) |
+| **GitHub Discussions** | Architecture questions, "how do I…" queries, and RFCs | [Start a Discussion](https://github.com/devlaunchkit/devlaunchkit/discussions)  |
+| **Discord**            | Real-time help, community chat, and pairing sessions  | [Join Discord](https://discord.gg/devlaunchkit)                                 |
+| **Stack Overflow**     | Searchable Q&A (tag: `devlaunchkit`)                  | [Browse Questions](https://stackoverflow.com/questions/tagged/devlaunchkit)     |
+| **Security Reports**   | Vulnerabilities and security-sensitive disclosures    | [security@devlaunchkit.dev](mailto:security@devlaunchkit.dev)                   |
+| **Email**              | Enterprise inquiries and partnership discussions      | [hello@devlaunchkit.dev](mailto:hello@devlaunchkit.dev)                         |
 
 > **Note:** GitHub Issues are for **confirmed bugs** and **well-defined feature requests** only. If you are unsure whether something is a bug, please start with GitHub Discussions or Discord first.
 
@@ -44,14 +44,14 @@ flowchart TD
 
 We are an open-source project maintained by volunteers and a small core team. While we strive to be responsive, please set expectations accordingly.
 
-| Channel | First Response | Resolution Target |
-| :--- | :--- | :--- |
-| **Security Reports** | Within 24 hours | Patch within 72 hours for critical issues |
-| **GitHub Issues (critical bugs)** | Within 48 hours | Next patch release |
-| **GitHub Issues (general)** | Within 5 business days | Triaged and labeled within 7 days |
-| **GitHub Discussions** | Within 3 business days | Community-driven; no guaranteed SLA |
-| **Discord** | Best-effort, same day | Community-driven; no guaranteed SLA |
-| **Enterprise Support** | Within 1 business day | Per SLA agreement |
+| Channel                           | First Response         | Resolution Target                         |
+| :-------------------------------- | :--------------------- | :---------------------------------------- |
+| **Security Reports**              | Within 24 hours        | Patch within 72 hours for critical issues |
+| **GitHub Issues (critical bugs)** | Within 48 hours        | Next patch release                        |
+| **GitHub Issues (general)**       | Within 5 business days | Triaged and labeled within 7 days         |
+| **GitHub Discussions**            | Within 3 business days | Community-driven; no guaranteed SLA       |
+| **Discord**                       | Best-effort, same day  | Community-driven; no guaranteed SLA       |
+| **Enterprise Support**            | Within 1 business day  | Per SLA agreement                         |
 
 > These are targets, not guarantees. During release cycles, response times may be longer. Critical security issues always take priority.
 
@@ -77,11 +77,11 @@ A well-written bug report dramatically increases the chance of a quick fix. Plea
 
 ### Example of a Good Bug Report Title
 
-| ❌ Poor | ✅ Good |
-| :--- | :--- |
-| "It doesn't work" | "pnpm dev fails with EADDRINUSE on port 3000 after hot reload" |
-| "Auth is broken" | "OAuth callback returns 403 when using Google provider with custom domain" |
-| "Help needed" | "Drizzle migration fails on PostgreSQL 16 with enum type conflict" |
+| ❌ Poor           | ✅ Good                                                                    |
+| :---------------- | :------------------------------------------------------------------------- |
+| "It doesn't work" | "pnpm dev fails with EADDRINUSE on port 3000 after hot reload"             |
+| "Auth is broken"  | "OAuth callback returns 403 when using Google provider with custom domain" |
+| "Help needed"     | "Drizzle migration fails on PostgreSQL 16 with enum type conflict"         |
 
 ---
 
@@ -136,11 +136,11 @@ When participating in any support channel, please:
 
 ## Useful Links
 
-| Resource | Description |
-| :--- | :--- |
-| [Documentation](https://devlaunchkit.dev/docs) | Full project documentation |
-| [Quick Start Guide](./QUICK_START.md) | Get up and running in minutes |
-| [Contributing Guide](../CONTRIBUTING.md) | How to contribute code, docs, and more |
-| [Changelog](../CHANGELOG.md) | Release notes and version history |
-| [Roadmap](https://github.com/devlaunchkit/devlaunchkit/projects) | Planned features and milestones |
-| [Security Policy](../SECURITY.md) | Responsible disclosure process |
+| Resource                                                         | Description                            |
+| :--------------------------------------------------------------- | :------------------------------------- |
+| [Documentation](https://devlaunchkit.dev/docs)                   | Full project documentation             |
+| [Quick Start Guide](./QUICK_START.md)                            | Get up and running in minutes          |
+| [Contributing Guide](../CONTRIBUTING.md)                         | How to contribute code, docs, and more |
+| [Changelog](../CHANGELOG.md)                                     | Release notes and version history      |
+| [Roadmap](https://github.com/devlaunchkit/devlaunchkit/projects) | Planned features and milestones        |
+| [Security Policy](../SECURITY.md)                                | Responsible disclosure process         |

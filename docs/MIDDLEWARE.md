@@ -7,6 +7,7 @@
 All middlewares are declared inside `@devlaunchkit/middleware`.
 
 ### 1. Request Logging & Timing Middleware
+
 Decorates the request execution cycle, tracking correlation IDs and printing response statuses and performance durations:
 
 ```typescript
@@ -18,6 +19,7 @@ const response = await withLogging(req, async () => {
 ```
 
 ### 2. API Rate Limiting Gate
+
 Performs sliding window rate limit checks on client keys (e.g. client IP or auth user ID), throwing a `RateLimitError` (yielding HTTP 429) if breached:
 
 ```typescript
@@ -31,6 +33,7 @@ try {
 ```
 
 ### 3. Feature Flag Gate
+
 Validates client access against feature flag specifications, throwing an `AuthorizationError` (yielding HTTP 403) if disabled:
 
 ```typescript
@@ -40,6 +43,7 @@ await withFeatureGate("beta-chat-enabled", { userId: "usr_123" });
 ```
 
 ### 4. RBAC Permission Gate
+
 Validates client role permissions, throwing an `AuthorizationError` (yielding HTTP 403) if unauthorized:
 
 ```typescript
@@ -49,6 +53,7 @@ checkPermission(user.role, "manage:users");
 ```
 
 ### 5. Maintenance Mode Gate
+
 Blocks incoming requests and displays an HTTP 503 response if the `maintenance-mode` feature toggle is active:
 
 ```typescript

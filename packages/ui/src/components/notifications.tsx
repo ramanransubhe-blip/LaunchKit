@@ -82,7 +82,9 @@ export function NotificationCenter({
             <div className="flex h-16 items-center justify-between px-4 border-b border-neutral-100 dark:border-neutral-800">
               <div className="flex items-center gap-2">
                 <Bell className="h-4 w-4 text-neutral-500" />
-                <h2 className="text-sm font-semibold text-neutral-950 dark:text-white">Notifications</h2>
+                <h2 className="text-sm font-semibold text-neutral-950 dark:text-white">
+                  Notifications
+                </h2>
                 {unreadCount > 0 && (
                   <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100 text-[10px] font-bold text-red-600 dark:bg-red-950 dark:text-red-400">
                     {unreadCount}
@@ -99,20 +101,22 @@ export function NotificationCenter({
 
             {/* Category tabs */}
             <div className="flex gap-1 p-2 border-b border-neutral-100 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-800/10">
-              {(["all", "security", "billing", "system", "team"] as NotificationCategory[]).map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setFilter(cat)}
-                  className={cn(
-                    "rounded-md px-2 py-1 text-[10px] font-semibold uppercase tracking-wider transition-colors",
-                    filter === cat
-                      ? "bg-white text-indigo-600 shadow-sm border border-neutral-200/50 dark:bg-neutral-800 dark:text-indigo-400 dark:border-neutral-700/50"
-                      : "text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
-                  )}
-                >
-                  {cat}
-                </button>
-              ))}
+              {(["all", "security", "billing", "system", "team"] as NotificationCategory[]).map(
+                (cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setFilter(cat)}
+                    className={cn(
+                      "rounded-md px-2 py-1 text-[10px] font-semibold uppercase tracking-wider transition-colors",
+                      filter === cat
+                        ? "bg-white text-indigo-600 shadow-sm border border-neutral-200/50 dark:bg-neutral-800 dark:text-indigo-400 dark:border-neutral-700/50"
+                        : "text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                    )}
+                  >
+                    {cat}
+                  </button>
+                )
+              )}
             </div>
 
             {/* Notifications Feed */}
@@ -138,7 +142,14 @@ export function NotificationCenter({
                     </div>
                     <div className="flex-1 min-w-0 space-y-0.5">
                       <div className="flex items-center justify-between gap-1.5">
-                        <p className={cn("text-xs truncate", notif.read ? "text-neutral-700 dark:text-neutral-300" : "font-semibold text-neutral-950 dark:text-white")}>
+                        <p
+                          className={cn(
+                            "text-xs truncate",
+                            notif.read
+                              ? "text-neutral-700 dark:text-neutral-300"
+                              : "font-semibold text-neutral-950 dark:text-white"
+                          )}
+                        >
                           {notif.title}
                         </p>
                         {!notif.read && (
@@ -149,7 +160,10 @@ export function NotificationCenter({
                         {notif.message}
                       </p>
                       <span className="text-[9px] text-neutral-400 block mt-1">
-                        {new Date(notif.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                        {new Date(notif.createdAt).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                       </span>
                     </div>
 

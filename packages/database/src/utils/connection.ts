@@ -1,7 +1,8 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
-const connectionString = process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/launchkit";
+const connectionString =
+  process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/launchkit";
 
 // Postgres client with pool and retry configurations
 export const client = postgres(connectionString, {
@@ -15,7 +16,11 @@ export const client = postgres(connectionString, {
 export const db = drizzle(client);
 
 // Connection retry runner helper
-export async function withDbRetry<T>(fn: () => Promise<T>, retries = 3, delayMs = 1000): Promise<T> {
+export async function withDbRetry<T>(
+  fn: () => Promise<T>,
+  retries = 3,
+  delayMs = 1000
+): Promise<T> {
   let attempt = 0;
   while (attempt < retries) {
     try {
@@ -23,7 +28,10 @@ export async function withDbRetry<T>(fn: () => Promise<T>, retries = 3, delayMs 
     } catch (error) {
       attempt++;
       if (attempt >= retries) throw error;
-      console.warn(`⚠️ Database connection warning, retrying attempt ${attempt}/${retries} in ${delayMs}ms...`, error);
+      console.warn(
+        `⚠️ Database connection warning, retrying attempt ${attempt}/${retries} in ${delayMs}ms...`,
+        error
+      );
       await new Promise((resolve) => setTimeout(resolve, delayMs));
     }
   }
@@ -31,7 +39,11 @@ export async function withDbRetry<T>(fn: () => Promise<T>, retries = 3, delayMs 
 }
 
 // Health check function
-export async function checkDatabaseHealth(): Promise<{ status: "healthy" | "unhealthy"; latencyMs?: number; error?: string }> {
+export async function checkDatabaseHealth(): Promise<{
+  status: "healthy" | "unhealthy";
+  latencyMs?: number;
+  error?: string;
+}> {
   const start = Date.now();
   try {
     // Run simple quick validation query
@@ -51,7 +63,9 @@ export async function checkDatabaseHealth(): Promise<{ status: "healthy" | "unhe
 // Custom Transaction Wrapper with retry
 export async function runInTransaction<T>(
   callback: (tx: any) => Promise<T>,
-  options?: { isolationLevel?: "read uncommitted" | "read committed" | "repeatable read" | "serializable" }
+  options?: {
+    isolationLevel?: "read uncommitted" | "read committed" | "repeatable read" | "serializable";
+  }
 ): Promise<T> {
   return withDbRetry(async () => {
     return await db.transaction(callback, options);

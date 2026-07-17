@@ -36,7 +36,7 @@ export function createAuthRouteHandler(authService: AuthService) {
                 message: "Missing operation parameter.",
               },
             }),
-            { status: 400, headers: { "Content-Type": "application/json" } },
+            { status: 400, headers: { "Content-Type": "application/json" } }
           );
         }
 
@@ -51,7 +51,7 @@ export function createAuthRouteHandler(authService: AuthService) {
                 message: `Operation '${operation}' not supported.`,
               },
             }),
-            { status: 404, headers: { "Content-Type": "application/json" } },
+            { status: 404, headers: { "Content-Type": "application/json" } }
           );
         }
 
@@ -131,19 +131,16 @@ export function createAuthRouteHandler(authService: AuthService) {
             success: true,
             data: result ?? null,
           }),
-          { status: 200, headers: { "Content-Type": "application/json" } },
+          { status: 200, headers: { "Content-Type": "application/json" } }
         );
       } catch (error) {
         const serialized = serializeAuthError(error);
         const status = isAuthError(error) ? error.statusCode : 500;
 
-        return new Response(
-          JSON.stringify(serialized),
-          {
-            status,
-            headers: { "Content-Type": "application/json" },
-          },
-        );
+        return new Response(JSON.stringify(serialized), {
+          status,
+          headers: { "Content-Type": "application/json" },
+        });
       }
     },
   };

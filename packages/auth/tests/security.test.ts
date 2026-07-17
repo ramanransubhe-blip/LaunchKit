@@ -60,10 +60,9 @@ test("suspicious login detection compares request signals", () => {
       ipAddress: "192.0.2.10",
       userAgent: "TestAgent/2.0",
       deviceFingerprint: "fp-2",
-    },
+    }
   );
 
   assert.equal(result.isSuspicious, true);
   assert.equal(result.reasons.length >= 1, true);
 });
-

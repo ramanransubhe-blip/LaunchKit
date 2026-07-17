@@ -48,14 +48,14 @@ Significant changes to DevLaunchKit require a Request for Comments (RFC) to ensu
 
 ### RFC Lifecycle
 
-| Stage | Description | Duration |
-| :--- | :--- | :--- |
-| **Draft** | Author opens a GitHub Discussion in the "Ideas" category with the `rfc` label | No limit |
-| **Review** | Core team and community provide feedback; author iterates on the proposal | Minimum 7 days |
-| **Final Comment Period (FCP)** | A core team member motions to accept, reject, or postpone; 5-day countdown begins | 5 days |
-| **Accepted** | The RFC is merged into `docs/rfcs/` and implementation begins | — |
-| **Rejected** | The RFC is closed with a rationale; may be revisited in the future | — |
-| **Postponed** | The RFC is valid but not a current priority; revisited quarterly | — |
+| Stage                          | Description                                                                       | Duration       |
+| :----------------------------- | :-------------------------------------------------------------------------------- | :------------- |
+| **Draft**                      | Author opens a GitHub Discussion in the "Ideas" category with the `rfc` label     | No limit       |
+| **Review**                     | Core team and community provide feedback; author iterates on the proposal         | Minimum 7 days |
+| **Final Comment Period (FCP)** | A core team member motions to accept, reject, or postpone; 5-day countdown begins | 5 days         |
+| **Accepted**                   | The RFC is merged into `docs/rfcs/` and implementation begins                     | —              |
+| **Rejected**                   | The RFC is closed with a rationale; may be revisited in the future                | —              |
+| **Postponed**                  | The RFC is valid but not a current priority; revisited quarterly                  | —              |
 
 ### RFC Template
 
@@ -63,22 +63,28 @@ Significant changes to DevLaunchKit require a Request for Comments (RFC) to ensu
 # RFC: [Title]
 
 ## Summary
+
 One-paragraph explanation of the proposal.
 
 ## Motivation
+
 Why are we doing this? What problem does it solve? What use cases does it support?
 
 ## Detailed Design
+
 Technical description of the proposed changes. Include code examples, API
 signatures, database schema changes, and architectural diagrams where applicable.
 
 ## Alternatives Considered
+
 What other approaches were evaluated? Why were they rejected?
 
 ## Migration Strategy
+
 How will existing users transition? Is backward compatibility maintained?
 
 ## Unresolved Questions
+
 What aspects of the design are still under discussion?
 ```
 
@@ -94,14 +100,14 @@ Only **Maintainers** and **Committers** (see Roles below) may cast binding votes
 
 ### Voting Rules
 
-| Rule | Details |
-| :--- | :--- |
-| **Quorum** | A minimum of 3 core team members must participate for a vote to be valid |
-| **Passing threshold** | Simple majority (>50%) for standard decisions |
-| **Supermajority** | Two-thirds majority (≥67%) for governance changes, license changes, and removal of a core team member |
-| **Voting period** | 5 business days from the call for votes |
-| **Abstentions** | Do not count toward the total; only "for" and "against" votes are tallied |
-| **Tie-breaking** | The Project Lead casts the deciding vote |
+| Rule                  | Details                                                                                               |
+| :-------------------- | :---------------------------------------------------------------------------------------------------- |
+| **Quorum**            | A minimum of 3 core team members must participate for a vote to be valid                              |
+| **Passing threshold** | Simple majority (>50%) for standard decisions                                                         |
+| **Supermajority**     | Two-thirds majority (≥67%) for governance changes, license changes, and removal of a core team member |
+| **Voting period**     | 5 business days from the call for votes                                                               |
+| **Abstentions**       | Do not count toward the total; only "for" and "against" votes are tallied                             |
+| **Tie-breaking**      | The Project Lead casts the deciding vote                                                              |
 
 ### Voting Process
 
@@ -121,6 +127,7 @@ DevLaunchKit recognizes four community roles with increasing levels of responsib
 **Who:** Anyone who has contributed to the project in any form — code, documentation, bug reports, community support, translations, or design.
 
 **Permissions:**
+
 - Open issues and pull requests
 - Participate in GitHub Discussions and Discord
 - Attend community office hours and meetups
@@ -132,12 +139,14 @@ DevLaunchKit recognizes four community roles with increasing levels of responsib
 **Who:** Trusted contributors who have demonstrated consistent, high-quality contributions and a deep understanding of at least one area of the codebase.
 
 **Permissions:**
+
 - Everything a Contributor can do
 - Merge pull requests within their designated area (with one approval)
 - Triage and label issues
 - Participate in RFC discussions with advisory input
 
 **Expectations:**
+
 - Review at least 2 PRs per month in their area
 - Respond to tagged issues within 5 business days
 - Follow the commit and code style guidelines
@@ -147,6 +156,7 @@ DevLaunchKit recognizes four community roles with increasing levels of responsib
 **Who:** Core team members responsible for the overall health, direction, and quality of the project.
 
 **Permissions:**
+
 - Everything a Committer can do
 - Cast binding votes on project decisions
 - Approve and merge PRs across all areas
@@ -155,6 +165,7 @@ DevLaunchKit recognizes four community roles with increasing levels of responsib
 - Moderate community channels
 
 **Expectations:**
+
 - Participate in on-call rotation
 - Attend monthly core team sync meetings
 - Actively contribute to roadmap planning and prioritization
@@ -165,6 +176,7 @@ DevLaunchKit recognizes four community roles with increasing levels of responsib
 **Who:** The founder and overall steward of DevLaunchKit.
 
 **Permissions:**
+
 - Everything a Maintainer can do
 - Final decision authority when consensus cannot be reached
 - Approve governance and licensing changes

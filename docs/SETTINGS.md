@@ -24,7 +24,7 @@ export function CustomSettings() {
       <SettingsCard title="User Avatar" description="Upload a workspace profile photo.">
         {/* Form elements */}
       </SettingsCard>
-      
+
       <DangerZone
         title="Delete workspace"
         onAction={() => handleDelete()}

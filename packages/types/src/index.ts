@@ -2,5 +2,5 @@
 
 export const info = {
   name: "types",
-  description: "Centralized TypeScript types & data contracts"
+  description: "Centralized TypeScript types & data contracts",
 };

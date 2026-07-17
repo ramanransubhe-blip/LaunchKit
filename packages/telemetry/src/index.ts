@@ -30,7 +30,7 @@ export function getSystemMetrics(): SystemMetrics {
     memory: {
       free: freeMem,
       total: totalMem,
-      usagePercent: Number(((totalMem - freeMem) / totalMem * 100).toFixed(2)),
+      usagePercent: Number((((totalMem - freeMem) / totalMem) * 100).toFixed(2)),
       process: {
         rss: processMemory.rss,
         heapTotal: processMemory.heapTotal,

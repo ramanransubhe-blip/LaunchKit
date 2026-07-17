@@ -6,20 +6,16 @@ import {
   setGlobalStorageService,
   getGlobalStorageService,
 } from "../src/index.js";
-import {
-  StorageProviderError,
-  isStorageError,
-} from "../src/core/errors.js";
-import {
-  uploadFileAction,
-  createFolderAction,
-} from "../src/server/actions.js";
+import { StorageProviderError, isStorageError } from "../src/core/errors.js";
+import { uploadFileAction, createFolderAction } from "../src/server/actions.js";
 
 test("Supabase Storage adapter mock flow", async () => {
   const service = createSupabaseStorageService({ isMock: true });
   assert.equal(service.providerName, "supabase-storage");
 
-  const up = await service.upload("avatars", "user1/profile.jpg", "image-bytes-data", { contentType: "image/jpeg" });
+  const up = await service.upload("avatars", "user1/profile.jpg", "image-bytes-data", {
+    contentType: "image/jpeg",
+  });
   assert.equal(up.path, "user1/profile.jpg");
   assert.ok(up.url.includes("mock.supabase.co"));
 
@@ -45,10 +41,7 @@ test("S3 Storage adapter mock flow", async () => {
 });
 
 test("Global registrar check", async () => {
-  assert.throws(
-    () => getGlobalStorageService(),
-    /No global StorageService registered/
-  );
+  assert.throws(() => getGlobalStorageService(), /No global StorageService registered/);
 });
 
 test("Storage server actions simulation", async () => {

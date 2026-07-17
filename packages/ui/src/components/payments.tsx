@@ -31,12 +31,16 @@ export function PricingCard({ plan, onSelect }: { plan: PricingPlan; onSelect?: 
       )}
       <div className="space-y-6">
         <div className="space-y-2">
-          <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">{plan.name}</h4>
+          <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">
+            {plan.name}
+          </h4>
           <p className="text-xs text-slate-500 dark:text-slate-400">{plan.description}</p>
         </div>
         <div className="flex items-baseline gap-1.5">
           <span className="text-4xl font-black tracking-tight">{plan.price}</span>
-          {plan.period && <span className="text-xs text-slate-400 font-medium">/{plan.period}</span>}
+          {plan.period && (
+            <span className="text-xs text-slate-400 font-medium">/{plan.period}</span>
+          )}
         </div>
         <ul className="space-y-3 pt-2">
           {plan.features.map((f, i) => (
@@ -86,7 +90,11 @@ export function SubscriptionCard({ sub, onManage }: { sub: Subscription; onManag
           </span>
         </div>
         <p className="text-xs text-slate-500 dark:text-slate-400">
-          Your plan renews on <span className="font-bold text-slate-700 dark:text-slate-200">{sub.nextBillingDate}</span> for {sub.price}.
+          Your plan renews on{" "}
+          <span className="font-bold text-slate-700 dark:text-slate-200">
+            {sub.nextBillingDate}
+          </span>{" "}
+          for {sub.price}.
         </p>
       </div>
       <Button variant="secondary" onClick={onManage} size="sm" className="h-10">
@@ -142,16 +150,29 @@ export interface CheckoutItem {
   price: number;
 }
 
-export function CheckoutSummary({ items, discount = 0, onCheckout }: { items: CheckoutItem[]; discount?: number; onCheckout?: () => void }) {
+export function CheckoutSummary({
+  items,
+  discount = 0,
+  onCheckout,
+}: {
+  items: CheckoutItem[];
+  discount?: number;
+  onCheckout?: () => void;
+}) {
   const subtotal = items.reduce((sum, item) => sum + item.price, 0);
   const total = subtotal - discount;
 
   return (
     <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/20 text-left space-y-4 max-w-sm mx-auto">
-      <h4 className="font-bold text-base border-b border-slate-200 dark:border-slate-850 pb-3">Checkout Summary</h4>
+      <h4 className="font-bold text-base border-b border-slate-200 dark:border-slate-850 pb-3">
+        Checkout Summary
+      </h4>
       <div className="space-y-2.5">
         {items.map((item, idx) => (
-          <div key={idx} className="flex justify-between text-sm text-slate-700 dark:text-slate-300 font-semibold">
+          <div
+            key={idx}
+            className="flex justify-between text-sm text-slate-700 dark:text-slate-300 font-semibold"
+          >
             <span>{item.name}</span>
             <span className="font-mono">${item.price.toFixed(2)}</span>
           </div>
@@ -190,7 +211,13 @@ export interface Invoice {
   status: string;
 }
 
-export function BillingHistory({ invoices, onDownload }: { invoices: Invoice[]; onDownload?: (id: string) => void }) {
+export function BillingHistory({
+  invoices,
+  onDownload,
+}: {
+  invoices: Invoice[];
+  onDownload?: (id: string) => void;
+}) {
   return (
     <div className="w-full border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-950 overflow-hidden text-left text-sm">
       <div className="p-4 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center gap-2 font-bold text-slate-650 dark:text-slate-300">
@@ -198,7 +225,10 @@ export function BillingHistory({ invoices, onDownload }: { invoices: Invoice[]; 
       </div>
       <div className="divide-y divide-slate-100 dark:divide-slate-900">
         {invoices.map((inv) => (
-          <div key={inv.id} className="p-4 flex items-center justify-between hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
+          <div
+            key={inv.id}
+            className="p-4 flex items-center justify-between hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors"
+          >
             <div className="space-y-1">
               <span className="font-bold font-mono">{inv.id}</span>
               <p className="text-xs text-slate-400 font-semibold">{inv.date}</p>
@@ -220,7 +250,17 @@ export function BillingHistory({ invoices, onDownload }: { invoices: Invoice[]; 
 }
 
 // UsageMeter
-export function UsageMeter({ label, value, max, unit = "" }: { label: string; value: number; max: number; unit?: string }) {
+export function UsageMeter({
+  label,
+  value,
+  max,
+  unit = "",
+}: {
+  label: string;
+  value: number;
+  max: number;
+  unit?: string;
+}) {
   const percentage = (value / max) * 100;
   return (
     <div className="w-full space-y-2.5 text-left p-4 rounded-xl border border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-950">

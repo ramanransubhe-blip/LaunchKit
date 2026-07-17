@@ -56,15 +56,15 @@ knowledge-base/
 
 ## Environment Variables
 
-| Variable | Description | Required |
-|---|---|---|
-| `DATABASE_URL` | PostgreSQL (with pgvector extension) connection string | Yes |
-| `REDIS_URL` | Redis connection string | Yes |
-| `OPENAI_API_KEY` | OpenAI API key for embeddings | Yes |
-| `ANTHROPIC_API_KEY` | Anthropic API key for summarization | Yes |
-| `BETTER_AUTH_SECRET` | Better Auth JWT secret | Yes |
-| `STORAGE_PROVIDER` | Storage provider (`s3` or `supabase`) | Yes |
-| `PORT` | Server port (default: `4005`) | No |
+| Variable             | Description                                            | Required |
+| -------------------- | ------------------------------------------------------ | -------- |
+| `DATABASE_URL`       | PostgreSQL (with pgvector extension) connection string | Yes      |
+| `REDIS_URL`          | Redis connection string                                | Yes      |
+| `OPENAI_API_KEY`     | OpenAI API key for embeddings                          | Yes      |
+| `ANTHROPIC_API_KEY`  | Anthropic API key for summarization                    | Yes      |
+| `BETTER_AUTH_SECRET` | Better Auth JWT secret                                 | Yes      |
+| `STORAGE_PROVIDER`   | Storage provider (`s3` or `supabase`)                  | Yes      |
+| `PORT`               | Server port (default: `4005`)                          | No       |
 
 ## Quick Start
 
@@ -91,15 +91,15 @@ pnpm worker:indexer
 
 ## API Endpoints
 
-| Method | Path | Description |
-|---|---|---|
-| `POST` | `/api/documents` | Upload and index a document |
-| `GET` | `/api/documents/:id` | Get document with metadata |
-| `DELETE` | `/api/documents/:id` | Delete document and chunks |
-| `POST` | `/api/search` | Semantic search (`{query, limit, threshold, summarize}`) |
-| `GET` | `/api/search/suggest?q=` | Autocomplete suggestions |
-| `GET` | `/api/stats` | Collection statistics |
-| `GET` | `/health` | Health check |
+| Method   | Path                     | Description                                              |
+| -------- | ------------------------ | -------------------------------------------------------- |
+| `POST`   | `/api/documents`         | Upload and index a document                              |
+| `GET`    | `/api/documents/:id`     | Get document with metadata                               |
+| `DELETE` | `/api/documents/:id`     | Delete document and chunks                               |
+| `POST`   | `/api/search`            | Semantic search (`{query, limit, threshold, summarize}`) |
+| `GET`    | `/api/search/suggest?q=` | Autocomplete suggestions                                 |
+| `GET`    | `/api/stats`             | Collection statistics                                    |
+| `GET`    | `/health`                | Health check                                             |
 
 ## Deployment
 

@@ -35,7 +35,12 @@ export interface StorageObjectMetadata {
 export interface StorageService {
   readonly providerName: string;
 
-  upload(bucket: string, path: string, body: Buffer | ArrayBuffer | string, options?: UploadOptions): Promise<StorageUploadResult>;
+  upload(
+    bucket: string,
+    path: string,
+    body: Buffer | ArrayBuffer | string,
+    options?: UploadOptions
+  ): Promise<StorageUploadResult>;
   download(bucket: string, path: string): Promise<StorageDownloadResult>;
   delete(bucket: string, path: string): Promise<void>;
   move(bucket: string, fromPath: string, toPath: string): Promise<void>;

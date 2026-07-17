@@ -11,7 +11,10 @@ export abstract class CommunicationError extends Error {
   abstract readonly code: CommunicationErrorCode;
   abstract readonly statusCode: number;
 
-  constructor(message: string, public readonly details?: CommunicationErrorDetails) {
+  constructor(
+    message: string,
+    public readonly details?: CommunicationErrorDetails
+  ) {
     super(message);
     this.name = new.target.name;
     Object.setPrototypeOf(this, new.target.prototype);

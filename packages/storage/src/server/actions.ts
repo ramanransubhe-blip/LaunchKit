@@ -52,9 +52,7 @@ export async function uploadFileAction(
   }
 }
 
-export async function deleteFileAction(
-  rawInput: unknown
-): Promise<StorageActionResponse<void>> {
+export async function deleteFileAction(rawInput: unknown): Promise<StorageActionResponse<void>> {
   try {
     const input = deleteSchema.parse(rawInput);
     const service = getGlobalStorageService();
@@ -65,9 +63,7 @@ export async function deleteFileAction(
   }
 }
 
-export async function moveFileAction(
-  rawInput: unknown
-): Promise<StorageActionResponse<void>> {
+export async function moveFileAction(rawInput: unknown): Promise<StorageActionResponse<void>> {
   try {
     const input = moveSchema.parse(rawInput);
     const service = getGlobalStorageService();
@@ -78,9 +74,7 @@ export async function moveFileAction(
   }
 }
 
-export async function createFolderAction(
-  rawInput: unknown
-): Promise<StorageActionResponse<void>> {
+export async function createFolderAction(rawInput: unknown): Promise<StorageActionResponse<void>> {
   try {
     const input = createFolderSchema.parse(rawInput);
     const service = getGlobalStorageService();
@@ -91,9 +85,7 @@ export async function createFolderAction(
   }
 }
 
-export async function shareFileAction(
-  rawInput: unknown
-): Promise<StorageActionResponse<void>> {
+export async function shareFileAction(rawInput: unknown): Promise<StorageActionResponse<void>> {
   try {
     const input = shareSchema.parse(rawInput);
     const service = getGlobalStorageService();

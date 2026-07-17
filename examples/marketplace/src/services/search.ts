@@ -137,19 +137,21 @@ export interface ProductSearchService {
   }): Promise<void>;
   removeProduct(productId: string): Promise<void>;
   searchProducts(query: string, options?: SearchOptions): Promise<SearchResponse>;
-  reindexAll(products: Array<{
-    id: string;
-    title: string;
-    description: string;
-    price: number;
-    currency: string;
-    category: string;
-    tags: string[];
-    vendorId: string;
-    images?: Array<{ url: string }>;
-    inventory: number;
-    createdAt: Date;
-  }>): Promise<void>;
+  reindexAll(
+    products: Array<{
+      id: string;
+      title: string;
+      description: string;
+      price: number;
+      currency: string;
+      category: string;
+      tags: string[];
+      vendorId: string;
+      images?: Array<{ url: string }>;
+      inventory: number;
+      createdAt: Date;
+    }>
+  ): Promise<void>;
 }
 
 /**
@@ -180,13 +182,7 @@ export function createSearchService(): ProductSearchService {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            searchableAttributes: [
-              "title",
-              "description",
-              "category",
-              "tags",
-              "vendorName",
-            ],
+            searchableAttributes: ["title", "description", "category", "tags", "vendorName"],
             attributesForFaceting: [
               "searchable(category)",
               "searchable(tags)",
@@ -197,7 +193,7 @@ export function createSearchService(): ProductSearchService {
             customRanking: ["desc(rating)", "desc(inventory)"],
             hitsPerPage: 20,
           }),
-        },
+        }
       );
 
       if (!settingsResponse.ok) {
@@ -243,7 +239,7 @@ export function createSearchService(): ProductSearchService {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(doc),
-        },
+        }
       );
 
       if (!response.ok) {
@@ -272,7 +268,7 @@ export function createSearchService(): ProductSearchService {
             "X-Algolia-Application-Id": ALGOLIA_APP_ID,
             "X-Algolia-API-Key": ALGOLIA_ADMIN_KEY,
           },
-        },
+        }
       );
 
       if (!response.ok) {
@@ -301,10 +297,14 @@ export function createSearchService(): ProductSearchService {
         // Apply facet filters
         if (options.filters) {
           if (options.filters.category) {
-            results = results.filter(({ product }) => product.category === options.filters!.category);
+            results = results.filter(
+              ({ product }) => product.category === options.filters!.category
+            );
           }
           if (options.filters.vendorId) {
-            results = results.filter(({ product }) => product.vendorId === options.filters!.vendorId);
+            results = results.filter(
+              ({ product }) => product.vendorId === options.filters!.vendorId
+            );
           }
         }
 
@@ -370,7 +370,7 @@ export function createSearchService(): ProductSearchService {
             filters: filterParts.join(" AND "),
             facets: options.facets ?? ["category", "tags"],
           }),
-        },
+        }
       );
 
       if (!response.ok) {
@@ -431,8 +431,8 @@ export function createSearchService(): ProductSearchService {
                 productId: product.id,
                 error: String(err),
               });
-            }),
-          ),
+            })
+          )
         );
         logger.debug("Reindex batch complete", {
           processed: Math.min(i + batchSize, products.length),

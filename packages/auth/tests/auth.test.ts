@@ -8,11 +8,7 @@ import {
 } from "../src/index.js";
 import { createAuthRouteHandler } from "../src/routes/next.js";
 import { createAuthMiddleware } from "../src/middleware/index.js";
-import {
-  setGlobalAuthService,
-  loginAction,
-  logoutAction,
-} from "../src/server/index.js";
+import { setGlobalAuthService, loginAction, logoutAction } from "../src/server/index.js";
 
 const MOCK_CONFIG = {
   baseUrl: "http://localhost:3000",
@@ -53,7 +49,7 @@ test("Organization creation and invitations on Clerk mock adapter", async () => 
   const invite = await clerk.inviteToOrganization(
     org.id,
     "invited@example.com",
-    OrganizationRole.Admin,
+    OrganizationRole.Admin
   );
   assert.equal(invite.email, "invited@example.com");
   assert.equal(invite.role, OrganizationRole.Admin);

@@ -9,7 +9,11 @@
 
 import type { Context, MiddlewareHandler } from "hono";
 import type { AuthService, AuthUser, AuthSession } from "@devlaunchkit/auth";
-import { getGlobalBillingService, type BillingSubscription, SubscriptionStatus } from "@devlaunchkit/payments";
+import {
+  getGlobalBillingService,
+  type BillingSubscription,
+  SubscriptionStatus,
+} from "@devlaunchkit/payments";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -99,7 +103,7 @@ export const authMiddleware: MiddlewareHandler<AuthEnv> = async (c, next) => {
   if (!token) {
     return c.json(
       { success: false, error: { code: "UNAUTHORIZED", message: "Missing authentication token" } },
-      401,
+      401
     );
   }
 
@@ -113,7 +117,7 @@ export const authMiddleware: MiddlewareHandler<AuthEnv> = async (c, next) => {
     if (!session) {
       return c.json(
         { success: false, error: { code: "UNAUTHORIZED", message: "Invalid or expired session" } },
-        401,
+        401
       );
     }
 
@@ -122,7 +126,7 @@ export const authMiddleware: MiddlewareHandler<AuthEnv> = async (c, next) => {
     if (!user) {
       return c.json(
         { success: false, error: { code: "UNAUTHORIZED", message: "User account not found" } },
-        401,
+        401
       );
     }
 
@@ -146,9 +150,6 @@ export const authMiddleware: MiddlewareHandler<AuthEnv> = async (c, next) => {
     await next();
   } catch (err) {
     const message = err instanceof Error ? err.message : "Authentication failed";
-    return c.json(
-      { success: false, error: { code: "AUTH_ERROR", message } },
-      500,
-    );
+    return c.json({ success: false, error: { code: "AUTH_ERROR", message } }, 500);
   }
 };

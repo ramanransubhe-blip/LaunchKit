@@ -30,13 +30,13 @@ function logSection(title: string) {
 
 export async function handleDoctorCommand(shouldExit: boolean = true): Promise<void> {
   console.log(`\n${BOLD}🩺 [Diagnostics] Assessing DevLaunchKit system health...${RESET}\n`);
-  
+
   let hasErrors = false;
   let hasWarnings = false;
 
   // 1. RUNTIME & SYSTEM CHECKS
   logSection("1. Runtime & Environment System");
-  
+
   // Node version check
   const nodeVersion = process.version;
   const nodeMajor = parseInt(nodeVersion.slice(1).split(".")[0], 10);
@@ -82,8 +82,10 @@ export async function handleDoctorCommand(shouldExit: boolean = true): Promise<v
   const envLocalExists = fs.existsSync(envLocalPath);
 
   if (envExists || envLocalExists) {
-    logSuccess(`Environment files detected (${envExists ? ".env " : ""}${envLocalExists ? ".env.local" : ""})`);
-    
+    logSuccess(
+      `Environment files detected (${envExists ? ".env " : ""}${envLocalExists ? ".env.local" : ""})`
+    );
+
     // Parse environment variables loaded into process.env
     // Validate with envSchema
     const parsed = envSchema.safeParse(process.env);
@@ -105,7 +107,7 @@ export async function handleDoctorCommand(shouldExit: boolean = true): Promise<v
       { key: "AUTH_SECRET_KEY", label: "Authentication Secret", required: false },
       { key: "STRIPE_API_KEY", label: "Stripe API Key", required: false },
       { key: "OPENAI_API_KEY", label: "OpenAI API Key", required: false },
-      { key: "RESEND_API_KEY", label: "Resend API Key", required: false }
+      { key: "RESEND_API_KEY", label: "Resend API Key", required: false },
     ];
 
     checks.forEach((item) => {
@@ -130,15 +132,16 @@ export async function handleDoctorCommand(shouldExit: boolean = true): Promise<v
         logSuccess(`Configured key: ${item.key} is valid`);
       }
     });
-
   } else {
-    logError("Environment configuration: FAILED (No .env or .env.local file found. Copy .env.example to start.)");
+    logError(
+      "Environment configuration: FAILED (No .env or .env.local file found. Copy .env.example to start.)"
+    );
     hasErrors = true;
   }
 
   // 3. DATABASE STATUS CHECKS
   logSection("3. Database Connectivity");
-  
+
   if (process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("your_key")) {
     try {
       const dbHealth = await checkDatabaseHealth();
@@ -146,7 +149,9 @@ export async function handleDoctorCommand(shouldExit: boolean = true): Promise<v
         logSuccess(`Database connectivity: OK (Latency: ${dbHealth.latencyMs}ms)`);
       } else {
         logError(`Database connectivity: FAILED (Error: ${dbHealth.error})`);
-        console.log(`     💡 Tip: Make sure your PostgreSQL docker container is running: docker-compose up -d`);
+        console.log(
+          `     💡 Tip: Make sure your PostgreSQL docker container is running: docker-compose up -d`
+        );
         hasErrors = true;
       }
     } catch (e: any) {
@@ -154,7 +159,9 @@ export async function handleDoctorCommand(shouldExit: boolean = true): Promise<v
       hasErrors = true;
     }
   } else {
-    logError("Database connectivity: SKIPPED (DATABASE_URL environment variable is missing or placeholder)");
+    logError(
+      "Database connectivity: SKIPPED (DATABASE_URL environment variable is missing or placeholder)"
+    );
     hasErrors = true;
   }
 
@@ -170,13 +177,14 @@ export async function handleDoctorCommand(shouldExit: boolean = true): Promise<v
   logSuccess(`Payments Active Adaptor: ${paymentsProvider}`);
 
   // AI Provider
-  const aiProvider = (process.env.OPENAI_API_KEY && process.env.ANTHROPIC_API_KEY) 
-    ? "OpenAI & Anthropic" 
-    : process.env.OPENAI_API_KEY 
-    ? "OpenAI" 
-    : process.env.ANTHROPIC_API_KEY 
-    ? "Anthropic" 
-    : "Gemini (Fallback)";
+  const aiProvider =
+    process.env.OPENAI_API_KEY && process.env.ANTHROPIC_API_KEY
+      ? "OpenAI & Anthropic"
+      : process.env.OPENAI_API_KEY
+        ? "OpenAI"
+        : process.env.ANTHROPIC_API_KEY
+          ? "Anthropic"
+          : "Gemini (Fallback)";
   logSuccess(`AI Active Gateway: ${aiProvider}`);
 
   // Resend Email
@@ -191,20 +199,28 @@ export async function handleDoctorCommand(shouldExit: boolean = true): Promise<v
   if (process.env.REDIS_URL) {
     logSuccess("Distributed Cache/Queue: Redis (BullMQ ready)");
   } else {
-    logWarning("Distributed Cache/Queue: In-memory Cache & Local queue (bullmq will not work without redis)");
+    logWarning(
+      "Distributed Cache/Queue: In-memory Cache & Local queue (bullmq will not work without redis)"
+    );
     hasWarnings = true;
   }
 
   // 5. SUMMARY
   console.log(`\n${BOLD}========================================${RESET}`);
   if (hasErrors) {
-    console.log(`\n❌ ${RED}${BOLD}LaunchKit diagnostics failed. Please fix critical errors listed above before starting the app.${RESET}\n`);
+    console.log(
+      `\n❌ ${RED}${BOLD}LaunchKit diagnostics failed. Please fix critical errors listed above before starting the app.${RESET}\n`
+    );
     if (shouldExit) {
       process.exit(1);
     }
   } else if (hasWarnings) {
-    console.log(`\n⚠️  ${YELLOW}${BOLD}LaunchKit diagnostics passed with warnings. Optional provider systems may run in mock mode.${RESET}\n`);
+    console.log(
+      `\n⚠️  ${YELLOW}${BOLD}LaunchKit diagnostics passed with warnings. Optional provider systems may run in mock mode.${RESET}\n`
+    );
   } else {
-    console.log(`\n🎉 ${GREEN}${BOLD}All DevLaunchKit environment systems check out cleanly! Ready for launch.${RESET}\n`);
+    console.log(
+      `\n🎉 ${GREEN}${BOLD}All DevLaunchKit environment systems check out cleanly! Ready for launch.${RESET}\n`
+    );
   }
 }

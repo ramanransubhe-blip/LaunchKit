@@ -1,7 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { AlertTriangle, Key, Shield, User, Bell, Palette, Globe, Layers, Link2 } from "lucide-react";
+import {
+  AlertTriangle,
+  Key,
+  Shield,
+  User,
+  Bell,
+  Palette,
+  Globe,
+  Layers,
+  Link2,
+} from "lucide-react";
 import { cn } from "../utils/cn.js";
 
 export function SettingsLayout({
@@ -19,7 +29,10 @@ export function SettingsLayout({
     <div className="flex flex-col md:flex-row gap-6">
       {/* Sidebar navigation */}
       <aside className="w-full md:w-56 shrink-0">
-        <nav className="flex md:flex-col gap-1 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0" aria-label="Settings navigation">
+        <nav
+          className="flex md:flex-col gap-1 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0"
+          aria-label="Settings navigation"
+        >
           {sidebarItems.map((item) => {
             const Icon = item.icon;
             const isActive = item.id === activeId;
@@ -65,7 +78,9 @@ export function SettingsCard({
         <div>
           <h2 className="text-sm font-semibold text-neutral-950 dark:text-white">{title}</h2>
           {description && (
-            <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">{description}</p>
+            <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+              {description}
+            </p>
           )}
         </div>
         <div className="pt-2">{children}</div>

@@ -2,5 +2,5 @@
 
 export const info = {
   name: "notifications",
-  description: "Slack / Email alert dispatching mechanisms"
+  description: "Slack / Email alert dispatching mechanisms",
 };

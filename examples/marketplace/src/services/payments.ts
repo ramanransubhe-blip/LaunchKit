@@ -221,7 +221,7 @@ export function createPaymentService(): MarketplacePaymentService {
         body: new URLSearchParams({
           type: "express",
           email,
-          "business_type": businessType === "non_profit" ? "non_profit" : businessType,
+          business_type: businessType === "non_profit" ? "non_profit" : businessType,
           country,
           "business_profile[name]": businessName,
           "capabilities[card_payments][requested]": "true",

@@ -6,20 +6,16 @@ import {
   setGlobalCommunicationService,
   getGlobalCommunicationService,
 } from "../src/index.js";
-import {
-  CommunicationTemplateMissingError,
-  isCommunicationError,
-} from "../src/core/errors.js";
-import {
-  sendEmailAction,
-  scheduleEmailAction,
-} from "../src/server/actions.js";
+import { CommunicationTemplateMissingError, isCommunicationError } from "../src/core/errors.js";
+import { sendEmailAction, scheduleEmailAction } from "../src/server/actions.js";
 
 test("Resend adapter mock flow", async () => {
   const service = createResendCommunicationService({ isMock: true });
   assert.equal(service.providerName, "resend");
 
-  const send = await service.sendEmail("test@user.com", "Welcome", "welcome_email", { name: "User" });
+  const send = await service.sendEmail("test@user.com", "Welcome", "welcome_email", {
+    name: "User",
+  });
   assert.ok(send.messageId.startsWith("re_mock_"));
   assert.equal(send.status, "sent");
 
@@ -48,10 +44,7 @@ test("Postmark adapter mock flow", async () => {
 });
 
 test("Global registrar check", async () => {
-  assert.throws(
-    () => getGlobalCommunicationService(),
-    /No global CommunicationService registered/
-  );
+  assert.throws(() => getGlobalCommunicationService(), /No global CommunicationService registered/);
 });
 
 test("Communication server actions simulation", async () => {

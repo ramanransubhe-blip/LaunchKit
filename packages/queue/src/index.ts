@@ -46,7 +46,7 @@ class JobQueue {
     };
 
     this.queue.push(job);
-    
+
     // Sort queue by priority (high first) and runAt
     this.sortQueue();
 
@@ -63,9 +63,9 @@ class JobQueue {
     this.queue.sort((a, b) => {
       const aWeight = priorityWeights[a.priority];
       const bWeight = priorityWeights[b.priority];
-      
+
       if (aWeight !== bWeight) return bWeight - aWeight;
-      
+
       const aTime = a.runAt?.getTime() || 0;
       const bTime = b.runAt?.getTime() || 0;
       return aTime - bTime;
@@ -110,11 +110,16 @@ class JobQueue {
         // Retry job after dynamic back-off delay (e.g. 5s, 10s, 15s)
         const delaySeconds = job.attempts * 5;
         job.runAt = new Date(Date.now() + delaySeconds * 1000);
-        console.warn(`⚠️ JobQueue: Job "${job.name}" failed (attempt ${job.attempts}/${job.maxAttempts}). Retrying in ${delaySeconds}s...`);
+        console.warn(
+          `⚠️ JobQueue: Job "${job.name}" failed (attempt ${job.attempts}/${job.maxAttempts}). Retrying in ${delaySeconds}s...`
+        );
         this.queue.push(job);
         this.sortQueue();
       } else {
-        console.error(`❌ JobQueue: Job "${job.name}" failed permanently after ${job.attempts} attempts. Sending to DLQ.`, err);
+        console.error(
+          `❌ JobQueue: Job "${job.name}" failed permanently after ${job.attempts} attempts. Sending to DLQ.`,
+          err
+        );
         this.dlq.push(job);
       }
     }

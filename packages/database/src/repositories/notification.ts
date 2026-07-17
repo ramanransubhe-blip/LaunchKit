@@ -3,7 +3,11 @@ import { Notification, InsertNotification } from "../types";
 import { notifications, notificationPreferences } from "../schema";
 import { eq, and } from "drizzle-orm";
 
-export class NotificationRepository extends BaseRepository<Notification, InsertNotification, typeof notifications> {
+export class NotificationRepository extends BaseRepository<
+  Notification,
+  InsertNotification,
+  typeof notifications
+> {
   constructor() {
     super(notifications);
   }
@@ -13,12 +17,7 @@ export class NotificationRepository extends BaseRepository<Notification, InsertN
     return await this.db
       .select()
       .from(notifications)
-      .where(
-        and(
-          eq(notifications.profileId, profileId),
-          eq(notifications.isRead, false)
-        )
-      );
+      .where(and(eq(notifications.profileId, profileId), eq(notifications.isRead, false)));
   }
 
   // Mark a notification as read
@@ -36,12 +35,7 @@ export class NotificationRepository extends BaseRepository<Notification, InsertN
     const results = await this.db
       .update(notifications)
       .set({ isRead: true })
-      .where(
-        and(
-          eq(notifications.profileId, profileId),
-          eq(notifications.isRead, false)
-        )
-      )
+      .where(and(eq(notifications.profileId, profileId), eq(notifications.isRead, false)))
       .returning();
     return results.length;
   }

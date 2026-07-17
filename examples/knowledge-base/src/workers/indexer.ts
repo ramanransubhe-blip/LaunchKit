@@ -47,13 +47,11 @@ async function processNextDocument(): Promise<boolean> {
     await db("document_chunks").insert(records);
 
     /** Mark as indexed */
-    await db("documents")
-      .where({ id: document.id })
-      .update({
-        status: "indexed",
-        chunk_count: chunks.length,
-        updated_at: new Date(),
-      });
+    await db("documents").where({ id: document.id }).update({
+      status: "indexed",
+      chunk_count: chunks.length,
+      updated_at: new Date(),
+    });
 
     logger.info("Document indexed", {
       documentId: document.id,
@@ -64,12 +62,10 @@ async function processNextDocument(): Promise<boolean> {
   } catch (error) {
     logger.error("Document indexing failed", { documentId: document.id, error });
 
-    await db("documents")
-      .where({ id: document.id })
-      .update({
-        status: "failed",
-        updated_at: new Date(),
-      });
+    await db("documents").where({ id: document.id }).update({
+      status: "failed",
+      updated_at: new Date(),
+    });
 
     return false;
   }

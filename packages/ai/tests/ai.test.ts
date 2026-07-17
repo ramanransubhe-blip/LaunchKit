@@ -7,14 +7,8 @@ import {
   setGlobalAIService,
   getGlobalAIService,
 } from "../src/index.js";
-import {
-  AIProviderError,
-  isAIError,
-} from "../src/core/errors.js";
-import {
-  generateTextAction,
-  chatAction,
-} from "../src/server/actions.js";
+import { AIProviderError, isAIError } from "../src/core/errors.js";
+import { generateTextAction, chatAction } from "../src/server/actions.js";
 
 test("OpenAI adapter mock flow", async () => {
   const service = createOpenAIService({ isMock: true });
@@ -51,10 +45,7 @@ test("Anthropic adapter mock flow", async () => {
 });
 
 test("Global registrar exceptions", async () => {
-  assert.throws(
-    () => getGlobalAIService(),
-    /No global AIService registered/
-  );
+  assert.throws(() => getGlobalAIService(), /No global AIService registered/);
 });
 
 test("AI server actions validation and simulation", async () => {

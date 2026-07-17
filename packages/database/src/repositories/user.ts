@@ -30,11 +30,7 @@ export class UserRepository extends BaseRepository<Profile, InsertProfile, typeo
 
   // Assign a platform role to a user profile
   async assignRoleToUser(profileId: string, roleName: string): Promise<void> {
-    const roleResults = await this.db
-      .select()
-      .from(roles)
-      .where(eq(roles.name, roleName))
-      .limit(1);
+    const roleResults = await this.db.select().from(roles).where(eq(roles.name, roleName)).limit(1);
 
     const role = roleResults[0];
     if (!role) throw new Error(`Role ${roleName} does not exist.`);

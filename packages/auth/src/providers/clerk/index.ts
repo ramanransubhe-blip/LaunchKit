@@ -17,7 +17,7 @@ export type ClerkServiceBridge = Omit<AuthService, "provider">;
  */
 export function createClerkService(
   bridgeOrOptions: ClerkServiceBridge | ClerkBridgeOptions,
-  options: AuthServiceFactoryOptions = {},
+  options: AuthServiceFactoryOptions = {}
 ): AuthService {
   const bridge =
     typeof (bridgeOrOptions as any).signIn === "function"
@@ -29,6 +29,6 @@ export function createClerkService(
       provider: AuthProviderType.Clerk,
       ...bridge,
     },
-    options,
+    options
   );
 }

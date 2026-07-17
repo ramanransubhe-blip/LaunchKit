@@ -20,12 +20,12 @@ NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
 The bridge routes canonical calls to standard Better Auth endpoints:
 
-| Operation | Endpoint | Method |
-| :--- | :--- | :--- |
-| `signIn` | `/api/auth/sign-in/email` | `POST` |
-| `signUp` | `/api/auth/sign-up/email` | `POST` |
-| `signOut` | `/api/auth/sign-out` | `POST` |
-| `getSession` | `/api/auth/get-session` | `GET` |
+| Operation            | Endpoint                        | Method |
+| :------------------- | :------------------------------ | :----- |
+| `signIn`             | `/api/auth/sign-in/email`       | `POST` |
+| `signUp`             | `/api/auth/sign-up/email`       | `POST` |
+| `signOut`            | `/api/auth/sign-out`            | `POST` |
+| `getSession`         | `/api/auth/get-session`         | `GET`  |
 | `createOrganization` | `/api/auth/organization/create` | `POST` |
 
 ---

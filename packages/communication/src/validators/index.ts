@@ -32,7 +32,9 @@ export const scheduleEmailSchema = z.object({
 export function validatePayload<T>(schema: z.Schema<T>, data: unknown): T {
   const result = schema.safeParse(data);
   if (!result.success) {
-    throw new Error(`Communication validation failed: ${result.error.errors.map((e) => e.message).join(", ")}`);
+    throw new Error(
+      `Communication validation failed: ${result.error.errors.map((e) => e.message).join(", ")}`
+    );
   }
   return result.data;
 }

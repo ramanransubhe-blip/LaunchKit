@@ -82,23 +82,23 @@ marketplace/
 
 ## Environment Variables
 
-| Variable | Description | Required | Default |
-|---|---|---|---|
-| `PORT` | HTTP server port | No | `4500` |
-| `NODE_ENV` | Runtime environment | No | `development` |
-| `DATABASE_URL` | PostgreSQL connection string | Yes | — |
-| `STRIPE_SECRET_KEY` | Stripe API secret key | Yes | — |
-| `STRIPE_WEBHOOK_SECRET` | Stripe webhook endpoint secret | Yes | — |
-| `STRIPE_PLATFORM_ACCOUNT` | Platform Stripe account ID | Yes | — |
-| `STRIPE_COMMISSION_RATE` | Platform commission percentage (0-100) | No | `10` |
-| `CLERK_SECRET_KEY` | Clerk backend API key | Yes | — |
-| `CLERK_PUBLISHABLE_KEY` | Clerk frontend publishable key | Yes | — |
-| `STORAGE_BUCKET` | Object storage bucket for product images | No | `marketplace-images` |
-| `ALGOLIA_APP_ID` | Algolia application ID | Yes | — |
-| `ALGOLIA_ADMIN_KEY` | Algolia admin API key | Yes | — |
-| `ALGOLIA_SEARCH_KEY` | Algolia public search-only key | Yes | — |
-| `ALGOLIA_INDEX_NAME` | Algolia product index name | No | `products` |
-| `NOTIFICATION_FROM_EMAIL` | Sender email for order notifications | No | `orders@marketplace.app` |
+| Variable                  | Description                              | Required | Default                  |
+| ------------------------- | ---------------------------------------- | -------- | ------------------------ |
+| `PORT`                    | HTTP server port                         | No       | `4500`                   |
+| `NODE_ENV`                | Runtime environment                      | No       | `development`            |
+| `DATABASE_URL`            | PostgreSQL connection string             | Yes      | —                        |
+| `STRIPE_SECRET_KEY`       | Stripe API secret key                    | Yes      | —                        |
+| `STRIPE_WEBHOOK_SECRET`   | Stripe webhook endpoint secret           | Yes      | —                        |
+| `STRIPE_PLATFORM_ACCOUNT` | Platform Stripe account ID               | Yes      | —                        |
+| `STRIPE_COMMISSION_RATE`  | Platform commission percentage (0-100)   | No       | `10`                     |
+| `CLERK_SECRET_KEY`        | Clerk backend API key                    | Yes      | —                        |
+| `CLERK_PUBLISHABLE_KEY`   | Clerk frontend publishable key           | Yes      | —                        |
+| `STORAGE_BUCKET`          | Object storage bucket for product images | No       | `marketplace-images`     |
+| `ALGOLIA_APP_ID`          | Algolia application ID                   | Yes      | —                        |
+| `ALGOLIA_ADMIN_KEY`       | Algolia admin API key                    | Yes      | —                        |
+| `ALGOLIA_SEARCH_KEY`      | Algolia public search-only key           | Yes      | —                        |
+| `ALGOLIA_INDEX_NAME`      | Algolia product index name               | No       | `products`               |
+| `NOTIFICATION_FROM_EMAIL` | Sender email for order notifications     | No       | `orders@marketplace.app` |
 
 ## Quick Start
 
@@ -139,38 +139,38 @@ The server starts at `http://localhost:4500` with structured request logging.
 
 ### Products
 
-| Method | Path | Description | Auth |
-|---|---|---|---|
-| `GET` | `/api/products` | List products with pagination and filters | Public |
-| `GET` | `/api/products/search` | Full-text search with facets | Public |
-| `GET` | `/api/products/:id` | Get product details | Public |
-| `POST` | `/api/products` | Create a new product | Vendor |
-| `PUT` | `/api/products/:id` | Update product details | Vendor (owner) |
-| `DELETE` | `/api/products/:id` | Soft-delete a product | Vendor (owner) |
-| `POST` | `/api/products/:id/images` | Upload product images | Vendor (owner) |
-| `DELETE` | `/api/products/:id/images/:imageId` | Remove a product image | Vendor (owner) |
+| Method   | Path                                | Description                               | Auth           |
+| -------- | ----------------------------------- | ----------------------------------------- | -------------- |
+| `GET`    | `/api/products`                     | List products with pagination and filters | Public         |
+| `GET`    | `/api/products/search`              | Full-text search with facets              | Public         |
+| `GET`    | `/api/products/:id`                 | Get product details                       | Public         |
+| `POST`   | `/api/products`                     | Create a new product                      | Vendor         |
+| `PUT`    | `/api/products/:id`                 | Update product details                    | Vendor (owner) |
+| `DELETE` | `/api/products/:id`                 | Soft-delete a product                     | Vendor (owner) |
+| `POST`   | `/api/products/:id/images`          | Upload product images                     | Vendor (owner) |
+| `DELETE` | `/api/products/:id/images/:imageId` | Remove a product image                    | Vendor (owner) |
 
 ### Orders
 
-| Method | Path | Description | Auth |
-|---|---|---|---|
-| `GET` | `/api/orders` | List orders (buyer sees own, vendor sees their items) | Buyer / Vendor |
-| `GET` | `/api/orders/:id` | Get order details | Buyer / Vendor |
-| `POST` | `/api/orders` | Place a new order | Buyer |
-| `PUT` | `/api/orders/:id/status` | Update order status (ship, deliver) | Vendor |
-| `POST` | `/api/orders/:id/refund` | Request or process a refund | Buyer / Admin |
-| `GET` | `/api/orders/:id/tracking` | Get shipment tracking info | Buyer |
+| Method | Path                       | Description                                           | Auth           |
+| ------ | -------------------------- | ----------------------------------------------------- | -------------- |
+| `GET`  | `/api/orders`              | List orders (buyer sees own, vendor sees their items) | Buyer / Vendor |
+| `GET`  | `/api/orders/:id`          | Get order details                                     | Buyer / Vendor |
+| `POST` | `/api/orders`              | Place a new order                                     | Buyer          |
+| `PUT`  | `/api/orders/:id/status`   | Update order status (ship, deliver)                   | Vendor         |
+| `POST` | `/api/orders/:id/refund`   | Request or process a refund                           | Buyer / Admin  |
+| `GET`  | `/api/orders/:id/tracking` | Get shipment tracking info                            | Buyer          |
 
 ### Vendors
 
-| Method | Path | Description | Auth |
-|---|---|---|---|
-| `POST` | `/api/vendors/register` | Register as a new vendor | Authenticated |
-| `GET` | `/api/vendors/me` | Get current vendor profile & stats | Vendor |
-| `PUT` | `/api/vendors/me` | Update vendor profile | Vendor |
-| `POST` | `/api/vendors/onboard` | Generate Stripe Connect onboarding link | Vendor |
-| `GET` | `/api/vendors/me/payouts` | List vendor payout history | Vendor |
-| `GET` | `/api/vendors/me/analytics` | Revenue analytics & top products | Vendor |
+| Method | Path                        | Description                             | Auth          |
+| ------ | --------------------------- | --------------------------------------- | ------------- |
+| `POST` | `/api/vendors/register`     | Register as a new vendor                | Authenticated |
+| `GET`  | `/api/vendors/me`           | Get current vendor profile & stats      | Vendor        |
+| `PUT`  | `/api/vendors/me`           | Update vendor profile                   | Vendor        |
+| `POST` | `/api/vendors/onboard`      | Generate Stripe Connect onboarding link | Vendor        |
+| `GET`  | `/api/vendors/me/payouts`   | List vendor payout history              | Vendor        |
+| `GET`  | `/api/vendors/me/analytics` | Revenue analytics & top products        | Vendor        |
 
 ## Deployment Guide
 
@@ -210,6 +210,7 @@ https://your-domain.com/api/webhooks/stripe
 ```
 
 Subscribe to these events:
+
 - `account.updated` — Vendor onboarding status
 - `payment_intent.succeeded` — Order payment confirmation
 - `payment_intent.payment_failed` — Payment failure handling

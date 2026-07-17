@@ -14,8 +14,7 @@ export const AuthTokenType = {
 } as const;
 
 /** Token categories used by the auth platform. */
-export type AuthTokenType =
-  (typeof AuthTokenType)[keyof typeof AuthTokenType];
+export type AuthTokenType = (typeof AuthTokenType)[keyof typeof AuthTokenType];
 
 /** Claims embedded into a signed auth token. */
 export interface AuthTokenClaims {
@@ -81,10 +80,7 @@ export function hashAuthToken(token: string, secret: string): string {
  * @param expiresInSeconds - Lifetime in seconds.
  * @returns Token envelope with hash and expiry.
  */
-export function createTokenEnvelope(
-  secret: string,
-  expiresInSeconds: number,
-): AuthTokenEnvelope {
+export function createTokenEnvelope(secret: string, expiresInSeconds: number): AuthTokenEnvelope {
   const token = createOpaqueToken();
   const expiresAt = new Date(Date.now() + expiresInSeconds * 1000);
 
@@ -110,7 +106,7 @@ export function createSignedToken(
   type: AuthTokenType,
   secret: string,
   expiresInSeconds: number,
-  data: Readonly<Record<string, string | number | boolean | null>> = {},
+  data: Readonly<Record<string, string | number | boolean | null>> = {}
 ): SignedAuthToken {
   const now = Math.floor(Date.now() / 1000);
   const claims: AuthTokenClaims = {
@@ -123,9 +119,7 @@ export function createSignedToken(
   };
 
   const encoded = Buffer.from(JSON.stringify(claims)).toString("base64url");
-  const signature = createHmac(TOKEN_ALGORITHM, secret)
-    .update(encoded)
-    .digest("base64url");
+  const signature = createHmac(TOKEN_ALGORITHM, secret).update(encoded).digest("base64url");
 
   return {
     token: `${encoded}.${signature}`,
@@ -140,25 +134,20 @@ export function createSignedToken(
  * @param secret - Verification secret.
  * @returns Parsed claims when valid.
  */
-export function verifySignedToken(
-  token: string,
-  secret: string,
-): AuthTokenClaims | null {
+export function verifySignedToken(token: string, secret: string): AuthTokenClaims | null {
   const [encoded, signature] = token.split(".");
   if (!encoded || !signature) {
     return null;
   }
 
-  const expected = createHmac(TOKEN_ALGORITHM, secret)
-    .update(encoded)
-    .digest("base64url");
+  const expected = createHmac(TOKEN_ALGORITHM, secret).update(encoded).digest("base64url");
   if (!constantTimeCompare(signature, expected)) {
     return null;
   }
 
   try {
     const claims = JSON.parse(
-      Buffer.from(encoded, "base64url").toString("utf8"),
+      Buffer.from(encoded, "base64url").toString("utf8")
     ) as AuthTokenClaims;
     if (claims.exp * 1000 < Date.now()) {
       return null;

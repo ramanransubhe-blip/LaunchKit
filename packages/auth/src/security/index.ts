@@ -1,9 +1,4 @@
-import {
-  createHmac,
-  randomBytes,
-  timingSafeEqual,
-  scryptSync,
-} from "node:crypto";
+import { createHmac, randomBytes, timingSafeEqual, scryptSync } from "node:crypto";
 
 /** Password hashing configuration. */
 export interface PasswordPolicy {
@@ -161,7 +156,7 @@ export function constantTimeEqual(left: string, right: string): boolean {
  */
 export async function hashPassword(
   password: string,
-  policy: Partial<PasswordPolicy> = {},
+  policy: Partial<PasswordPolicy> = {}
 ): Promise<string> {
   const salt = randomBytes(16).toString("base64url");
   const cost = 16_384;
@@ -196,10 +191,7 @@ export async function hashPassword(
  * @param encodedHash - Stored encoded hash.
  * @returns `true` when the password matches.
  */
-export async function verifyPassword(
-  password: string,
-  encodedHash: string,
-): Promise<boolean> {
+export async function verifyPassword(password: string, encodedHash: string): Promise<boolean> {
   const parts = encodedHash.split("$");
   if (parts.length < 8 || parts[0] !== "scrypt") {
     return false;
@@ -245,7 +237,7 @@ export async function verifyPassword(
  */
 export function evaluatePasswordStrength(
   password: string,
-  policy: Partial<PasswordPolicy> = {},
+  policy: Partial<PasswordPolicy> = {}
 ): PasswordStrengthAssessment {
   const mergedPolicy = { ...DEFAULT_POLICY, ...policy };
   const issues: string[] = [];
@@ -262,16 +254,10 @@ export function evaluatePasswordStrength(
   if (mergedPolicy.requireNumber && !/[0-9]/.test(password)) {
     issues.push("Password must contain at least one number.");
   }
-  if (
-    mergedPolicy.requireSymbol &&
-    !/[^A-Za-z0-9]/.test(password)
-  ) {
+  if (mergedPolicy.requireSymbol && !/[^A-Za-z0-9]/.test(password)) {
     issues.push("Password must contain at least one symbol.");
   }
-  if (
-    mergedPolicy.rejectCommonPasswords &&
-    COMMON_PASSWORDS.has(password.toLowerCase())
-  ) {
+  if (mergedPolicy.rejectCommonPasswords && COMMON_PASSWORDS.has(password.toLowerCase())) {
     issues.push("Password is too common.");
   }
 
@@ -325,7 +311,7 @@ export function buildCookieOptions(options: {
  */
 export function detectSuspiciousLogin(
   previous: LoginSignal | null,
-  current: LoginSignal,
+  current: LoginSignal
 ): SuspiciousLoginAssessment {
   if (!previous) {
     return {

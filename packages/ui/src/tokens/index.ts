@@ -1,13 +1,13 @@
 export const tokens = {
   // Spacing scale (rem)
   spacing: {
-    xs: "0.25rem",    // 4px
-    sm: "0.5rem",     // 8px
-    md: "1rem",       // 16px
-    lg: "1.5rem",     // 24px
-    xl: "2rem",       // 32px
-    xxl: "3rem",      // 48px
-    xxxl: "4rem",     // 64px
+    xs: "0.25rem", // 4px
+    sm: "0.5rem", // 8px
+    md: "1rem", // 16px
+    lg: "1.5rem", // 24px
+    xl: "2rem", // 32px
+    xxl: "3rem", // 48px
+    xxxl: "4rem", // 64px
   },
 
   // Typography Size Scale (fontSize/lineHeight)
@@ -41,11 +41,11 @@ export const tokens = {
   // Border Radii (rem)
   borderRadius: {
     none: "0",
-    sm: "0.125rem",   // 2px
-    md: "0.375rem",   // 6px
-    lg: "0.5rem",     // 8px
-    xl: "0.75rem",    // 12px
-    xxl: "1rem",      // 16px
+    sm: "0.125rem", // 2px
+    md: "0.375rem", // 6px
+    lg: "0.5rem", // 8px
+    xl: "0.75rem", // 12px
+    xxl: "1rem", // 16px
     full: "9999px",
   },
 

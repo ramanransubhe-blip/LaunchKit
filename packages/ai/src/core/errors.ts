@@ -12,7 +12,10 @@ export abstract class AIError extends Error {
   abstract readonly code: AIErrorCode;
   abstract readonly statusCode: number;
 
-  constructor(message: string, public readonly details?: AIErrorDetails) {
+  constructor(
+    message: string,
+    public readonly details?: AIErrorDetails
+  ) {
     super(message);
     this.name = new.target.name;
     Object.setPrototypeOf(this, new.target.prototype);

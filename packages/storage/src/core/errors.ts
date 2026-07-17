@@ -13,7 +13,10 @@ export abstract class StorageError extends Error {
   abstract readonly code: StorageErrorCode;
   abstract readonly statusCode: number;
 
-  constructor(message: string, public readonly details?: StorageErrorDetails) {
+  constructor(
+    message: string,
+    public readonly details?: StorageErrorDetails
+  ) {
     super(message);
     this.name = new.target.name;
     Object.setPrototypeOf(this, new.target.prototype);

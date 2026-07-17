@@ -5,9 +5,11 @@ Securing Next.js applications, encrypting keys, and setting rate limits.
 ---
 
 ## Purpose
+
 This document provides security practices and hardening guidelines for DevLaunchKit, detailing threat mitigation steps, secure headers configuration, rate-limiting, and encryption procedures.
 
 ## Prerequisites
+
 - Basic understanding of web security concepts (OWASP Top 10)
 - Production environment access for configuring headers and variables
 
@@ -26,6 +28,7 @@ DevLaunchKit applies security layers across every transaction point:
 ## Hardening Configurations
 
 ### 1. Content Security Policy (CSP)
+
 Configure your Content Security Policy inside `packages/middleware/src/security.ts` to restrict where scripts, styles, and fonts can load from:
 
 ```typescript
@@ -41,9 +44,11 @@ const cspHeader = `
 ```
 
 ### 2. Encryption Key Rotation
+
 Sensitive information (like user tokens and integration keys) are encrypted inside the database using the AES-256-GCM wrapper from `@devlaunchkit/security`:
 
 To rotate keys safely in production:
+
 1. Generate a new key: `openssl rand -hex 32`
 2. Add it to `ENCRYPTION_KEY_NEW` inside `.env`.
 3. Run the CLI key-migration script:
@@ -55,23 +60,27 @@ To rotate keys safely in production:
 ---
 
 ## Screenshots Placeholder
+
 ![Security Scan Audit logs](/assets/storage_platform.png)
-*CLI auditing tool displaying zero vulnerability warnings after security check runs.*
+_CLI auditing tool displaying zero vulnerability warnings after security check runs._
 
 ---
 
 ## Best Practices
+
 - **Rotate secrets quarterly**: Keep a regular schedule for rotating API keys, database passwords, and session secrets.
 - **Implement Strict CORS rules**: Never set CORS access to `*` on API routes. Always restrict allowed origins to your verified web app domains.
 - **Sanitize HTML inputs**: Use DOMPurify or sanitize-html on the server-side before saving user-generated markdown or rich text to the database.
 
 ## Common Mistakes
+
 - **Exposing DB connection URLs in Git commits**: Accidental commits containing database credentials or production API keys.
 - **Bypassing SSL checks**: Configuring endpoints with `http` in production instead of enforcing HTTPS globally.
 
 ---
 
 ## Troubleshooting
+
 - **CORS Blockages in production**:
   - Double check that the frontend domain (including `https://` prefix) is correctly listed in the `ALLOWED_ORIGINS` environment variable in your production hosting setup.
 - **CSP blocks local scripts**:

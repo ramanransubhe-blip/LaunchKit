@@ -2,7 +2,18 @@
 
 import { cn } from "../utils/cn";
 import { ReactNode, useState, useRef, useEffect, KeyboardEvent } from "react";
-import { Send, Sparkles, User, Terminal, Copy, Check, ChevronDown, ChevronRight, MessageSquare, Plus } from "lucide-react";
+import {
+  Send,
+  Sparkles,
+  User,
+  Terminal,
+  Copy,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  MessageSquare,
+  Plus,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Avatar } from "./data-display";
 
@@ -10,9 +21,18 @@ import { Avatar } from "./data-display";
 export function TypingIndicator() {
   return (
     <div className="flex items-center gap-1 px-3 py-2 bg-slate-100 dark:bg-slate-900 rounded-2xl w-fit">
-      <div className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500 animate-bounce" style={{ animationDelay: "0ms" }} />
-      <div className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500 animate-bounce" style={{ animationDelay: "150ms" }} />
-      <div className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+      <div
+        className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500 animate-bounce"
+        style={{ animationDelay: "0ms" }}
+      />
+      <div
+        className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500 animate-bounce"
+        style={{ animationDelay: "150ms" }}
+      />
+      <div
+        className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500 animate-bounce"
+        style={{ animationDelay: "300ms" }}
+      />
     </div>
   );
 }
@@ -40,8 +60,15 @@ export function CodeBlock({ code, language = "typescript" }: { code: string; lan
     <div className="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-slate-50 dark:bg-slate-900/50 my-3 text-left">
       <div className="flex items-center justify-between px-4 py-2 border-b border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900 text-xs font-mono font-bold text-slate-500">
         <span>{language}</span>
-        <button onClick={handleCopy} className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-650 flex items-center gap-1 cursor-pointer">
-          {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+        <button
+          onClick={handleCopy}
+          className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-650 flex items-center gap-1 cursor-pointer"
+        >
+          {copied ? (
+            <Check className="w-3.5 h-3.5 text-emerald-500" />
+          ) : (
+            <Copy className="w-3.5 h-3.5" />
+          )}
           <span>{copied ? "Copied" : "Copy"}</span>
         </button>
       </div>
@@ -66,7 +93,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
           const code = lines.slice(1, -1).join("\n");
           return <CodeBlock key={idx} code={code} language={language} />;
         }
-        
+
         return (
           <p key={idx} className="whitespace-pre-wrap leading-relaxed text-sm">
             {block}
@@ -91,10 +118,18 @@ export function MessageBubble({ message }: { message: Message }) {
   const [showThinking, setShowThinking] = useState(false);
 
   return (
-    <div className={cn("flex gap-3 text-left w-full max-w-3xl", isAi ? "self-start" : "self-end flex-row-reverse")}>
+    <div
+      className={cn(
+        "flex gap-3 text-left w-full max-w-3xl",
+        isAi ? "self-start" : "self-end flex-row-reverse"
+      )}
+    >
       <Avatar
         fallback={isAi ? "AI" : "ME"}
-        className={cn("w-8 h-8 rounded-xl", isAi ? "bg-indigo-500 text-white" : "bg-slate-200 dark:bg-slate-900")}
+        className={cn(
+          "w-8 h-8 rounded-xl",
+          isAi ? "bg-indigo-500 text-white" : "bg-slate-200 dark:bg-slate-900"
+        )}
       />
       <div className="space-y-1.5 flex-1 max-w-[85%]">
         <div className="flex items-center gap-2 justify-between">
@@ -113,7 +148,11 @@ export function MessageBubble({ message }: { message: Message }) {
               onClick={() => setShowThinking(!showThinking)}
               className="text-xs font-semibold text-slate-400 hover:text-indigo-400 flex items-center gap-1 focus:outline-none cursor-pointer"
             >
-              {showThinking ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+              {showThinking ? (
+                <ChevronDown className="w-3.5 h-3.5" />
+              ) : (
+                <ChevronRight className="w-3.5 h-3.5" />
+              )}
               <span>Thought process</span>
             </button>
             {showThinking && (
@@ -158,7 +197,9 @@ export function ToolCallRenderer({ tool }: { tool: ToolCall }) {
       >
         <div className="flex items-center gap-2">
           <Terminal className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
-          <span>Call tool: <code className="text-indigo-500">{tool.name}</code></span>
+          <span>
+            Call tool: <code className="text-indigo-500">{tool.name}</code>
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <span
@@ -171,7 +212,11 @@ export function ToolCallRenderer({ tool }: { tool: ToolCall }) {
           >
             {tool.status}
           </span>
-          {isOpen ? <ChevronDown className="w-3.5 h-3.5 text-slate-400" /> : <ChevronRight className="w-3.5 h-3.5" />}
+          {isOpen ? (
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+          ) : (
+            <ChevronRight className="w-3.5 h-3.5" />
+          )}
         </div>
       </button>
 
@@ -229,7 +274,8 @@ export function ConversationSidebar({
               onClick={() => onSelectSession(s.id)}
               className={cn(
                 "w-full px-3 py-2.5 rounded-xl flex items-center gap-2 text-sm font-semibold transition hover:bg-slate-100 dark:hover:bg-slate-900 cursor-pointer",
-                s.active && "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-indigo-650 dark:text-indigo-400"
+                s.active &&
+                  "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-indigo-650 dark:text-indigo-400"
               )}
             >
               <MessageSquare className="w-4 h-4 shrink-0 text-slate-400" />
@@ -251,7 +297,13 @@ export interface ChatWindowProps {
   tools?: ToolCall[];
 }
 
-export function ChatWindow({ title = "AI Copilot", messages, onSendMessage, loading, tools }: ChatWindowProps) {
+export function ChatWindow({
+  title = "AI Copilot",
+  messages,
+  onSendMessage,
+  loading,
+  tools,
+}: ChatWindowProps) {
   const [inputText, setInputText] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -278,14 +330,19 @@ export function ChatWindow({ title = "AI Copilot", messages, onSendMessage, load
             <Sparkles className="w-4 h-4 animate-pulse" />
           </div>
           <div>
-            <h4 className="font-bold text-sm text-slate-900 dark:text-white leading-none">{title}</h4>
+            <h4 className="font-bold text-sm text-slate-900 dark:text-white leading-none">
+              {title}
+            </h4>
             <span className="text-[10px] text-slate-400 font-medium">Next-gen Gemini engine</span>
           </div>
         </div>
       </div>
 
       {/* Messages list */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 flex flex-col bg-slate-50/10 dark:bg-slate-950/5">
+      <div
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto p-6 space-y-6 flex flex-col bg-slate-50/10 dark:bg-slate-950/5"
+      >
         {messages.length === 0 && (
           <div className="my-auto text-center space-y-2 max-w-sm mx-auto">
             <Sparkles className="w-8 h-8 text-indigo-500 mx-auto animate-pulse" />

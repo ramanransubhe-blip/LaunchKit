@@ -10,12 +10,7 @@ import {
   validateAuthSchema,
 } from "../validators/index.js";
 import { serializeAuthError } from "../core/errors.js";
-import type {
-  AuthResult,
-  AuthUser,
-  AuthOrganization,
-  AuthInvitation,
-} from "../types/index.js";
+import type { AuthResult, AuthUser, AuthOrganization, AuthInvitation } from "../types/index.js";
 
 export interface ServerActionResponse<T> {
   success: boolean;
@@ -41,9 +36,7 @@ async function handleActionError<T>(error: unknown): Promise<ServerActionRespons
 }
 
 /** Server Action: Authenticate user using email/password. */
-export async function loginAction(
-  payload: unknown,
-): Promise<ServerActionResponse<AuthResult>> {
+export async function loginAction(payload: unknown): Promise<ServerActionResponse<AuthResult>> {
   try {
     const credentials = validateAuthSchema(signInCredentialsSchema, payload);
     const authService = getGlobalAuthService();
@@ -55,9 +48,7 @@ export async function loginAction(
 }
 
 /** Server Action: Register new user account. */
-export async function signupAction(
-  payload: unknown,
-): Promise<ServerActionResponse<AuthResult>> {
+export async function signupAction(payload: unknown): Promise<ServerActionResponse<AuthResult>> {
   try {
     const data = validateAuthSchema(signUpDataSchema, payload);
     const authService = getGlobalAuthService();
@@ -69,9 +60,7 @@ export async function signupAction(
 }
 
 /** Server Action: End user session. */
-export async function logoutAction(
-  sessionId?: string,
-): Promise<ServerActionResponse<void>> {
+export async function logoutAction(sessionId?: string): Promise<ServerActionResponse<void>> {
   try {
     const authService = getGlobalAuthService();
     await authService.signOut(sessionId);
@@ -82,9 +71,7 @@ export async function logoutAction(
 }
 
 /** Server Action: Initiate forgot-password workflow. */
-export async function forgotPasswordAction(
-  email: string,
-): Promise<ServerActionResponse<void>> {
+export async function forgotPasswordAction(email: string): Promise<ServerActionResponse<void>> {
   try {
     const authService = getGlobalAuthService();
     await authService.forgotPassword(email);
@@ -97,7 +84,7 @@ export async function forgotPasswordAction(
 /** Server Action: Complete password reset using verification token. */
 export async function resetPasswordAction(
   token: string,
-  newPassword: unknown,
+  newPassword: unknown
 ): Promise<ServerActionResponse<void>> {
   try {
     const authService = getGlobalAuthService();
@@ -112,7 +99,7 @@ export async function resetPasswordAction(
 export async function changePasswordAction(
   userId: string,
   currentPassword: unknown,
-  newPassword: unknown,
+  newPassword: unknown
 ): Promise<ServerActionResponse<void>> {
   try {
     const authService = getGlobalAuthService();
@@ -124,9 +111,7 @@ export async function changePasswordAction(
 }
 
 /** Server Action: Verify user email. */
-export async function verifyEmailAction(
-  token: string,
-): Promise<ServerActionResponse<void>> {
+export async function verifyEmailAction(token: string): Promise<ServerActionResponse<void>> {
   try {
     const authService = getGlobalAuthService();
     await authService.verifyEmail(token);
@@ -139,7 +124,7 @@ export async function verifyEmailAction(
 /** Server Action: Update user profile fields. */
 export async function updateProfileAction(
   userId: string,
-  payload: unknown,
+  payload: unknown
 ): Promise<ServerActionResponse<AuthUser>> {
   try {
     const data = validateAuthSchema(updateUserDataSchema, payload);
@@ -154,7 +139,7 @@ export async function updateProfileAction(
 /** Server Action: Create new organization context. */
 export async function createOrganizationAction(
   userId: string,
-  payload: unknown,
+  payload: unknown
 ): Promise<ServerActionResponse<AuthOrganization>> {
   try {
     const data = validateAuthSchema(createOrganizationDataSchema, payload);
@@ -169,7 +154,7 @@ export async function createOrganizationAction(
 /** Server Action: Update organization details. */
 export async function updateOrganizationAction(
   orgId: string,
-  payload: unknown,
+  payload: unknown
 ): Promise<ServerActionResponse<AuthOrganization>> {
   try {
     const data = validateAuthSchema(updateOrganizationDataSchema, payload);
@@ -185,7 +170,7 @@ export async function updateOrganizationAction(
 export async function inviteUserAction(
   orgId: string,
   email: string,
-  role: unknown,
+  role: unknown
 ): Promise<ServerActionResponse<AuthInvitation>> {
   try {
     const authService = getGlobalAuthService();
@@ -199,7 +184,7 @@ export async function inviteUserAction(
 /** Server Action: Switch organization membership context. */
 export async function switchOrganizationAction(
   userId: string,
-  orgId: string,
+  orgId: string
 ): Promise<ServerActionResponse<void>> {
   try {
     const authService = getGlobalAuthService();

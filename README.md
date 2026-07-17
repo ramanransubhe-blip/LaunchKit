@@ -15,7 +15,7 @@
 [![Build](https://img.shields.io/badge/Build-Passing-success.svg?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/devlaunchkit/devlaunchkit/actions)
 [![Tests](https://img.shields.io/badge/Tests-Passing-success.svg?style=flat-square&logo=jest&logoColor=white)](tests/)
 [![Coverage](https://img.shields.io/badge/Coverage-94%25-success.svg?style=flat-square)](tests/)
-[![Version](https://img.shields.io/badge/v1.0.0-blue.svg?style=flat-square)](https://github.com/devlaunchkit/devlaunchkit/releases)
+[![Version](https://img.shields.io/badge/v1.1.0-blue.svg?style=flat-square)](https://github.com/devlaunchkit/devlaunchkit/releases)
 
 </div>
 
@@ -43,13 +43,13 @@ It's a **starting point**, not a framework. Standard TypeScript, Turborepo monor
 
 ## Supported Providers
 
-| Platform           | Default              | Also supported           | Planned                    |
-| :----------------- | :------------------- | :----------------------- | :------------------------- |
-| **Auth**           | Better Auth          | Clerk                    | Auth0, NextAuth            |
-| **Billing**        | Dodo Payments        | Stripe                   | Lemon Squeezy, Paddle      |
-| **AI**             | OpenAI (GPT-4o)      | Gemini, Claude           | —                          |
-| **Storage**        | Supabase Storage     | AWS S3                   | Cloudflare R2              |
-| **Email**          | Resend               | Postmark                 | SendGrid                   |
+| Platform    | Default          | Also supported | Planned               |
+| :---------- | :--------------- | :------------- | :-------------------- |
+| **Auth**    | Better Auth      | Clerk          | Auth0, NextAuth       |
+| **Billing** | Dodo Payments    | Stripe         | Lemon Squeezy, Paddle |
+| **AI**      | OpenAI (GPT-4o)  | Gemini, Claude | —                     |
+| **Storage** | Supabase Storage | AWS S3         | Cloudflare R2         |
+| **Email**   | Resend           | Postmark       | SendGrid              |
 
 ---
 
@@ -144,40 +144,55 @@ Dependencies flow one way: `apps/` imports from `packages/`, never the reverse.
 ## Platforms
 
 ### 🔐 Auth
+
 MFA, OAuth (Google/GitHub), magic links, RBAC. Providers: Better Auth, Clerk.
 
 <!-- AUTHENTICATION SCREENSHOT -->
 
 ### 💳 Billing
+
 Subscriptions, seat billing, coupons, customer portal. Providers: Dodo Payments, Stripe.
 
 <!-- BILLING DASHBOARD SCREENSHOT -->
 
 ### 🤖 AI
+
 Streaming responses, structured Zod output, token tracking. Providers: OpenAI, Gemini, Claude.
 
 <!-- AI PLATFORM SCREENSHOT -->
 
 ### 📁 Storage
+
 Signed URLs, access control, image optimization. Providers: Supabase Storage, S3.
 
 <!-- STORAGE PLATFORM SCREENSHOT -->
 
 ### ✉️ Email & Notifications
+
 React Email templates, scheduled dispatch, in-app notification sync. Providers: Resend, Postmark.
 
 ### 🔌 API & SDK
+
 Typed client (`LaunchKitClient`), OpenAPI generation, cursor pagination.
 
 ### 🖥️ Dashboard
+
 Collapsible sidebar, `Cmd+K` command palette, org switcher, settings pages.
 
 <!-- DASHBOARD SCREENSHOT -->
 
-### ⚙️ Admin
-User management, feature flags, audit logs, system health.
+### ⚙️ Admin Console
+
+Secure control panel to manage users, track billing, toggle settings, and read user feedback.
 
 <!-- ADMIN PANEL SCREENSHOT -->
+
+- **Security:** Edge middleware and server-side checks keep non-admin users out.
+- **Analytics:** Simple charts showing active users, MRR, ARR, and subscription splits.
+- **User Management:** Search, sort, paginate, change user roles, or suspend accounts.
+- **Subscriptions:** Track active, cancelled, or unpaid customer plans in one view.
+- **Feedback:** View bug reports and feature requests from users.
+- **System Settings:** Change app branding or toggle maintenance mode.
 
 ---
 
@@ -209,12 +224,13 @@ npx devlaunchkit doctor             # check environment
 
 ## Roadmap
 
-| Phase | Status         | Highlights                                            |
-| :---- | :------------- | :---------------------------------------------------- |
-| **1** | ✅ Done        | Monorepo, Turborepo, Better Auth                      |
-| **2** | ✅ Done        | Payments (Stripe + Dodo), S3, multi-LLM gateway       |
-| **3** | 🚀 In progress | Admin console, OpenAPI generation, CLI                |
-| **4** | 📅 Planned     | Edge routing, billing ledger, WebSocket support       |
+| Phase | Status         | Highlights                                      |
+| :---- | :------------- | :---------------------------------------------- |
+| **1** | ✅ Done        | Monorepo, Turborepo, Better Auth                |
+| **2** | ✅ Done        | Payments (Stripe + Dodo), S3, multi-LLM gateway |
+| **3** | ✅ Done        | Admin console v1.1                              |
+| **4** | 🚀 In progress | CLI tool, OpenAPI generation                    |
+| **5** | 📅 Planned     | Edge routing, billing ledger, WebSocket support |
 
 ---
 

@@ -20,11 +20,7 @@ export abstract class BaseRepository<TSelect, TInsert, TTable extends { id: any 
 
   // Find by primary ID key
   async findById(id: string): Promise<TSelect | null> {
-    const results = await this.db
-      .select()
-      .from(this.table)
-      .where(eq(this.table.id, id))
-      .limit(1);
+    const results = await this.db.select().from(this.table).where(eq(this.table.id, id)).limit(1);
     return (results[0] as TSelect) || null;
   }
 
@@ -81,10 +77,7 @@ export abstract class BaseRepository<TSelect, TInsert, TTable extends { id: any 
 
   // Delete record by ID
   async delete(id: string): Promise<boolean> {
-    const results = await this.db
-      .delete(this.table)
-      .where(eq(this.table.id, id))
-      .returning();
+    const results = await this.db.delete(this.table).where(eq(this.table.id, id)).returning();
     return results.length > 0;
   }
 }

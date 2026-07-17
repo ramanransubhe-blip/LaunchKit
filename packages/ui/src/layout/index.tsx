@@ -79,7 +79,7 @@ export function Stack({
   ...props
 }: StackProps) {
   const dirClass = direction === "row" ? "flex-row" : "flex-col";
-  
+
   const alignClass = {
     start: "items-start",
     center: "items-center",
@@ -115,7 +115,13 @@ export function Stack({
 // Page Wrapper
 export function Page({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("min-h-screen flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-200", className)} {...props}>
+    <div
+      className={cn(
+        "min-h-screen flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-200",
+        className
+      )}
+      {...props}
+    >
       {children}
     </div>
   );
@@ -134,9 +140,7 @@ export function SidebarLayout({ sidebar, children, className }: SidebarLayoutPro
       <aside className="w-64 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hidden md:block">
         {sidebar}
       </aside>
-      <main className="flex-1 flex flex-col bg-white dark:bg-slate-950">
-        {children}
-      </main>
+      <main className="flex-1 flex flex-col bg-white dark:bg-slate-950">{children}</main>
     </div>
   );
 }
@@ -178,10 +182,16 @@ export function AuthLayout({ title, description, children, footer }: AuthLayoutP
       <div className="w-full max-w-md p-8 rounded-3xl border border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-950/80 backdrop-blur-md shadow-xl flex flex-col gap-6">
         <div className="text-center space-y-1">
           <h2 className="text-3xl font-extrabold tracking-tight">{title}</h2>
-          {description && <p className="text-sm text-slate-500 dark:text-slate-400">{description}</p>}
+          {description && (
+            <p className="text-sm text-slate-500 dark:text-slate-400">{description}</p>
+          )}
         </div>
         <div>{children}</div>
-        {footer && <div className="border-t border-slate-100 dark:border-slate-900 pt-4 text-center">{footer}</div>}
+        {footer && (
+          <div className="border-t border-slate-100 dark:border-slate-900 pt-4 text-center">
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -190,7 +200,13 @@ export function AuthLayout({ title, description, children, footer }: AuthLayoutP
 // CenteredLayout
 export function CenteredLayout({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("min-h-screen flex items-center justify-center p-6 bg-slate-50 dark:bg-slate-950", className)} {...props}>
+    <div
+      className={cn(
+        "min-h-screen flex items-center justify-center p-6 bg-slate-50 dark:bg-slate-950",
+        className
+      )}
+      {...props}
+    >
       <div className="w-full max-w-lg">{children}</div>
     </div>
   );
@@ -225,10 +241,25 @@ export interface EmptyStateLayoutProps {
   className?: string;
 }
 
-export function EmptyStateLayout({ icon, title, description, action, className }: EmptyStateLayoutProps) {
+export function EmptyStateLayout({
+  icon,
+  title,
+  description,
+  action,
+  className,
+}: EmptyStateLayoutProps) {
   return (
-    <div className={cn("flex flex-col items-center justify-center text-center p-8 border border-dashed border-slate-200 dark:border-slate-800 rounded-3xl bg-slate-50/50 dark:bg-slate-950/20 max-w-lg mx-auto my-8", className)}>
-      {icon && <div className="p-4 rounded-full bg-slate-100 dark:bg-slate-900 text-slate-500 mb-4">{icon}</div>}
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center text-center p-8 border border-dashed border-slate-200 dark:border-slate-800 rounded-3xl bg-slate-50/50 dark:bg-slate-950/20 max-w-lg mx-auto my-8",
+        className
+      )}
+    >
+      {icon && (
+        <div className="p-4 rounded-full bg-slate-100 dark:bg-slate-900 text-slate-500 mb-4">
+          {icon}
+        </div>
+      )}
       <h3 className="font-bold text-lg mb-1">{title}</h3>
       <p className="text-sm text-slate-500 dark:text-slate-400 mb-6 max-w-sm">{description}</p>
       {action && <div>{action}</div>}
